@@ -1,0 +1,36 @@
+manifestVersion: 1
+id: bitcoinlab-node
+category: bitcoin
+name: Bitcoin Lab
+version: "1.0.0"
+tagline: Find your best relaying Bitcoin peers
+description: >-
+  Bitcoin Lab turns your Bitcoin node's peer connections into measurable relay performance.
+
+
+  It continuously observes which peers deliver new blocks first via Bitcoin Core's ZMQ interface, maintains long-term peer performance history (First/Eligible/First%, ping, sessions, connection time), and helps you identify valuable peers worth keeping as manual connections - without replacing Bitcoin Core's own automatic outbound peer discovery.
+
+
+  A parallel Stratum Race measures which mining pools deliver new block templates fastest, including any local solo-mining pool you add by host and port.
+
+
+  Bitcoin Lab does not modify Bitcoin consensus behavior or mining. It is an observability and network-optimization tool for advanced node operators.
+releaseNotes: ""
+
+developer: Ben
+website: https://github.com/<github-user>/bitcoin-lab
+dependencies:
+  - bitcoin
+repo: https://github.com/<github-user>/bitcoin-lab
+support: https://github.com/<github-user>/bitcoin-lab/issues
+
+icon: https://raw.githubusercontent.com/<github-user>/bitcoin-lab-community-store/master/bitcoinlab-node/icon.svg
+port: 8788
+gallery: []
+path: ""
+
+defaultUsername: ""
+defaultPassword: ""
+
+submitter: Ben
+submission: ""
