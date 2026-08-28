@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "1.2.1"
+version: "1.2.2"
 tagline: Find your best relaying Bitcoin peers
 description: >-
   Bitcoin Lab turns your Bitcoin node's peer connections into measurable relay performance.
@@ -16,7 +16,7 @@ description: >-
 
   Bitcoin Lab does not modify Bitcoin consensus behavior or mining. It is an observability and network-optimization tool for advanced node operators.
 releaseNotes: >-
-  Fixed the Actions column (including "Add as Manual") being cut off next to Ping on narrower screens - it now stays pinned in view while the table scrolls horizontally. Manually-trusted peers no longer show up twice - they only appear in the dedicated Manual Peers panel now, not in Outbound Peers too. The Manual Peers panel header now shows how many of the 8 connection slots are free. Button clicks now only refresh the data they actually changed instead of re-fetching everything on every click.
+  Fixed the Stratum Race idle-connection timeout: it was 20 minutes, but Bitcoin block gaps over 20 minutes happen routinely (blocks are exponentially distributed around a 10-minute average, with no upper bound), so pools were being needlessly reconnected during entirely normal waits - occasionally causing a pool to be wrongly scored as a miss if a block landed during the reconnect. Real TCP keepalive now detects an actually-dead connection within minutes, and the idle timeout is a generous 2-hour last-resort backstop instead of the primary check.
 
 developer: Ben
 website: https://github.com/benunskilled/bitcoin-lab
