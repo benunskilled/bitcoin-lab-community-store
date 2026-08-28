@@ -17,7 +17,7 @@ services:
       APP_PORT: 8788
 
   dashboard:
-    image: ghcr.io/<github-user>/bitcoin-lab:1.0.0@sha256:REPLACE_AFTER_FIRST_RELEASE
+    image: ghcr.io/benunskilled/bitcoin-lab:1.0.0@sha256:REPLACE_AFTER_FIRST_RELEASE
     user: "1000:1000"
     init: true
     restart: on-failure
@@ -35,7 +35,7 @@ services:
       DASHBOARD_PORT: "8788"
 
   peer-profiler:
-    image: ghcr.io/<github-user>/bitcoin-lab:1.0.0@sha256:REPLACE_AFTER_FIRST_RELEASE
+    image: ghcr.io/benunskilled/bitcoin-lab:1.0.0@sha256:REPLACE_AFTER_FIRST_RELEASE
     user: "1000:1000"
     init: true
     restart: on-failure
@@ -52,7 +52,7 @@ services:
       DATA_DIR: /data
 
   relay-profiler:
-    image: ghcr.io/<github-user>/bitcoin-lab:1.0.0@sha256:REPLACE_AFTER_FIRST_RELEASE
+    image: ghcr.io/benunskilled/bitcoin-lab:1.0.0@sha256:REPLACE_AFTER_FIRST_RELEASE
     user: "1000:1000"
     init: true
     restart: on-failure
@@ -69,7 +69,7 @@ services:
       DATA_DIR: /data
 
   stratum-race:
-    image: ghcr.io/<github-user>/bitcoin-lab:1.0.0@sha256:REPLACE_AFTER_FIRST_RELEASE
+    image: ghcr.io/benunskilled/bitcoin-lab:1.0.0@sha256:REPLACE_AFTER_FIRST_RELEASE
     user: "1000:1000"
     init: true
     restart: on-failure
