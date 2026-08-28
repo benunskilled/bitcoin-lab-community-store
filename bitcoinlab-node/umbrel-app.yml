@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "1.5.0"
+version: "1.6.0"
 tagline: Find your best relaying Bitcoin peers
 description: >-
   Bitcoin Lab turns your Bitcoin node's peer connections into measurable relay performance.
@@ -16,7 +16,7 @@ description: >-
 
   Bitcoin Lab does not modify Bitcoin consensus behavior or mining. It is an observability and network-optimization tool for advanced node operators.
 releaseNotes: >-
-  The "Show all" toggle on Live Peer Ranking now sits below the table instead of above it - more intuitive. Inbound IPv6 peers relayed through Docker are now clearly labeled "IPv6 peer (address hidden by Docker)" instead of showing a confusing, meaningless internal Docker address (Docker discards the real source address for these before Bitcoin Core ever sees it - not fixable from inside this app). Static assets now revalidate on every load, so future updates should show up on a normal browser reload instead of sometimes needing a hard refresh.
+  Core keeps trying to reconnect a dropped manual peer on its own, but that can silently stall. The Manual Peers table now shows how long an offline trusted peer has actually been down instead of a flat dash, the Umbrel home-screen widget shows online-vs-total manual peers at a glance, and a background check logs any currently-offline trusted peer every 10 minutes for a durable record even when the dashboard is closed.
 
 developer: Ben
 website: https://github.com/benunskilled/bitcoin-lab
