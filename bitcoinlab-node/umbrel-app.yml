@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "1.0.0"
+version: "1.1.0"
 tagline: Find your best relaying Bitcoin peers
 description: >-
   Bitcoin Lab turns your Bitcoin node's peer connections into measurable relay performance.
@@ -15,7 +15,8 @@ description: >-
 
 
   Bitcoin Lab does not modify Bitcoin consensus behavior or mining. It is an observability and network-optimization tool for advanced node operators.
-releaseNotes: ""
+releaseNotes: >-
+  Dashboard: offline peers are now hidden from the main list by default, new Outbound Peers and Manual Peers panels, a prominent current block-height display, and an orange screen flash + 2-minute row highlight for whichever peer(s) delivered a new block first.
 
 developer: Ben
 website: https://github.com/benunskilled/bitcoin-lab
