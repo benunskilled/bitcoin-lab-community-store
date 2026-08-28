@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "1.6.0"
+version: "1.6.1"
 tagline: Find your best relaying Bitcoin peers
 description: >-
   Bitcoin Lab turns your Bitcoin node's peer connections into measurable relay performance.
@@ -16,7 +16,7 @@ description: >-
 
   Bitcoin Lab does not modify Bitcoin consensus behavior or mining. It is an observability and network-optimization tool for advanced node operators.
 releaseNotes: >-
-  Core keeps trying to reconnect a dropped manual peer on its own, but that can silently stall. The Manual Peers table now shows how long an offline trusted peer has actually been down instead of a flat dash, the Umbrel home-screen widget shows online-vs-total manual peers at a glance, and a background check logs any currently-offline trusted peer every 10 minutes for a durable record even when the dashboard is closed.
+  Small cleanup: removed the long explanation paragraph under Live Peer Ranking that was cluttering the page. The detail it carried still lives in the column-header and address tooltips if you need it.
 
 developer: Ben
 website: https://github.com/benunskilled/bitcoin-lab
