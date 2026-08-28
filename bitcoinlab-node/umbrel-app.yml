@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "1.3.1"
+version: "1.3.2"
 tagline: Find your best relaying Bitcoin peers
 description: >-
   Bitcoin Lab turns your Bitcoin node's peer connections into measurable relay performance.
@@ -16,7 +16,7 @@ description: >-
 
   Bitcoin Lab does not modify Bitcoin consensus behavior or mining. It is an observability and network-optimization tool for advanced node operators.
 releaseNotes: >-
-  Found the likely real reason Stratum Race showed no data: ckpool-solo (which GoBrrr Pool and most public solo pools run) requires the mining.authorize username to be a valid Bitcoin address and silently never sends job updates to a connection that fails authorize - the previous fix used a made-up username. Now authorizes with a well-known placeholder address (no real payout, we never submit shares). Also raised the idle-timeout backstop from 2h to 6h based on real observation of longer gaps, and added periodic per-pool status logs so a still-quiet race is diagnosable instead of a black box.
+  Fixed the "Remove" button on a stratum pool throwing an internal error: pools that had ever raced (even just recorded a miss) couldn't be deleted because their observation history still referenced them at the database level. Removing a pool now cleans up its history first, so it always works - including removing an old/incorrect pool entry.
 
 developer: Ben
 website: https://github.com/benunskilled/bitcoin-lab
