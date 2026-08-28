@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "1.2.0"
+version: "1.2.1"
 tagline: Find your best relaying Bitcoin peers
 description: >-
   Bitcoin Lab turns your Bitcoin node's peer connections into measurable relay performance.
@@ -16,7 +16,7 @@ description: >-
 
   Bitcoin Lab does not modify Bitcoin consensus behavior or mining. It is an observability and network-optimization tool for advanced node operators.
 releaseNotes: >-
-  Fixed a bug where stratum pool connections were recycled every 30 seconds, long before a real block (~10 min apart) could arrive - the Stratum Race should now actually populate. Added a time-range selector (last 10 blocks / 1h / 24h / 7d / 30d / all) and a last-race-winner badge to the Stratum Race table. Outbound Peers now shows the real Core connection type instead of the manual/trusted overlay. Added a Client (subver) column across peer tables. "Add as Manual" now re-probes 8333/9333 before adding (fixes inbound peers with ephemeral ports) and persists so it survives restarts; manual peers can now be properly Removed (also drops the Core addnode entry) separately from Disconnect, and the 8-manual-connection cap Bitcoin Core enforces is now respected and shown as a slot counter. Peer panels are now collapsible.
+  Fixed the Actions column (including "Add as Manual") being cut off next to Ping on narrower screens - it now stays pinned in view while the table scrolls horizontally. Manually-trusted peers no longer show up twice - they only appear in the dedicated Manual Peers panel now, not in Outbound Peers too. The Manual Peers panel header now shows how many of the 8 connection slots are free. Button clicks now only refresh the data they actually changed instead of re-fetching everything on every click.
 
 developer: Ben
 website: https://github.com/benunskilled/bitcoin-lab
