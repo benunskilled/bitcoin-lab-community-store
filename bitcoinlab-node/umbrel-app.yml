@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "1.3.3"
+version: "1.4.0"
 tagline: Find your best relaying Bitcoin peers
 description: >-
   Bitcoin Lab turns your Bitcoin node's peer connections into measurable relay performance.
@@ -16,7 +16,7 @@ description: >-
 
   Bitcoin Lab does not modify Bitcoin consensus behavior or mining. It is an observability and network-optimization tool for advanced node operators.
 releaseNotes: >-
-  "Add as Manual" (and Remove/Disconnect/pool actions) gave zero on-screen confirmation on success - a peer added as manual just silently disappeared from the Outbound table and reappeared in the Manual Peers panel below, easy to miss if you weren't watching that panel. Now every action shows a status message: a "probing 8333, then 9333..." notice while the check is running (can take a few seconds), then an explicit success or failure result naming the address and, on failure, the exact reason.
+  Peer ranking (Live/Outbound/Manual) and the Stratum Race pool ranking now both sort by their win-rate stat first (First Seen % / Win %), then by ping (peer ping / pool avg latency) as the tiebreaker, everywhere. The Live Peer Ranking table also now shows only the top 10 by default, with a "Show all" toggle for the rest, instead of always listing every connected peer.
 
 developer: Ben
 website: https://github.com/benunskilled/bitcoin-lab
