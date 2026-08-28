@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "1.2.3"
+version: "1.3.0"
 tagline: Find your best relaying Bitcoin peers
 description: >-
   Bitcoin Lab turns your Bitcoin node's peer connections into measurable relay performance.
@@ -16,7 +16,7 @@ description: >-
 
   Bitcoin Lab does not modify Bitcoin consensus behavior or mining. It is an observability and network-optimization tool for advanced node operators.
 releaseNotes: >-
-  Fixed manual peers added outside this app (e.g. directly via bitcoin-cli addnode, or a bitcoin.conf entry) showing up in the Outbound Peers table instead of the Manual Peers panel. Bitcoin Lab never touches bitcoin.conf - it only uses the addnode/removenode RPCs, same as before - but it now recognizes any peer Core reports as "manual" immediately, and adopts it into its own tracking so it gets a proper Remove button and counts toward the 8-slot display.
+  Likely fix for the Stratum Race showing no data: the client only ever sent mining.subscribe, but many stratum servers withhold job broadcasts until a worker authorizes - added that step. Fixed "Remove" on a manual peer silently doing nothing (it now actually disconnects, not just stops future reconnects) and dropped the now-pointless separate Disconnect button for manual peers. Live/Outbound/Manual tables no longer blow up in width from long client strings - truncated with a hover tooltip - and First/Eligible plus First % are merged into one First Seen % column. Stratum Race range switched from hours to block counts (10/100/all). Peers are now ranked by first% (rate) instead of raw first count.
 
 developer: Ben
 website: https://github.com/benunskilled/bitcoin-lab
