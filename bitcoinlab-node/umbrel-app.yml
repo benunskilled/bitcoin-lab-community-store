@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "1.3.2"
+version: "1.3.3"
 tagline: Find your best relaying Bitcoin peers
 description: >-
   Bitcoin Lab turns your Bitcoin node's peer connections into measurable relay performance.
@@ -16,7 +16,7 @@ description: >-
 
   Bitcoin Lab does not modify Bitcoin consensus behavior or mining. It is an observability and network-optimization tool for advanced node operators.
 releaseNotes: >-
-  Fixed the "Remove" button on a stratum pool throwing an internal error: pools that had ever raced (even just recorded a miss) couldn't be deleted because their observation history still referenced them at the database level. Removing a pool now cleans up its history first, so it always works - including removing an old/incorrect pool entry.
+  "Add as Manual" (and Remove/Disconnect/pool actions) gave zero on-screen confirmation on success - a peer added as manual just silently disappeared from the Outbound table and reappeared in the Manual Peers panel below, easy to miss if you weren't watching that panel. Now every action shows a status message: a "probing 8333, then 9333..." notice while the check is running (can take a few seconds), then an explicit success or failure result naming the address and, on failure, the exact reason.
 
 developer: Ben
 website: https://github.com/benunskilled/bitcoin-lab
