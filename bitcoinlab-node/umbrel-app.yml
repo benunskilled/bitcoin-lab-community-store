@@ -24,7 +24,7 @@ dependencies:
 repo: https://github.com/benunskilled/bitcoin-lab
 support: https://github.com/benunskilled/bitcoin-lab/issues
 
-icon: https://raw.githubusercontent.com/benunskilled/bitcoin-lab-community-store/master/bitcoinlab-node/icon.svg
+icon: https://raw.githubusercontent.com/benunskilled/bitcoin-lab-community-store/main/bitcoinlab-node/icon.svg
 port: 8788
 gallery: []
 path: ""
