@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "1.10.1"
+version: "1.11.0"
 tagline: Find your best relaying Bitcoin peers
 description: >-
   Bitcoin Lab turns your Bitcoin node's peer connections into measurable relay performance.
@@ -16,7 +16,7 @@ description: >-
 
   Bitcoin Lab does not modify Bitcoin consensus behavior or mining. It is an observability and network-optimization tool for advanced node operators.
 releaseNotes: >-
-  Retention is now smarter: a peer with real relay history (or a manually trusted one) is never pruned, no matter how old - only short-lived "feeler" connections with no ranking value age out quickly (14 days by default). Fixed the Live/Outbound/Manual tables' Actions column getting clipped at the right edge instead of staying reachable. Also fixes a bug from the previous update where the new background database maintenance could occasionally cause a real Stratum Race report to be misrecorded as a miss.
+  Live Peer Ranking, Outbound Peers, and Manual Peers now show the same columns in the same order and width, so they line up with each other instead of each looking different. The Actions column no longer gets clipped at the table's right edge - its buttons now stack instead of sitting side by side, which is what was actually causing it not to fit.
 
 developer: Ben
 website: https://github.com/benunskilled/bitcoin-lab
