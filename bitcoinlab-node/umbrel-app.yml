@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "1.7.0"
+version: "1.8.0"
 tagline: Find your best relaying Bitcoin peers
 description: >-
   Bitcoin Lab turns your Bitcoin node's peer connections into measurable relay performance.
@@ -16,7 +16,7 @@ description: >-
 
   Bitcoin Lab does not modify Bitcoin consensus behavior or mining. It is an observability and network-optimization tool for advanced node operators.
 releaseNotes: >-
-  Live Peer Ranking now offers Disconnect for a currently-live manual peer too, not just Remove - useful to kick a connection without forgetting the peer entirely (Manual Peers panel is unchanged, Remove only, since Core just reconnects a trusted peer right back). Action buttons across all peer tables now line up consistently row to row - a missing action leaves an empty reserved spot instead of shifting the remaining button out of position.
+  Peers connecting from another app on this same Umbrel (like electrs or mempool's own indexer) are now labeled "Local Umbrel app" instead of showing up as a regular peer - these aren't external connections at all, so Add as Manual and Disconnect are both hidden for them since neither action makes sense on a same-host sibling container.
 
 developer: Ben
 website: https://github.com/benunskilled/bitcoin-lab
