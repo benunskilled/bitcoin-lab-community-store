@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "1.12.6"
+version: "1.12.7"
 tagline: Find your best relay peers and Stratum Race pool speed
 description: >-
   Bitcoin Lab turns your Bitcoin node's peer connections into measurable relay performance.
@@ -16,13 +16,12 @@ description: >-
 
   Bitcoin Lab does not modify Bitcoin consensus behavior or mining. It is an observability and peer-optimization tool for advanced node operators.
 releaseNotes: >-
-  Another wording correction, this time on why Stratum Race exists at all:
-  it's not really about shopping between mining pools. For a solo pool
-  built on the same node Bitcoin Lab observes, better peers mean your node
-  relays blocks faster, which means that pool gets a new job out faster -
-  Stratum Race is how you watch that actually happen instead of assuming
-  it. Comparing external pools is a secondary byproduct, not the point.
-  No application change.
+  Fixes a real trap in Add Pool: a pool running as another Umbrel app
+  (GoBrrr, Bassin) isn't reachable at umbrel.local, and the port your
+  miner uses on the LAN is the wrong one from here - Bitcoin Lab needs the
+  pool's container name and its internal stratum port instead. Added
+  quick-fill buttons for GoBrrr and Bassin (verified against real
+  installs) plus a tooltip on Host/Port for any other local pool app.
 developer: Ben
 website: https://github.com/benunskilled/bitcoin-lab
 dependencies:
