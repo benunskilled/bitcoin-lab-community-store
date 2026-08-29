@@ -2,8 +2,8 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "1.12.2"
-tagline: Find your best relaying Bitcoin peers
+version: "1.12.3"
+tagline: Find your best relay peers and Stratum Race pool speed
 description: >-
   Bitcoin Lab turns your Bitcoin node's peer connections into measurable relay performance.
 
@@ -16,13 +16,11 @@ description: >-
 
   Bitcoin Lab does not modify Bitcoin consensus behavior or mining. It is an observability and network-optimization tool for advanced node operators.
 releaseNotes: >-
-  UI cleanup: dropped three leftover explanatory paragraphs (Outbound Peers,
-  Manual Peers, Stratum Race) that had never been trimmed when Live Peer
-  Ranking's own explanation was removed a while back - every panel is now
-  free of static prose. Nothing about seeing whether a manual peer is
-  online changes: the per-row Type pill, the Session column's offline
-  duration, and the free/active/total slot count in the Manual Peers
-  heading already covered that without the removed text.
+  Store listing only, no application change: added a screenshot and a
+  proper public README (what Bitcoin Lab does, how to add this store),
+  and mentioned Stratum Race in the tagline so it's easier to find for
+  anyone specifically searching for pool-speed racing rather than peer
+  ranking.
 developer: Ben
 website: https://github.com/benunskilled/bitcoin-lab
 dependencies:
@@ -32,7 +30,8 @@ support: https://github.com/benunskilled/bitcoin-lab/issues
 
 icon: https://raw.githubusercontent.com/benunskilled/bitcoin-lab-community-store/main/bitcoinlab-node/icon.svg
 port: 8788
-gallery: []
+gallery:
+  - 1.png
 path: ""
 
 defaultUsername: ""
