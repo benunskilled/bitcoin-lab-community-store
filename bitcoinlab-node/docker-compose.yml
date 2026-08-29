@@ -41,11 +41,16 @@ services:
       DATA_DIR: /data
       DASHBOARD_PORT: "8788"
     healthcheck:
+      # Double-quoted deliberately: the JavaScript contains ": " (in the
+      # ternary "? 0 : 1"), and an unquoted YAML plain scalar treats that as a
+      # key/value separator - which silently turned this argument into a
+      # mapping, made the whole compose file fail schema validation, and left
+      # the app with no containers at all. Keep the quotes.
       test:
         - CMD
         - node
         - -e
-        - require('http').get('http://127.0.0.1:8788/api/health', (r) => process.exit(r.statusCode === 200 ? 0 : 1)).on('error', () => process.exit(1))
+        - "require('http').get('http://127.0.0.1:8788/api/health', (r) => process.exit(r.statusCode === 200 ? 0 : 1)).on('error', () => process.exit(1))"
       interval: 30s
       timeout: 10s
       retries: 3
