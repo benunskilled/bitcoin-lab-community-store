@@ -1,9 +1,16 @@
-version: "3.7"
-
-# One image, four lightweight services (one per long-running process) -
-# each gets Docker's native `restart: on-failure` instead of a hand-rolled
-# supervisor. All four share the same SQLite file under ${APP_DATA_DIR}/data
-# (better-sqlite3 in WAL mode is safe for multiple local processes).
+# One image, four lightweight services (one per long-running process). All
+# four share the same SQLite file under ${APP_DATA_DIR}/data (better-sqlite3
+# in WAL mode is safe for multiple local processes).
+#
+# restart: unless-stopped rather than on-failure - these are dauerlaeufer, and
+# on-failure does not bring a service back that exited cleanly, nor reliably
+# after a Docker daemon restart.
+#
+# Every service has a healthcheck. The three worker processes have no HTTP
+# port, so each writes a heartbeat into the shared database every 30s and its
+# check reads that back read-only (see src/lib/health.js). Without this a
+# crash-looping worker was completely invisible: the app kept showing as
+# running and its tables simply stopped growing.
 #
 # IMPORTANT: replace the `image:` digest below after your first
 # `git push --tags` triggers .github/workflows/release.yml in the
@@ -17,10 +24,10 @@ services:
       APP_PORT: 8788
 
   dashboard:
-    image: ghcr.io/benunskilled/bitcoin-lab:1.11.1@sha256:211fd629661b09123356cdd3724795f92c59391b1d15683b474a58cf23f21efb
+    image: ghcr.io/benunskilled/bitcoin-lab:1.12.0@sha256:31d4dc35a7def8c5d0112801f9e6042d11f0f7191b4b75f1777812e4a309149c
     user: "1000:1000"
     init: true
-    restart: on-failure
+    restart: unless-stopped
     command: ["node", "src/dashboard-server.js"]
     volumes:
       - ${APP_DATA_DIR}/data:/data
@@ -33,12 +40,22 @@ services:
       APP_BITCOIN_NETWORK: $APP_BITCOIN_NETWORK
       DATA_DIR: /data
       DASHBOARD_PORT: "8788"
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - -e
+        - require('http').get('http://127.0.0.1:8788/api/health', (r) => process.exit(r.statusCode === 200 ? 0 : 1)).on('error', () => process.exit(1))
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
 
   peer-profiler:
-    image: ghcr.io/benunskilled/bitcoin-lab:1.11.1@sha256:211fd629661b09123356cdd3724795f92c59391b1d15683b474a58cf23f21efb
+    image: ghcr.io/benunskilled/bitcoin-lab:1.12.0@sha256:31d4dc35a7def8c5d0112801f9e6042d11f0f7191b4b75f1777812e4a309149c
     user: "1000:1000"
     init: true
-    restart: on-failure
+    restart: unless-stopped
     command: ["node", "src/peer-profiler.js"]
     volumes:
       - ${APP_DATA_DIR}/data:/data
@@ -50,12 +67,22 @@ services:
       APP_BITCOIN_ZMQ_HASHBLOCK_PORT: $APP_BITCOIN_ZMQ_HASHBLOCK_PORT
       APP_BITCOIN_NETWORK: $APP_BITCOIN_NETWORK
       DATA_DIR: /data
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - -e
+        - require('/app/src/lib/health').assertFresh('peer-profiler', 120000)
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
 
   relay-profiler:
-    image: ghcr.io/benunskilled/bitcoin-lab:1.11.1@sha256:211fd629661b09123356cdd3724795f92c59391b1d15683b474a58cf23f21efb
+    image: ghcr.io/benunskilled/bitcoin-lab:1.12.0@sha256:31d4dc35a7def8c5d0112801f9e6042d11f0f7191b4b75f1777812e4a309149c
     user: "1000:1000"
     init: true
-    restart: on-failure
+    restart: unless-stopped
     command: ["node", "src/relay-profiler.js"]
     volumes:
       - ${APP_DATA_DIR}/data:/data
@@ -67,12 +94,22 @@ services:
       APP_BITCOIN_ZMQ_HASHBLOCK_PORT: $APP_BITCOIN_ZMQ_HASHBLOCK_PORT
       APP_BITCOIN_NETWORK: $APP_BITCOIN_NETWORK
       DATA_DIR: /data
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - -e
+        - require('/app/src/lib/health').assertFresh('relay-profiler', 120000)
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
 
   stratum-race:
-    image: ghcr.io/benunskilled/bitcoin-lab:1.11.1@sha256:211fd629661b09123356cdd3724795f92c59391b1d15683b474a58cf23f21efb
+    image: ghcr.io/benunskilled/bitcoin-lab:1.12.0@sha256:31d4dc35a7def8c5d0112801f9e6042d11f0f7191b4b75f1777812e4a309149c
     user: "1000:1000"
     init: true
-    restart: on-failure
+    restart: unless-stopped
     command: ["node", "src/stratum-race.js"]
     volumes:
       - ${APP_DATA_DIR}/data:/data
@@ -84,3 +121,13 @@ services:
       APP_BITCOIN_ZMQ_HASHBLOCK_PORT: $APP_BITCOIN_ZMQ_HASHBLOCK_PORT
       APP_BITCOIN_NETWORK: $APP_BITCOIN_NETWORK
       DATA_DIR: /data
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - -e
+        - require('/app/src/lib/health').assertFresh('stratum-race', 120000)
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
