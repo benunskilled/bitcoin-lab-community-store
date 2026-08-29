@@ -2,25 +2,26 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "1.12.4"
+version: "1.12.5"
 tagline: Find your best relay peers and Stratum Race pool speed
 description: >-
   Bitcoin Lab turns your Bitcoin node's peer connections into measurable relay performance.
 
 
-  It continuously observes which peers deliver new blocks first via Bitcoin Core's ZMQ interface, maintains long-term peer performance history (First/Eligible/First%, ping, sessions, connection time), and helps you identify valuable peers worth keeping as manual connections - without replacing Bitcoin Core's own automatic outbound peer discovery.
+  It continuously observes which peers deliver new blocks first via Bitcoin Core's ZMQ interface and maintains long-term peer performance history (First/Eligible/First%, ping, sessions, connection time). Most of the actual speed gain comes from acting on that history: add your best-ranked peers as manual/trusted connections so they stay put, and disconnect outbound peers that never deliver anything - Core replaces a disconnected outbound with a fresh, random one, which you then rank the same way.
 
 
-  A parallel Stratum Race measures which mining pools deliver new block templates fastest, including any local solo-mining pool you add by host and port.
+  A parallel Stratum Race measures which mining pools deliver new block templates fastest, including any local solo-mining pool you add by host and port, so switching pools is a numbers comparison instead of a guess.
 
 
-  Bitcoin Lab does not modify Bitcoin consensus behavior or mining. It is an observability and network-optimization tool for advanced node operators.
+  Bitcoin Lab does not modify Bitcoin consensus behavior or mining. It is an observability and peer-optimization tool for advanced node operators.
 releaseNotes: >-
-  Store listing only, no application change: replaced the screenshot. The
-  previous one was generated against a mostly-empty demo database - no
-  block height, half the Stratum Race pools showing no data - which made
-  the app look broken rather than showing what it actually does. The new
-  one has a full peer table and every pool in the race actually racing.
+  Wording fix in the README and this listing's description: the previous
+  copy leaned on vague "network/config change" language for what actually
+  drives most of the real speed improvement - ranking peers, manually
+  adding the strongest ones, and disconnecting outbound peers that never
+  deliver, so Core replaces them and you rank the replacements too. No
+  application change.
 developer: Ben
 website: https://github.com/benunskilled/bitcoin-lab
 dependencies:
