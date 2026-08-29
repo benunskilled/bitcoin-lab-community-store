@@ -8,17 +8,20 @@ connections into measurable numbers instead of guesswork.
 ## What it does
 
 - **Peer relay ranking** — continuously tracks which of your connected peers
-  actually deliver new blocks first, over Bitcoin Core's ZMQ interface. Builds
-  up a long-term First / Eligible / First % ranking per peer, plus ping,
-  session count and total connection time, so you can see which peers are
-  actually worth keeping as manual connections instead of guessing.
-- **Stratum Race** — races your mining pools against each other on every new
-  block template (any local solo pool you add by host/port, plus a handful of
-  public solo pools out of the box), tracking wins, win %, and latency
-  (avg/median/P90) per pool. Because every pool is timed the same way on the
-  same event, this is what makes it possible to see **whether a pool switch,
-  or a network/config change, actually made things faster — in numbers,** not
-  just a feeling.
+  actually deliver new blocks first, over Bitcoin Core's ZMQ interface, building
+  a long-term First / Eligible / First % ranking per peer (plus ping, session
+  count, total connection time). **This is where most of the actual speed gain
+  comes from**: add your best-ranked peers as manual/trusted connections so
+  they stay connected instead of rotating out on their own, and disconnect
+  outbound peers that never deliver anything — Core replaces a disconnected
+  outbound with a fresh, random one, which you then rank the same way. Repeat
+  the loop and your peer set gets better over time instead of staying whatever
+  Core happened to pick.
+- **Stratum Race** — races your mining pools (any local solo pool you add by
+  host/port, plus a handful of public solo pools out of the box) against each
+  other on every new block template, tracking wins, win %, and latency
+  (avg/median/P90) per pool, so switching pools — or adding your own — is a
+  numbers comparison instead of a guess.
 
 Both live on the same dashboard, refreshed continuously.
 
