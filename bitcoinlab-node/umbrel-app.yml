@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "1.11.0"
+version: "1.11.1"
 tagline: Find your best relaying Bitcoin peers
 description: >-
   Bitcoin Lab turns your Bitcoin node's peer connections into measurable relay performance.
@@ -16,7 +16,7 @@ description: >-
 
   Bitcoin Lab does not modify Bitcoin consensus behavior or mining. It is an observability and network-optimization tool for advanced node operators.
 releaseNotes: >-
-  Live Peer Ranking, Outbound Peers, and Manual Peers now show the same columns in the same order and width, so they line up with each other instead of each looking different. The Actions column no longer gets clipped at the table's right edge - its buttons now stack instead of sitting side by side, which is what was actually causing it not to fit.
+  Removed the Label column (there was never a way to actually set one), renamed Status to Type, and fixed the Type pill visually overflowing into the First Seen % column next to it.
 
 developer: Ben
 website: https://github.com/benunskilled/bitcoin-lab
