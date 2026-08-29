@@ -1,7 +1,8 @@
 # Bitcoin Lab — Umbrel Community App Store
 
-**Bitcoin Lab** turns your Bitcoin Core node's peer connections *and* mining-pool
-connections into measurable numbers instead of guesswork.
+**Bitcoin Lab** turns curating your Bitcoin Core node's peers into a measurable
+speed improvement, and Stratum Race is how you see whether it's actually
+working.
 
 ![Bitcoin Lab dashboard](./bitcoinlab-node/1.png)
 
@@ -17,11 +18,14 @@ connections into measurable numbers instead of guesswork.
   outbound with a fresh, random one, which you then rank the same way. Repeat
   the loop and your peer set gets better over time instead of staying whatever
   Core happened to pick.
-- **Stratum Race** — races your mining pools (any local solo pool you add by
-  host/port, plus a handful of public solo pools out of the box) against each
-  other on every new block template, tracking wins, win %, and latency
-  (avg/median/P90) per pool, so switching pools — or adding your own — is a
-  numbers comparison instead of a guess.
+- **Stratum Race** — tracks latency (avg/median/P90) and win rate per mining
+  pool, race after race (any local solo pool you add by host/port, plus a
+  handful of public solo pools out of the box). **This is the main reason it
+  exists**: as your peer curation above pays off and your node relays blocks
+  faster, a pool built on that node should get its own new-block template out
+  faster too — Stratum Race is how you actually watch that latency improve
+  over time, instead of assuming better peers helped. Comparing external pools
+  against each other is a secondary, free byproduct of the same measurement.
 
 Both live on the same dashboard, refreshed continuously.
 

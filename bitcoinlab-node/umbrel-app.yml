@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "1.12.5"
+version: "1.12.6"
 tagline: Find your best relay peers and Stratum Race pool speed
 description: >-
   Bitcoin Lab turns your Bitcoin node's peer connections into measurable relay performance.
@@ -11,17 +11,18 @@ description: >-
   It continuously observes which peers deliver new blocks first via Bitcoin Core's ZMQ interface and maintains long-term peer performance history (First/Eligible/First%, ping, sessions, connection time). Most of the actual speed gain comes from acting on that history: add your best-ranked peers as manual/trusted connections so they stay put, and disconnect outbound peers that never deliver anything - Core replaces a disconnected outbound with a fresh, random one, which you then rank the same way.
 
 
-  A parallel Stratum Race measures which mining pools deliver new block templates fastest, including any local solo-mining pool you add by host and port, so switching pools is a numbers comparison instead of a guess.
+  A parallel Stratum Race tracks per-pool latency (avg/median/P90) and win rate over time, including any local solo-mining pool you add by host and port. This is the main reason it exists: as your peer curation above pays off and your node relays blocks faster, a pool built on that node should get its own new-block template out faster too - Stratum Race is how you actually see that latency improve, instead of assuming better peers helped. Comparing external pools against each other is a secondary byproduct of the same measurement.
 
 
   Bitcoin Lab does not modify Bitcoin consensus behavior or mining. It is an observability and peer-optimization tool for advanced node operators.
 releaseNotes: >-
-  Wording fix in the README and this listing's description: the previous
-  copy leaned on vague "network/config change" language for what actually
-  drives most of the real speed improvement - ranking peers, manually
-  adding the strongest ones, and disconnecting outbound peers that never
-  deliver, so Core replaces them and you rank the replacements too. No
-  application change.
+  Another wording correction, this time on why Stratum Race exists at all:
+  it's not really about shopping between mining pools. For a solo pool
+  built on the same node Bitcoin Lab observes, better peers mean your node
+  relays blocks faster, which means that pool gets a new job out faster -
+  Stratum Race is how you watch that actually happen instead of assuming
+  it. Comparing external pools is a secondary byproduct, not the point.
+  No application change.
 developer: Ben
 website: https://github.com/benunskilled/bitcoin-lab
 dependencies:
