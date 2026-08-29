@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "1.11.1"
+version: "1.12.0"
 tagline: Find your best relaying Bitcoin peers
 description: >-
   Bitcoin Lab turns your Bitcoin node's peer connections into measurable relay performance.
@@ -16,8 +16,16 @@ description: >-
 
   Bitcoin Lab does not modify Bitcoin consensus behavior or mining. It is an observability and network-optimization tool for advanced node operators.
 releaseNotes: >-
-  Removed the Label column (there was never a way to actually set one), renamed Status to Type, and fixed the Type pill visually overflowing into the First Seen % column next to it.
+  Correctness: a pool that was a block behind could close the running Stratum Race early and mark every other pool as a miss, which systematically inflated Win % for the fastest pool and Miss for everyone else. Because the recorded numbers were biased rather than merely noisy, the existing stratum history is cleared once on update so the statistics restart from a correct baseline. Peer ranking data is untouched.
 
+
+  Stability: an out-of-range pool port could be saved from the dashboard and then crash the Stratum Race process on every restart, which no restart could clear - ports are now validated and a bad pool disables only itself. The relay and peer profilers no longer terminate on a database error, and all four services handle shutdown signals.
+
+
+  Visibility: every service now has a container healthcheck, and the dashboard shows a banner if a background service stops reporting. Previously a crash-looping collector looked exactly like a running app.
+
+
+  Performance: per-peer relay totals are kept as a running summary instead of being aggregated over the full history on every refresh, and pool median/P90 are computed in SQL rather than by loading every latency sample - so the dashboard stays fast as history accumulates. New blocks now arrive over a live event stream instead of a 5-second poll, so the block wave is immediate and the app is quieter on the node.
 developer: Ben
 website: https://github.com/benunskilled/bitcoin-lab
 dependencies:
