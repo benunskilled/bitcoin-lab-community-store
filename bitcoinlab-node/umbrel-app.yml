@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "1.12.0"
+version: "1.12.1"
 tagline: Find your best relaying Bitcoin peers
 description: >-
   Bitcoin Lab turns your Bitcoin node's peer connections into measurable relay performance.
@@ -16,6 +16,13 @@ description: >-
 
   Bitcoin Lab does not modify Bitcoin consensus behavior or mining. It is an observability and network-optimization tool for advanced node operators.
 releaseNotes: >-
+  Packaging fix for 1.12.0. The dashboard healthcheck command contains a
+  ternary, and the ": " inside it made an unquoted YAML scalar parse as a
+  mapping - which made the whole compose file fail validation, so 1.12.0
+  removed the old containers and could not create the new ones. The
+  application image is unchanged from 1.12.0; only the compose file differs.
+
+
   Correctness: a pool that was a block behind could close the running Stratum Race early and mark every other pool as a miss, which systematically inflated Win % for the fastest pool and Miss for everyone else. Because the recorded numbers were biased rather than merely noisy, the existing stratum history is cleared once on update so the statistics restart from a correct baseline. Peer ranking data is untouched.
 
 
