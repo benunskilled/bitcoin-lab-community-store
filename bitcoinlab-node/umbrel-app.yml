@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "1.12.14"
+version: "1.12.15"
 tagline: Rank your peers, race your pool's latency - built for solo miners
 description: >-
   Bitcoin Lab is built for solo miners running their own pool on their Bitcoin node: it turns peer connections into measurable relay performance, and Stratum Race confirms it's actually working.
@@ -16,8 +16,12 @@ description: >-
 
   Bitcoin Lab does not modify Bitcoin consensus behavior or mining. It is an observability and peer-optimization tool for solo miners and advanced node operators.
 releaseNotes: >-
-  No functional changes. Trimmed the metric-name list out of the
-  listing text.
+  Fixed manual peer add for IPv6: a bracketed address like
+  [2001:db8::1]:8333 was rejected outright, and a bare IPv6 address was
+  sometimes misread as host:port if its last hextet looked like a
+  2-5 digit number, which also meant the peer never got saved in the
+  format Bitcoin Core itself expects. Affects both the free-text Add
+  Peer field and the "Add as Manual" button on an existing peer row.
 
 developer: Ben
 website: https://github.com/benunskilled/bitcoin-lab
