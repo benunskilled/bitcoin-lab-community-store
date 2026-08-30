@@ -11,8 +11,7 @@ made your pool faster.
 
 - **Peer relay ranking** — continuously tracks which of your connected peers
   actually deliver new blocks first, over Bitcoin Core's ZMQ interface, building
-  a long-term First / Eligible / First % ranking per peer (plus ping, session
-  count, total connection time). **This is where most of the actual speed gain
+  a long-term ranking per peer. **This is where most of the actual speed gain
   comes from**: add your best-ranked peers as manual/trusted connections so
   they stay connected instead of rotating out on their own, and disconnect
   outbound peers that never deliver anything — Core replaces a disconnected
