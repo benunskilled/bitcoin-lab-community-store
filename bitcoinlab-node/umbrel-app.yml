@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "1.12.8"
+version: "1.12.9"
 tagline: Find your best relay peers and Stratum Race pool speed
 description: >-
   Bitcoin Lab turns your Bitcoin node's peer connections into measurable relay performance.
@@ -16,13 +16,11 @@ description: >-
 
   Bitcoin Lab does not modify Bitcoin consensus behavior or mining. It is an observability and peer-optimization tool for advanced node operators.
 releaseNotes: >-
-  Fixes a bug where clicking "Add as Manual" on a peer that was already
-  connected did not actually free up an automatic-outbound slot for Core
-  to pick a new peer, because the existing connection was never
-  disconnected - only queued as an addnode. Bitcoin Lab now disconnects
-  that existing session first (only when needed), so Core reconnects it
-  moments later as a genuine manual peer and the slot it used to occupy
-  is available again.
+  Table readability pass: subtle zebra striping across the peer/pool
+  tables so a wide row stays easy to follow, Add as Manual and
+  Disconnect render side by side again instead of stacked (which had
+  doubled every row's height), and Manual Peers now shows unused
+  capacity as actual empty rows instead of only a text summary.
 
 developer: Ben
 website: https://github.com/benunskilled/bitcoin-lab
