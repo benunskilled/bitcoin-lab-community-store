@@ -18,7 +18,10 @@ made your pool faster.
   outbound peers that never deliver anything — Core replaces a disconnected
   outbound with a fresh, random one, which you then rank the same way. Repeat
   the loop and your peer set gets better over time instead of staying whatever
-  Core happened to pick.
+  Core happened to pick. Inbound peers get ranked too and can be promoted as
+  manual if reachable — Bitcoin Lab probes the real port with a TCP handshake
+  first, since only the port in the reported address is temporary, and not
+  every peer listens.
 - **Stratum Race** — tracks latency (avg/median/P90) and win rate per mining
   pool, race after race (any local solo pool you add by host/port, plus a
   handful of public solo pools out of the box). **This is the main reason it
