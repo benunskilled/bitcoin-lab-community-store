@@ -27,9 +27,8 @@ made your pool faster.
   faster too — every extra second a miner spends hashing the previous,
   already-solved block is wasted work (a stale share), so faster templates
   mean fewer of those. Stratum Race is how you actually watch that latency
-  improve over time, instead of assuming better peers helped. Comparing
-  external pools against each other is a secondary, free byproduct of the
-  same measurement.
+  improve over time, instead of assuming better peers helped. The public
+  pools are the baseline your own pool's number is measured against.
 
 Both live on the same dashboard, refreshed continuously.
 
