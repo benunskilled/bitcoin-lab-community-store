@@ -2,13 +2,13 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "1.12.12"
+version: "1.12.13"
 tagline: Rank your peers, race your pool's latency - built for solo miners
 description: >-
   Bitcoin Lab is built for solo miners running their own pool on their Bitcoin node: it turns peer connections into measurable relay performance, and Stratum Race confirms it's actually working.
 
 
-  It continuously observes which peers deliver new blocks first via Bitcoin Core's ZMQ interface and maintains long-term peer performance history (First/Eligible/First%, ping, sessions, connection time). Most of the actual speed gain comes from acting on that history: add your best-ranked peers as manual/trusted connections so they stay put, and disconnect outbound peers that never deliver anything - Core replaces a disconnected outbound with a fresh, random one, which you then rank the same way.
+  It continuously observes which peers deliver new blocks first via Bitcoin Core's ZMQ interface and maintains long-term peer performance history (First/Eligible/First%, ping, sessions, connection time). Most of the actual speed gain comes from acting on that history: add your best-ranked peers as manual/trusted connections so they stay put, and disconnect outbound peers that never deliver anything - Core replaces a disconnected outbound with a fresh, random one, which you then rank the same way. Inbound peers get ranked too and can be promoted as manual if reachable - Bitcoin Lab probes the real port with a TCP handshake first, since only the port in the reported address is temporary, and not every peer listens.
 
 
   A parallel Stratum Race tracks per-pool latency (avg/median/P90) and win rate over time, including any local solo-mining pool you add by host and port. This is the main reason it exists: as you act on that peer ranking above and your node relays blocks faster, a pool built on that node should get its own new-block template out faster too - every extra second a miner spends hashing the previous, already-solved block is wasted work (a stale share), so faster templates mean fewer of those. Stratum Race is how you actually see that latency improve, instead of assuming better peers helped. The public pools are the baseline your own pool's number is measured against.
@@ -16,9 +16,8 @@ description: >-
 
   Bitcoin Lab does not modify Bitcoin consensus behavior or mining. It is an observability and peer-optimization tool for solo miners and advanced node operators.
 releaseNotes: >-
-  No functional changes. Fixed a misleading line in the listing: the
-  public pools in Stratum Race aren't a side comparison, they're the
-  baseline your own pool's latency is measured against.
+  No functional changes. Listing now mentions that inbound peers get
+  ranked and can be promoted to manual too, not just outbound ones.
 
 developer: Ben
 website: https://github.com/benunskilled/bitcoin-lab
