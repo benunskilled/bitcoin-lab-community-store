@@ -21,6 +21,10 @@ made your pool faster.
   manual if reachable — Bitcoin Lab probes the real port with a TCP handshake
   first, since only the port in the reported address is temporary, and not
   every peer listens.
+  An optional toggle automates this whole loop: it disconnects outbound peers
+  once they've had a full day to prove themselves and never delivered a block
+  first, then promotes or swaps in the best-performing candidate as manual —
+  one step per pass, off by default.
 - **Stratum Race** — tracks latency (avg/median/P90) and win rate per mining
   pool, race after race (any local solo pool you add by host/port, plus a
   handful of public solo pools out of the box). **This is the main reason it
