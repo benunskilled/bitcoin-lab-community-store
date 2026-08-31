@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "1.12.18"
+version: "1.12.19"
 tagline: Rank your peers, race your pool's latency - built for solo miners
 description: >-
   Bitcoin Lab is built for solo miners running their own pool on their Bitcoin node: it turns peer connections into measurable relay performance, and Stratum Race confirms it's actually working.
@@ -19,13 +19,8 @@ description: >-
 
   Bitcoin Lab does not modify Bitcoin consensus behavior or mining. It is an observability and peer-optimization tool for solo miners and advanced node operators.
 releaseNotes: >-
-  Added an optional automatic peer-rotation toggle: every ~10 minutes it
-  disconnects outbound peers that have had a full day to prove themselves
-  and never delivered a block first (Core replaces them with a fresh
-  random peer), then promotes or swaps in the best-performing candidate
-  as a manual peer if it's a clear improvement - one step per pass, off
-  by default. A new Peer Rotation panel on the dashboard shows the toggle
-  and a log of what it has done.
+  Small table styling fix - the Total Time and Actions column headers
+  were sitting slightly off from the data/buttons they actually head.
 
 developer: Ben
 website: https://github.com/benunskilled/bitcoin-lab
