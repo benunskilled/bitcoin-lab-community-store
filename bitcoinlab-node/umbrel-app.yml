@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "1.15.2"
+version: "1.15.3"
 tagline: Rank your peers, race your pool's latency - built for solo miners
 description: >-
   Your node hears about each new block from whichever peer relays it to you first. Until it does, your pool is still handing out work on a block that has already been solved - hashrate spent on nothing. Bitcoin Lab finds the peers that consistently deliver first, keeps them, and then measures whether your pool actually got faster because of it.
@@ -22,16 +22,12 @@ description: >-
 
   Expect tens to a few hundred milliseconds. Small - but it is exactly the window in which a miner is working on a block that can no longer win.
 releaseNotes: >-
-  A presentation fix on the Peer Rotation panel: its explanation sat squeezed
-  beside the toggle in about a third of the card's width, running to eight
-  lines with the rest of the row empty. Same text, its own line, six lines.
-
-
-  Everything else in this release is behind the scenes - the demo data these
-  store screenshots are taken from is rebuilt around the shape of a real node
-  (206 connections, 188 of them inbound, a full outbound table) rather than a
-  dozen invented peers, so the pictures show what the app looks like on a node
-  that has actually been running for a while.
+  Plain-language pass on the Peer Rotation panel. The explanation under the
+  toggle had been grown a sentence at a time with every feature and ended up as
+  one paragraph with three asides in it - accurate, and nobody was going to
+  read it. It is now one line, three short bullets, one line, and the detailed
+  rules live in the project README where someone looking for them will actually
+  find them.
 
 
 developer: Ben
