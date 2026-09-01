@@ -2,10 +2,10 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "1.12.19"
+version: "1.13.0"
 tagline: Rank your peers, race your pool's latency - built for solo miners
 description: >-
-  Bitcoin Lab is built for solo miners running their own pool on their Bitcoin node: it turns peer connections into measurable relay performance, and Stratum Race confirms it's actually working.
+  Your node hears about each new block from whichever peer relays it to you first. Until it does, your pool is still handing out work on a block that has already been solved - hashrate spent on nothing. Bitcoin Lab finds the peers that consistently deliver first, keeps them, and then measures whether your pool actually got faster because of it.
 
 
   It continuously observes which peers deliver new blocks first via Bitcoin Core's ZMQ interface and maintains long-term peer performance history. Most of the actual speed gain comes from acting on that history: add your best-ranked peers as manual/trusted connections so they stay put, and disconnect outbound peers that never deliver anything - Core replaces a disconnected outbound with a fresh, random one, which you then rank the same way. Inbound peers get ranked too and can be promoted as manual if reachable - Bitcoin Lab probes the real port with a TCP handshake first, since only the port in the reported address is temporary, and not every peer listens.
@@ -19,8 +19,23 @@ description: >-
 
   Bitcoin Lab does not modify Bitcoin consensus behavior or mining. It is an observability and peer-optimization tool for solo miners and advanced node operators.
 releaseNotes: >-
-  Small table styling fix - the Total Time and Actions column headers
-  were sitting slightly off from the data/buttons they actually head.
+  A correctness and clean-up release. Two bugs in the new peer rotation are
+  fixed: an offline manual peer left a slot that looked free but Core could
+  not fill, so the loop kept adding peers indefinitely, and an inbound peer
+  that was already manual could be "promoted" over and over, using up the one
+  promotion each pass allows. Also fixed: deleting a pool could spoil the miss
+  count of the next race for every pool, a peer that reconnected within 15
+  seconds was recorded as never having dropped, and an invalid port in the Add
+  Peer field returned an error page instead of a message.
+
+
+  The dashboard no longer rebuilds its tables while you are clicking in them
+  (a poll landing at the wrong moment could swallow a click outright), the
+  block height now updates with the block wave instead of up to 20 seconds
+  later, and failed refreshes say so rather than quietly showing stale
+  numbers. Behind the scenes the most expensive query no longer walks every
+  peer the node has ever seen, and the home-screen widget stopped building two
+  full rankings every minute.
 
 developer: Ben
 website: https://github.com/benunskilled/bitcoin-lab

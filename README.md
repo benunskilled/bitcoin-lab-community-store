@@ -1,9 +1,14 @@
 # Bitcoin Lab — Umbrel Community App Store
 
-**Bitcoin Lab** is for solo miners running their own pool: it ranks your Bitcoin
-Core node's peers by which ones actually deliver new blocks first, so you can
-keep the best and drop the rest — and Stratum Race shows whether that actually
-made your pool faster.
+**Bitcoin Lab** is for solo miners running their own pool. Your node hears about
+each new block from whichever peer relays it to you first; until it does, your
+pool is still handing out work on a block that has already been solved — hashrate
+spent on nothing. Bitcoin Lab finds the peers that consistently deliver first,
+keeps them, and then measures whether your pool actually got faster because of it.
+
+It is worth being plain about the size of the prize: this is a game of tens to a
+few hundred milliseconds per block. Small — but it is exactly the window in which
+a miner is working on a block that can no longer win.
 
 ![Bitcoin Lab dashboard](./bitcoinlab-node/1.png)
 
@@ -22,9 +27,10 @@ made your pool faster.
   first, since only the port in the reported address is temporary, and not
   every peer listens.
   An optional toggle automates this whole loop: it disconnects outbound peers
-  once they've had a full day to prove themselves and never delivered a block
-  first, then promotes or swaps in the best-performing candidate as manual —
-  one step per pass, off by default.
+  once they have had a full day to prove themselves and never delivered a block
+  first, then makes the best remaining candidate manual if it beats what is
+  already there — one step per pass, off by default, with a log of everything
+  it has done.
 - **Stratum Race** — tracks latency (avg/median/P90) and win rate per mining
   pool, race after race (any local solo pool you add by host/port, plus a
   handful of public solo pools out of the box). **This is the main reason it
