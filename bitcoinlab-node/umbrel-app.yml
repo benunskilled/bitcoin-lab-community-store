@@ -2,13 +2,13 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "1.14.1"
+version: "1.14.2"
 tagline: Rank your peers, race your pool's latency - built for solo miners
 description: >-
   Your node hears about each new block from whichever peer relays it to you first. Until it does, your pool is still handing out work on a block that has already been solved - hashrate spent on nothing. Bitcoin Lab finds the peers that consistently deliver first, keeps them, and then measures whether your pool actually got faster because of it.
 
 
-  Bitcoin Core picks its peers for network health, not for your latency, so your peer set is random and stays random. Bitcoin Lab watches which of them hand you each new block first, over Core's ZMQ interface, and builds a lifetime First % for each one. Core timestamps block arrival to the second, so several peers can share a block: First % is how often a peer was in the fastest group, not how often it beat everyone outright - which is also why it only becomes meaningful after a day or so of blocks.
+  Bitcoin Core picks its peers for network health, not for your latency, so your peer set is random and stays random. Bitcoin Lab watches which of them hand you each new block first, over Core's ZMQ interface, and builds a lifetime First % for each one. Core credits only the peer whose block was new to your node, so each block has exactly one first - no guessing, and no credit for relaying something you already had. A single block proves nothing either way, which is why the percentage only starts to mean something after a day or so of them.
 
 
   Acting on that ranking is where the speed comes from. Keep your best peers as manual connections so Core holds on to them, and disconnect the ones that never deliver - Core replaces a dropped outbound peer with a fresh, random one, which you then rank the same way. Inbound peers are ranked too and can be promoted when they are reachable; Bitcoin Lab probes for the real listening port first, since the port an inbound peer reports is only its temporary one. An optional toggle runs this whole loop for you, one step every ten minutes, off until you switch it on.
@@ -19,14 +19,16 @@ description: >-
 
   Expect tens to a few hundred milliseconds. Small - but it is exactly the window in which a miner is working on a block that can no longer win.
 releaseNotes: >-
-  Fixes the home-screen widget added in 1.14.0, which stayed empty: it pointed
-  at the dashboard by container name, and Umbrel expects the service name.
+  Corrects what First % measures. Since 1.14.0 the description and the column's
+  tooltip claimed that several peers routinely share a block and that the
+  percentage says how often a peer was "in the fastest group". That was wrong
+  on both counts: Bitcoin Core credits a peer only when the block it sent was
+  new to your node, so each block has exactly one first, and First % means
+  exactly what it appears to mean.
 
 
-  Public Pool joins GoBrrr and Bassin in the one-click pool list, so all three
-  solo pools from the Umbrel app store are covered. Its stratum port is 2018
-  rather than 3333, which the port field's help text now explains instead of
-  claiming 3333 is the usual answer.
+  Nothing about the measurement changed - only the explanation of it, which had
+  been wrong in three places at once.
 
 developer: Ben
 website: https://github.com/benunskilled/bitcoin-lab-community-store
