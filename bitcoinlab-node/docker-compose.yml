@@ -2,9 +2,9 @@
 # four share the same SQLite file under ${APP_DATA_DIR}/data (better-sqlite3
 # in WAL mode is safe for multiple local processes).
 #
-# restart: unless-stopped rather than on-failure - these are dauerlaeufer, and
-# on-failure does not bring a service back that exited cleanly, nor reliably
-# after a Docker daemon restart.
+# restart: unless-stopped rather than on-failure - these are long-running
+# services, and on-failure does not bring one back that exited cleanly, nor
+# reliably after a Docker daemon restart.
 #
 # Every service has a healthcheck. The three worker processes have no HTTP
 # port, so each writes a heartbeat into the shared database every 30s and its
@@ -12,10 +12,8 @@
 # crash-looping worker was completely invisible: the app kept showing as
 # running and its tables simply stopped growing.
 #
-# IMPORTANT: replace the `image:` digest below after your first
-# `git push --tags` triggers .github/workflows/release.yml in the
-# `bitcoin-lab` source repo - see that workflow's final step for the exact
-# ghcr.io/<owner>/bitcoin-lab:<version>@sha256:<digest> to paste in here.
+# The `image:` reference is pinned by tag AND digest, and all four services
+# use the same one. See RELEASING.md for where that reference comes from.
 
 services:
   app_proxy:
@@ -24,7 +22,7 @@ services:
       APP_PORT: 8788
 
   dashboard:
-    image: ghcr.io/benunskilled/bitcoin-lab:1.13.0@sha256:cef1d5903dd89b7dd10d8560b434906821687cbc732800a70dff25e81199f58c
+    image: ghcr.io/benunskilled/bitcoin-lab:1.14.0@sha256:d3c5b41d9e087fb56672b9fb128a21ecc97e681901519e6ede2cbfa9b5e3bae6
     user: "1000:1000"
     init: true
     restart: unless-stopped
@@ -57,7 +55,7 @@ services:
       start_period: 30s
 
   peer-profiler:
-    image: ghcr.io/benunskilled/bitcoin-lab:1.13.0@sha256:cef1d5903dd89b7dd10d8560b434906821687cbc732800a70dff25e81199f58c
+    image: ghcr.io/benunskilled/bitcoin-lab:1.14.0@sha256:d3c5b41d9e087fb56672b9fb128a21ecc97e681901519e6ede2cbfa9b5e3bae6
     user: "1000:1000"
     init: true
     restart: unless-stopped
@@ -84,7 +82,7 @@ services:
       start_period: 60s
 
   relay-profiler:
-    image: ghcr.io/benunskilled/bitcoin-lab:1.13.0@sha256:cef1d5903dd89b7dd10d8560b434906821687cbc732800a70dff25e81199f58c
+    image: ghcr.io/benunskilled/bitcoin-lab:1.14.0@sha256:d3c5b41d9e087fb56672b9fb128a21ecc97e681901519e6ede2cbfa9b5e3bae6
     user: "1000:1000"
     init: true
     restart: unless-stopped
@@ -111,7 +109,7 @@ services:
       start_period: 60s
 
   stratum-race:
-    image: ghcr.io/benunskilled/bitcoin-lab:1.13.0@sha256:cef1d5903dd89b7dd10d8560b434906821687cbc732800a70dff25e81199f58c
+    image: ghcr.io/benunskilled/bitcoin-lab:1.14.0@sha256:d3c5b41d9e087fb56672b9fb128a21ecc97e681901519e6ede2cbfa9b5e3bae6
     user: "1000:1000"
     init: true
     restart: unless-stopped

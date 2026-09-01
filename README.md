@@ -1,85 +1,28 @@
 # Bitcoin Lab — Umbrel Community App Store
 
-**Bitcoin Lab** is for solo miners running their own pool. Your node hears about
-each new block from whichever peer relays it to you first; until it does, your
-pool is still handing out work on a block that has already been solved — hashrate
-spent on nothing. Bitcoin Lab finds the peers that consistently deliver first,
-keeps them, and then measures whether your pool actually got faster because of it.
+This repository is the Umbrel Community App Store that installs **Bitcoin Lab**:
+peer relay ranking and mining-pool latency racing, built for solo miners.
 
-It is worth being plain about the size of the prize: this is a game of tens to a
-few hundred milliseconds per block. Small — but it is exactly the window in which
-a miner is working on a block that can no longer win.
+It contains only the packaging — `umbrel-app.yml` and `docker-compose.yml`. The
+application itself, and everything about how it works, lives in
+[**benunskilled/bitcoin-lab**](https://github.com/benunskilled/bitcoin-lab).
 
 ![Bitcoin Lab dashboard](./bitcoinlab-node/1.png)
 
-## What it does
-
-- **Peer relay ranking** — continuously tracks which of your connected peers
-  actually deliver new blocks first, over Bitcoin Core's ZMQ interface, building
-  a long-term ranking per peer. **This is where most of the actual speed gain
-  comes from**: add your best-ranked peers as manual/trusted connections so
-  they stay connected instead of rotating out on their own, and disconnect
-  outbound peers that never deliver anything — Core replaces a disconnected
-  outbound with a fresh, random one, which you then rank the same way. Repeat
-  the loop and your peer set gets better over time instead of staying whatever
-  Core happened to pick. Inbound peers get ranked too and can be promoted as
-  manual if reachable — Bitcoin Lab probes the real port with a TCP handshake
-  first, since only the port in the reported address is temporary, and not
-  every peer listens.
-  An optional toggle automates this whole loop: it disconnects outbound peers
-  once they have had a full day to prove themselves and never delivered a block
-  first, then makes the best remaining candidate manual if it beats what is
-  already there — one step per pass, off by default, with a log of everything
-  it has done.
-- **Stratum Race** — tracks latency (avg/median/P90) and win rate per mining
-  pool, race after race (any local solo pool you add by host/port, plus a
-  handful of public solo pools out of the box). **This is the main reason it
-  exists**: as you act on that peer ranking above and your node relays blocks
-  faster, a pool built on that node should get its own new-block template out
-  faster too — every extra second a miner spends hashing the previous,
-  already-solved block is wasted work (a stale share), so faster templates
-  mean fewer of those. Stratum Race is how you actually watch that latency
-  improve over time, instead of assuming better peers helped. The public
-  pools are the baseline your own pool's number is measured against.
-
-Both live on the same dashboard, refreshed continuously.
-
-## Installing
+## Install
 
 1. In Umbrel: **Settings → App Store → ⋮ → Community App Stores**
-2. Paste this store's URL:
+2. Add this store's URL:
    ```
    https://github.com/benunskilled/bitcoin-lab-community-store
    ```
-3. Open the **Bitcoin Lab** store and install **Bitcoin Lab**. It depends on
-   the official **Bitcoin Node** app, which Umbrel will offer to install
-   first if you don't already have it.
+3. Open the **Bitcoin Lab** store and install **Bitcoin Lab**. It depends on the
+   official **Bitcoin Node** app, which Umbrel offers to install first if you do
+   not already have it.
 
-The dashboard is then reachable at `<your-umbrel>:8788`.
+The dashboard is then at `<your-umbrel>:8788`, and a summary widget is available
+for the Umbrel home screen.
 
-## Repositories
+## Releasing
 
-- [`bitcoin-lab`](https://github.com/benunskilled/bitcoin-lab) — the
-  application source and the Docker image it publishes.
-- `bitcoin-lab-community-store` (this repo) — only the Umbrel packaging
-  (`umbrel-app.yml` + `docker-compose.yml`) that tells Umbrel how to install
-  and update it.
-
----
-
-## Maintainer notes (updating a release)
-
-1. Bump `version:` in `bitcoinlab-node/umbrel-app.yml`, write `releaseNotes:`.
-2. Tag and push a new version in `bitcoin-lab` (`git tag vX.Y.Z && git push --tags`)
-   and wait for the "Build and publish multi-arch image" GitHub Action to
-   finish — its last step prints the exact
-   `ghcr.io/benunskilled/bitcoin-lab:X.Y.Z@sha256:<digest>` reference.
-3. Paste that reference into all four `image:` lines in
-   `bitcoinlab-node/docker-compose.yml`.
-4. Commit and push this repo. Umbrel shows the update to anyone who has
-   already added this store; a store that's never been added before will
-   see the current version right away.
-
-A packaging-only change (no new application image) can bump just this repo's
-`version:` — the `image:` digests stay pointed at whatever release is
-current.
+See [RELEASING.md](./RELEASING.md).
