@@ -31,6 +31,24 @@ new text appears without one; only a new application build changes the number.
 5. In `bitcoin-lab`, publish a GitHub Release for the tag using the same notes,
    so the history is readable outside Umbrel too.
 
+## Screenshots
+
+`bitcoinlab-node/1.png` .. `3.png` are the store gallery, and `1.png` is also
+the header image of both READMEs. They are regenerated from the demo stack:
+
+```sh
+DATA_DIR=/tmp/bitcoin-lab-demo node scripts/seed-demo-data.js
+MOCK_RPC_PORT=18332 node scripts/mock-rpc-server.js &
+DATA_DIR=/tmp/bitcoin-lab-demo BITCOIN_RPC_HOST=127.0.0.1 \
+  BITCOIN_RPC_PORT=18332 node src/dashboard-server.js &
+node scripts/screenshot.js
+```
+
+**When a screenshot changes, bump the `?v=` on the image URL in
+`bitcoin-lab/README.md`.** The file name stays the same forever, so browsers
+and GitHub's CDN happily keep serving the old picture to anyone who has
+already seen it - the version stamp is what makes the URL new.
+
 ## Notes
 
 - The image must be pinned by tag **and** digest. A moving tag would mean two
