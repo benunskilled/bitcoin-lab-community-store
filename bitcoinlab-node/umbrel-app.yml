@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "1.15.1"
+version: "1.15.2"
 tagline: Rank your peers, race your pool's latency - built for solo miners
 description: >-
   Your node hears about each new block from whichever peer relays it to you first. Until it does, your pool is still handing out work on a block that has already been solved - hashrate spent on nothing. Bitcoin Lab finds the peers that consistently deliver first, keeps them, and then measures whether your pool actually got faster because of it.
@@ -22,32 +22,16 @@ description: >-
 
   Expect tens to a few hundred milliseconds. Small - but it is exactly the window in which a miner is working on a block that can no longer win.
 releaseNotes: >-
-  Manual peers are the eight connections Bitcoin Core will hold open for you on
-  request, and this release is about making those eight slots worth something.
+  A presentation fix on the Peer Rotation panel: its explanation sat squeezed
+  beside the toggle in about a third of the card's width, running to eight
+  lines with the rest of the row empty. Same text, its own line, six lines.
 
 
-  Adding a peer now decides everything before it changes anything. The cap is
-  checked first and the weakest peer dropped to make room - named, with its
-  record, not silently - and the peer's existing connection is only
-  disconnected once it is genuinely in the manual list. So trying an inbound
-  peer that turns out not to be listening costs nothing at all, and a new Test
-  button answers "is anyone actually there, and on which port" without adding
-  anything.
-
-
-  A manual peer that goes offline now gives its slot up within hours instead of
-  holding it indefinitely. That is safe because giving up is no longer
-  permanent: the address is kept with its record, quietly re-tested, and takes
-  a slot straight back the moment it answers again. Both the waiting and the
-  chasing scale with the peer's own First % - a peer delivering 30% of your
-  blocks first keeps its slot for a day and is chased twice daily for months,
-  one at 1% for an hour and a few days.
-
-
-  On the dashboard: the Live Peer Ranking panel no longer has a collapse that
-  hides the whole table - collapsing goes back to the top ten, where it
-  started. Add a Peer has moved out into its own section. And the browser tab
-  finally shows the Bitcoin Lab flask instead of a blank page icon.
+  Everything else in this release is behind the scenes - the demo data these
+  store screenshots are taken from is rebuilt around the shape of a real node
+  (206 connections, 188 of them inbound, a full outbound table) rather than a
+  dozen invented peers, so the pictures show what the app looks like on a node
+  that has actually been running for a while.
 
 
 developer: Ben
