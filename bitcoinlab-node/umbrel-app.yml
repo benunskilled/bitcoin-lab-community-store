@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "1.15.0"
+version: "1.15.1"
 tagline: Rank your peers, race your pool's latency - built for solo miners
 description: >-
   Your node hears about each new block from whichever peer relays it to you first. Until it does, your pool is still handing out work on a block that has already been solved - hashrate spent on nothing. Bitcoin Lab finds the peers that consistently deliver first, keeps them, and then measures whether your pool actually got faster because of it.
@@ -11,7 +11,10 @@ description: >-
   Bitcoin Core picks its peers for network health, not for your latency, so your peer set is random and stays random. Bitcoin Lab watches which of them hand you each new block first, over Core's ZMQ interface, and builds a lifetime First % for each one. Core credits only the peer whose block was new to your node, so each block has exactly one first - no guessing, and no credit for relaying something you already had. A single block proves nothing either way, which is why the percentage only starts to mean something after a day or so of them.
 
 
-  Acting on that ranking is where the speed comes from. Keep your best peers as manual connections so Core holds on to them, and disconnect the ones that never deliver - Core replaces a dropped outbound peer with a fresh, random one, which you then rank the same way. Inbound peers are ranked too and can be promoted when they are reachable; Bitcoin Lab probes for the real listening port first, since the port an inbound peer reports is only its temporary one. Trying one is free: nothing is written and no connection is touched until that probe succeeds and a slot is confirmed, and a Test button answers the reachability question on its own. An optional toggle runs this whole loop for you, one step every ten minutes, off until you switch it on - including giving up on a manual peer that has gone quiet, on a timescale its own First % sets, and handing its slot back the moment it answers again.
+  Acting on that ranking is where the speed comes from. Keep your best peers as manual connections so Core holds on to them, and disconnect the ones that never deliver - Core replaces a dropped outbound peer with a fresh, random one, which you then rank the same way. Inbound peers are ranked too and can be promoted when they are reachable; Bitcoin Lab probes for the real listening port first, since the port an inbound peer reports is only its temporary one. Trying one is free: nothing is written and no connection is touched until that probe succeeds and one of Core's eight manual slots is confirmed, and a Test button answers the reachability question on its own.
+
+
+  Those eight slots are the scarcest thing here, so a manual peer that goes offline gives its slot up within hours rather than sitting on it - but it is not lost. Its address is kept with its record and quietly re-tested, and it takes a slot straight back the moment it answers again. That is what makes reclaiming quickly safe, and both halves are scaled by the peer's own First %: a peer that delivers 30% of your blocks first keeps its slot for a day and is chased for months, one at 1% for an hour and a few days. An optional toggle runs this whole loop for you, one step every ten minutes, off until you switch it on.
 
 
   Stratum Race is the other half, and the reason the first half matters: it times how quickly each mining pool turns a new block into fresh work, your own local pool included. Every second a miner spends hashing the previous, already-solved block is wasted work - a stale share - so faster templates mean fewer of them. Established public pools race alongside yours as the baseline, because a pool racing alone would trivially win every time.
@@ -19,26 +22,26 @@ description: >-
 
   Expect tens to a few hundred milliseconds. Small - but it is exactly the window in which a miner is working on a block that can no longer win.
 releaseNotes: >-
-  Adding a peer as manual now decides everything before it changes anything.
-  Bitcoin Core holds eight manual connections at once, and a ninth used to be
-  written down and then quietly queued forever - a peer the app listed as
-  manual that Core had never been told about. Now the cap is checked first and
-  the weakest peer is dropped to make room, and the answer says which one and
-  what its record was.
+  Manual peers are the eight connections Bitcoin Core will hold open for you on
+  request, and this release is about making those eight slots worth something.
 
 
-  Trying an inbound peer is free. The existing connection is only disconnected
-  once the peer is genuinely in the manual list, so a peer that turns out not
-  to be listening costs nothing at all - and a new Test button answers "is
-  anyone actually there" without adding anything.
+  Adding a peer now decides everything before it changes anything. The cap is
+  checked first and the weakest peer dropped to make room - named, with its
+  record, not silently - and the peer's existing connection is only
+  disconnected once it is genuinely in the manual list. So trying an inbound
+  peer that turns out not to be listening costs nothing at all, and a new Test
+  button answers "is anyone actually there, and on which port" without adding
+  anything.
 
 
-  A manual peer that goes offline now gives its slot up, after a grace period
-  bought with its own performance: a few hours at 1% first, a week at 40%.
-  Waiting the same length of time for both was treating the two ends of the
-  list as the same peer. What makes the shorter wait safe is that giving up is
-  no longer permanent - the address is parked, quietly re-tested, and takes its
-  slot straight back when it answers again.
+  A manual peer that goes offline now gives its slot up within hours instead of
+  holding it indefinitely. That is safe because giving up is no longer
+  permanent: the address is kept with its record, quietly re-tested, and takes
+  a slot straight back the moment it answers again. Both the waiting and the
+  chasing scale with the peer's own First % - a peer delivering 30% of your
+  blocks first keeps its slot for a day and is chased twice daily for months,
+  one at 1% for an hour and a few days.
 
 
   On the dashboard: the Live Peer Ranking panel no longer has a collapse that
