@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "1.14.0"
+version: "1.14.1"
 tagline: Rank your peers, race your pool's latency - built for solo miners
 description: >-
   Your node hears about each new block from whichever peer relays it to you first. Until it does, your pool is still handing out work on a block that has already been solved - hashrate spent on nothing. Bitcoin Lab finds the peers that consistently deliver first, keeps them, and then measures whether your pool actually got faster because of it.
@@ -19,23 +19,15 @@ description: >-
 
   Expect tens to a few hundred milliseconds. Small - but it is exactly the window in which a miner is working on a block that can no longer win.
 releaseNotes: >-
-  Bitcoin Lab now has a home-screen widget: live peers, your best-performing
-  peer, the fastest pool, and how many of your manual peers are actually
-  connected - all without opening the app. The endpoint behind it had existed
-  since v1.6.0, but the widget was never declared, so nothing ever called it.
+  Fixes the home-screen widget added in 1.14.0, which stayed empty: it pointed
+  at the dashboard by container name, and Umbrel expects the service name.
 
 
-  The "First Seen %" column is now simply "First %", and its tooltip explains
-  what the number really means: Core records block arrival to the second, so
-  several peers can share a block, and the percentage says how often a peer was
-  in the fastest group.
+  Public Pool joins GoBrrr and Bassin in the one-click pool list, so all three
+  solo pools from the Umbrel app store are covered. Its stratum port is 2018
+  rather than 3333, which the port field's help text now explains instead of
+  claiming 3333 is the usual answer.
 
-
-  Housekeeping around the app: the store page, both repository READMEs and the
-  release tooling had accumulated instructions left over from the very first
-  setup, the same description of the app written out in three places, and a
-  store version number that had drifted away from the version actually
-  installed. The store version now always matches the app version.
 developer: Ben
 website: https://github.com/benunskilled/bitcoin-lab-community-store
 dependencies:
@@ -58,7 +50,7 @@ widgets:
   - id: "stats"
     type: "four-stats"
     refresh: "60s"
-    endpoint: "bitcoinlab-node_dashboard_1:8788/api/widget/stats"
+    endpoint: "dashboard:8788/api/widget/stats"
     link: ""
     example:
       type: "four-stats"
