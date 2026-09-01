@@ -2,43 +2,42 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "1.13.0"
+version: "1.14.0"
 tagline: Rank your peers, race your pool's latency - built for solo miners
 description: >-
   Your node hears about each new block from whichever peer relays it to you first. Until it does, your pool is still handing out work on a block that has already been solved - hashrate spent on nothing. Bitcoin Lab finds the peers that consistently deliver first, keeps them, and then measures whether your pool actually got faster because of it.
 
 
-  It continuously observes which peers deliver new blocks first via Bitcoin Core's ZMQ interface and maintains long-term peer performance history. Most of the actual speed gain comes from acting on that history: add your best-ranked peers as manual/trusted connections so they stay put, and disconnect outbound peers that never deliver anything - Core replaces a disconnected outbound with a fresh, random one, which you then rank the same way. Inbound peers get ranked too and can be promoted as manual if reachable - Bitcoin Lab probes the real port with a TCP handshake first, since only the port in the reported address is temporary, and not every peer listens.
+  Bitcoin Core picks its peers for network health, not for your latency, so your peer set is random and stays random. Bitcoin Lab watches which of them hand you each new block first, over Core's ZMQ interface, and builds a lifetime First % for each one. Core timestamps block arrival to the second, so several peers can share a block: First % is how often a peer was in the fastest group, not how often it beat everyone outright - which is also why it only becomes meaningful after a day or so of blocks.
 
 
-  An optional toggle automates that loop: it disconnects outbound peers with a full day of eligibility and zero first-seen blocks, and promotes or swaps in the best-performing peer as manual - one step at a time, off by default.
+  Acting on that ranking is where the speed comes from. Keep your best peers as manual connections so Core holds on to them, and disconnect the ones that never deliver - Core replaces a dropped outbound peer with a fresh, random one, which you then rank the same way. Inbound peers are ranked too and can be promoted when they are reachable; Bitcoin Lab probes for the real listening port first, since the port an inbound peer reports is only its temporary one. An optional toggle runs this whole loop for you, one step every ten minutes, off until you switch it on.
 
 
-  A parallel Stratum Race tracks per-pool latency (avg/median/P90) and win rate over time, including any local solo-mining pool you add by host and port. This is the main reason it exists: as you act on that peer ranking above and your node relays blocks faster, a pool built on that node should get its own new-block template out faster too - every extra second a miner spends hashing the previous, already-solved block is wasted work (a stale share), so faster templates mean fewer of those. Stratum Race is how you actually see that latency improve, instead of assuming better peers helped. The public pools are the baseline your own pool's number is measured against.
+  Stratum Race is the other half, and the reason the first half matters: it times how quickly each mining pool turns a new block into fresh work, your own local pool included. Every second a miner spends hashing the previous, already-solved block is wasted work - a stale share - so faster templates mean fewer of them. Established public pools race alongside yours as the baseline, because a pool racing alone would trivially win every time.
 
 
-  Bitcoin Lab does not modify Bitcoin consensus behavior or mining. It is an observability and peer-optimization tool for solo miners and advanced node operators.
+  Expect tens to a few hundred milliseconds. Small - but it is exactly the window in which a miner is working on a block that can no longer win.
 releaseNotes: >-
-  A correctness and clean-up release. Two bugs in the new peer rotation are
-  fixed: an offline manual peer left a slot that looked free but Core could
-  not fill, so the loop kept adding peers indefinitely, and an inbound peer
-  that was already manual could be "promoted" over and over, using up the one
-  promotion each pass allows. Also fixed: deleting a pool could spoil the miss
-  count of the next race for every pool, a peer that reconnected within 15
-  seconds was recorded as never having dropped, and an invalid port in the Add
-  Peer field returned an error page instead of a message.
+  Bitcoin Lab now has a home-screen widget: live peers, your best-performing
+  peer, the fastest pool, and how many of your manual peers are actually
+  connected - all without opening the app. The endpoint behind it had existed
+  since v1.6.0, but the widget was never declared, so nothing ever called it.
 
 
-  The dashboard no longer rebuilds its tables while you are clicking in them
-  (a poll landing at the wrong moment could swallow a click outright), the
-  block height now updates with the block wave instead of up to 20 seconds
-  later, and failed refreshes say so rather than quietly showing stale
-  numbers. Behind the scenes the most expensive query no longer walks every
-  peer the node has ever seen, and the home-screen widget stopped building two
-  full rankings every minute.
+  The "First Seen %" column is now simply "First %", and its tooltip explains
+  what the number really means: Core records block arrival to the second, so
+  several peers can share a block, and the percentage says how often a peer was
+  in the fastest group.
 
+
+  Housekeeping around the app: the store page, both repository READMEs and the
+  release tooling had accumulated instructions left over from the very first
+  setup, the same description of the app written out in three places, and a
+  store version number that had drifted away from the version actually
+  installed. The store version now always matches the app version.
 developer: Ben
-website: https://github.com/benunskilled/bitcoin-lab
+website: https://github.com/benunskilled/bitcoin-lab-community-store
 dependencies:
   - bitcoin
 repo: https://github.com/benunskilled/bitcoin-lab
@@ -48,10 +47,35 @@ icon: https://raw.githubusercontent.com/benunskilled/bitcoin-lab-community-store
 port: 8788
 gallery:
   - 1.png
+  - 2.png
+  - 3.png
 path: ""
 
 defaultUsername: ""
 defaultPassword: ""
+
+widgets:
+  - id: "stats"
+    type: "four-stats"
+    refresh: "60s"
+    endpoint: "bitcoinlab-node_dashboard_1:8788/api/widget/stats"
+    link: ""
+    example:
+      type: "four-stats"
+      link: ""
+      items:
+        - title: "Live Peers"
+          text: "42"
+          subtext: "connected"
+        - title: "Best Peer"
+          text: "33%"
+          subtext: "203.0.113.12:8333"
+        - title: "Fastest Pool"
+          text: "80ms"
+          subtext: "AtlasPool"
+        - title: "Manual"
+          text: "7/8"
+          subtext: "manual peers online"
 
 submitter: Ben
 submission: ""
