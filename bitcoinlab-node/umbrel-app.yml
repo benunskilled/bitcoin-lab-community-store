@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "1.15.5"
+version: "1.15.6"
 tagline: Rank your peers, race your pool's latency - built for solo miners
 description: >-
   Your node hears about each new block from whichever peer relays it to you first. Until it does, your pool is still handing out work on a block that has already been solved - hashrate spent on nothing. Bitcoin Lab finds the peers that consistently deliver first, keeps them, and then measures whether your pool actually got faster because of it.
@@ -14,7 +14,7 @@ description: >-
   Acting on that ranking is where the speed comes from. Keep your best peers as manual connections so Core holds on to them, and disconnect the ones that never deliver - Core replaces a dropped outbound peer with a fresh, random one, which you then rank the same way. Inbound peers are ranked too and can be promoted when they are reachable; Bitcoin Lab probes for the real listening port first, since the port an inbound peer reports is only its temporary one. Trying one is free: nothing is written and no connection is touched until that probe succeeds and one of Core's eight manual slots is confirmed, and a Test button answers the reachability question on its own.
 
 
-  Those eight slots are the scarcest thing here, so a manual peer that goes offline gives its slot up within hours rather than sitting on it - but it is not lost. Its address is kept with its record and quietly re-tested, and it takes a slot straight back the moment it answers again. That is what makes reclaiming quickly safe, and both halves are scaled by the peer's own First %: a peer that delivers 30% of your blocks first keeps its slot for a day and is chased for months, one at 1% for an hour and a few days. An optional toggle runs this whole loop for you every ten minutes, off until you switch it on. For the sharpest results, set Bitcoin Core's outgoing connections to clearnet only - not "both". Over Tor you are timing circuits rather than peers, and a .onion peer cannot be made manual at all, so every outbound slot held by one is a slot this loop can never improve.
+  Those eight slots are the scarcest thing here, so a manual peer that goes offline gives its slot up within hours rather than sitting on it - but it is not lost. Its address is kept with its record and quietly re-tested, and it takes a slot straight back the moment it answers again. That is what makes reclaiming quickly safe, and both halves are scaled by the peer's own First %: a peer that delivers 30% of your blocks first keeps its slot for a day and is chased for months, one at 1% for an hour and a few days. An optional toggle runs this whole loop for you every ten minutes, off until you switch it on. For the sharpest results, set Bitcoin Core's outgoing connections to clearnet only - not "both". Over Tor or I2P you are timing the overlay network rather than the peer, and such a peer cannot be made manual at all, so every outbound slot held by one is a slot this loop can never improve. Inbound connections over Tor or I2P are fine either way - those peers dialled you, they rank normally, and the dashboard now says plainly which ones cannot be kept.
 
 
   Stratum Race is the other half, and the reason the first half matters: it times how quickly each mining pool turns a new block into fresh work, your own local pool included. Every second a miner spends hashing the previous, already-solved block is wasted work - a stale share - so faster templates mean fewer of them. Established public pools race alongside yours as the baseline, because a pool racing alone would trivially win every time.
@@ -22,38 +22,25 @@ description: >-
 
   Expect tens to a few hundred milliseconds. Small - but it is exactly the window in which a miner is working on a block that can no longer win.
 releaseNotes: >-
-  A full review of the app found five real defects introduced in the 1.15.x
-  releases, and this fixes all of them along with everything else it turned up.
+  Bitcoin Core also talks to peers over Tor, I2P and CJDNS, and this app can
+  reach none of those: it dials out over plain TCP from inside its own
+  container, with no Tor proxy, no I2P bridge and no CJDNS interface - and
+  asking for any of them would mean asking for access to your host's
+  networking, which this app deliberately never does.
 
 
-  The important one: with automatic rotation switched on, a manual peer that
-  had been offline earlier could be retired and immediately re-added, over and
-  over, every ten minutes. Because only one peer may join the manual set per
-  pass, that loop used up every pass and no genuinely better peer was ever
-  promoted while it ran. If you had rotation on, it was doing nothing useful.
-  Two related fixes: a peer added by hand could be dropped seconds later, and a
-  peer Bitcoin Core never manages to connect used to hold one of the eight
-  slots permanently, invisible to every screen.
+  Such a peer was nonetheless offered an "Add as Manual" button, which probed
+  and then reported "no node answering on 8333 or 9333" - as though the peer
+  merely had the wrong port open. It now says "Tor only" or "I2P only" instead,
+  with the reason behind it, and the automatic rotation skips them rather than
+  failing on the same address every ten minutes.
 
 
-  Adding a peer is now genuinely all-or-nothing. Previously a refused addnode
-  could leave the peer in neither the manual list nor the parked list - losing
-  months of ranking data - or leave the manual set one peer smaller with
-  nothing said about it. Nothing moves now until the step that can fail has
-  succeeded.
-
-
-  Tables scroll properly on a phone instead of squeezing nine columns into the
-  width and overprinting them. "Show all" no longer stops working while a peer
-  is being added. The peer ranking query no longer slows down as the node ages.
-  The weekly database compaction no longer rewrites the entire file to reclaim
-  nothing, which could cost a block's measurement.
-
-
-  And one piece of advice now stated where it matters: set Bitcoin Core's
-  outgoing connections to clearnet only. Over Tor you are measuring circuits
-  rather than peers, and a .onion peer can never be made a manual connection at
-  all. The dashboard counts how many of your peers are on Tor when any are.
+  Nothing else about those peers changes: they rank normally, earn First %
+  normally, and really do deliver blocks - inbound Tor and I2P connections are
+  completely normal even with outgoing connections set to clearnet only,
+  because those peers dialled you. The note above the outbound table now counts
+  them by network, so you can see at a glance which setting is involved.
 
 
 developer: Ben
