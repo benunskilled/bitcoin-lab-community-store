@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "1.15.7"
+version: "1.15.8"
 tagline: Measure your peers, keep the ones that deliver
 description: >-
   Your peers decide how fast you hear about a new block, and Bitcoin Core picks them at random. Bitcoin Lab watches which of them actually delivers each block first - over Core's ZMQ interface, timestamped before anything else happens - and builds a lifetime First % for every peer you have. After a day of blocks the ranking tells you which of your connections are worth anything, and which are along for the ride.
@@ -15,7 +15,7 @@ description: >-
 
 
 releaseNotes: >-
-  Fixes a rotation loop that could swap the same two peers back and forth every ten minutes for hours: a peer that has just taken a manual slot now keeps it for its first 50 blocks, and a challenger has to be more than 0.2 points of First % better before it can displace anyone. Block hashes arriving over ZMQ were byte-reversed a second time and are now stored as Core sends them. The rotation log no longer grows without limit - it shows the five most recent actions with the rest behind a button, and keeps thirty. A new Storage panel shows what the database occupies and can clear peer measurements or pool history separately, each with its row count and size named first; your manual peers survive both. Stratum race history is now kept for a year instead of half of one.
+  Two explanations in the dashboard were longer than they needed to be, and one of them was out of date. The note above the outbound table said to avoid leaving the setting on "both" - Umbrel has three toggles, Clearnet, Tor and I2P, and all three are on by default - and it named the setting wrongly. It now says what matters at that table in three lines: a Tor or I2P peer is never first and cannot be kept as a manual peer, while inbound connections over either are perfectly normal. The rotation panel lost about a third of its words without losing anything it said.
 
 
 developer: Ben
