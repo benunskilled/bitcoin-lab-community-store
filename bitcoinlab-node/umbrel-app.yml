@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "1.15.8"
+version: "1.15.9"
 tagline: Measure your peers, keep the ones that deliver
 description: >-
   Your peers decide how fast you hear about a new block, and Bitcoin Core picks them at random. Bitcoin Lab watches which of them actually delivers each block first - over Core's ZMQ interface, timestamped before anything else happens - and builds a lifetime First % for every peer you have. After a day of blocks the ranking tells you which of your connections are worth anything, and which are along for the ride.
@@ -15,7 +15,7 @@ description: >-
 
 
 releaseNotes: >-
-  Two explanations in the dashboard were longer than they needed to be, and one of them was out of date. The note above the outbound table said to avoid leaving the setting on "both" - Umbrel has three toggles, Clearnet, Tor and I2P, and all three are on by default - and it named the setting wrongly. It now says what matters at that table in three lines: a Tor or I2P peer is never first and cannot be kept as a manual peer, while inbound connections over either are perfectly normal. The rotation panel lost about a third of its words without losing anything it said.
+  A peer had to be connected through 144 blocks - a full day - before the rotation was allowed to judge it. That is a long time to watch a peer deliver blocks without being permitted to keep it, and Bitcoin Core drops peers on its own schedule in the meantime: one delivering 15% of blocks was watched for twenty hours and then lost. The bar is now 50 blocks, about eight hours. The same threshold decides when a peer that never delivers is dropped, so that happens sooner too - occasionally to a peer that was merely unlucky, which is the deliberate trade. A dropped peer keeps its record and resumes it if it comes back; a peer lost to waiting is gone with nothing learned.
 
 
 developer: Ben
