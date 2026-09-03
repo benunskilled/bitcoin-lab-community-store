@@ -24,7 +24,26 @@ In `bitcoin-lab`:
 5. `git tag vX.Y.Z`, then `git push origin master:main` and `git push origin vX.Y.Z`.
 6. Wait for the **Build and publish multi-arch image** workflow. Its last step,
    *Print pinned reference for the app package*, prints the exact
-   `ghcr.io/benunskilled/bitcoin-lab:X.Y.Z@sha256:<digest>` reference.
+   `ghcr.io/benunskilled/bitcoin-lab:X.Y.Z@sha256:<digest>` reference. Copy the
+   whole line, not just the hash: the repository also publishes one manifest per
+   architecture, and their digests look identical but are not the one to pin.
+   **Verify it against the registry before it goes anywhere:**
+
+   ```sh
+   TOKEN=$(curl -s "https://ghcr.io/token?scope=repository:benunskilled/bitcoin-lab:pull&service=ghcr.io" \
+     | sed -n 's/.*"token":"\([^"]*\)".*/\1/p')
+   curl -sI -H "Authorization: Bearer $TOKEN" \
+     -H "Accept: application/vnd.oci.image.index.v1+json" \
+     "https://ghcr.io/v2/benunskilled/bitcoin-lab/manifests/X.Y.Z" \
+     | grep -i docker-content-digest
+   ```
+
+   That prints the digest of the multi-arch index, which is what belongs in the
+   compose file. Pinning anything else does not fail loudly: Docker cannot
+   resolve the reference, the update hangs before a single container is created,
+   the app's logs stay empty because there is no container to log, and Umbrel
+   sits in `"state": "updating"` until the manifest is corrected and the update
+   is triggered again. That cost an evening once.
 
 Here:
 
