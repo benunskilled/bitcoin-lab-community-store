@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "1.15.9"
+version: "1.15.10"
 tagline: Measure your peers, keep the ones that deliver
 description: >-
   Your peers decide how fast you hear about a new block, and Bitcoin Core picks them at random. Bitcoin Lab watches which of them actually delivers each block first - over Core's ZMQ interface, timestamped before anything else happens - and builds a lifetime First % for every peer you have. After a day of blocks the ranking tells you which of your connections are worth anything, and which are along for the ride.
@@ -15,7 +15,7 @@ description: >-
 
 
 releaseNotes: >-
-  A peer had to be connected through 144 blocks - a full day - before the rotation was allowed to judge it. That is a long time to watch a peer deliver blocks without being permitted to keep it, and Bitcoin Core drops peers on its own schedule in the meantime: one delivering 15% of blocks was watched for twenty hours and then lost. The bar is now 50 blocks, about eight hours. The same threshold decides when a peer that never delivers is dropped, so that happens sooner too - occasionally to a peer that was merely unlucky, which is the deliberate trade. A dropped peer keeps its record and resumes it if it comes back; a peer lost to waiting is gone with nothing learned.
+  The Outbound Peers card now carries four numbers over the whole history rather than the current snapshot: how many outbound peers Bitcoin Core has handed this node, how many stayed connected long enough to be judged, how many ever delivered a block first, and how many were kept. The table underneath shows what is connected right now; these say what those rows are a sample of. On the node this was built against it reads 74 tested and 12 delivered - five outbound peers in six never deliver a block at all. All four are counted by IP, so a host that reconnected, or was kept under a second address, counts once.
 
 
 developer: Ben
