@@ -2,20 +2,29 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "1.15.12"
+version: "1.16.0"
 tagline: Measure your peers, keep the ones that deliver
 description: >-
-  Your peers decide how fast you hear about a new block, and Bitcoin Core picks them at random. Bitcoin Lab watches which of them actually delivers each block first - over Core's ZMQ interface, timestamped before anything else happens - and builds a lifetime First % for every peer you have. After a day of blocks the ranking tells you which of your connections are worth anything, and which are along for the ride.
+  Your peers decide how fast you hear about a new block, and Bitcoin Core picks them at random. Bitcoin Lab watches which of them actually delivers each block first - over Core's ZMQ interface, timestamped before anything else happens - and ranks every peer you have by how often it wins. The rank comes from the last few days rather than from a whole lifetime, so a peer whose routing has changed cannot coast on an old record. After a day of blocks the ranking tells you which of your connections are worth anything, and which are along for the ride.
 
 
   Then you act on it. Keep a good peer and Core holds on to it instead of letting it rotate away; drop one that never delivers and Core hands you a fresh random peer to rank in its place. Inbound peers are ranked too, and can be promoted when they turn out to be reachable. An optional toggle runs the whole loop for you, off until you switch it on - and your proven peers are put back after a restart, which Core itself will not do.
 
 
-  Stratum Race is the other half: it times how quickly each mining pool turns a new block into fresh work, your own local pool included, with eight public solo pools racing as the baseline. Every second a miner spends on an already-solved block is a stale share, and that is the window curated peers close.
+  Stratum Race is the other half: it times how quickly each mining pool turns a new block into fresh work, your own local pool included, with eight public solo pools racing as the baseline. Every second a miner spends on an already-solved block is a stale share, and that is the window curated peers close. Whether that is worth chasing is a fair question: half a second off a ten-minute job is 0.08% of your miner's time. Bitcoin Lab is for people who enjoy chasing it anyway.
 
 
 releaseNotes: >-
-  The shortened block hash under the big number in the header is gone. It named the block the ranking had just scored, which the ranking itself already shows, and nothing on the page acted on it - so the card now carries the block height alone. That line also held the state before Bitcoin Core has answered, which moves into the number's own slot: the height is Core's own block count and is there from the first response, so the only case with no height is Core not answering, and it now says so in small type instead of showing a large dash.
+  A peer is now ranked on what it has done lately. The ranking key was a lifetime First % with no decay, so a peer whose routing changed months ago kept the record it earned before that while delivering nothing today. It is now the last 500 blocks - about three and a half days - and a peer falls back on its whole record only for the part of that window it has not been around for. Both figures run through a Wilson lower bound, so a peer with four deliveries out of fifty no longer outranks one with sixty out of nine hundred. Nothing is thrown away: the lifetime numbers stay on the page, they no longer decide the order.
+
+
+  Peers you add by hand are protected from the rotation. Add as Manual is now Add & Keep, and anything typed in arrives with a star: the rotation will neither displace it for a better candidate nor park it when it goes offline. Click the star to release it. What the rotation promotes itself arrives unstarred, or the loop would freeze itself out of every slot it filled.
+
+
+  Tor, I2P and CJDNS peers are labelled correctly. The network was read off the address string, and an inbound Tor peer arrives from Umbrel's own Tor container under that container's plain local address - so every Tor peer was filed as another app on this host. Core reports the network itself in getpeerinfo, and that is what is stored and shown now, with the old guess kept only for connections recorded before this version.
+
+
+  Adding a peer that is already connected inbound now works. The inbound session is dropped before the addnode, not after: an inbound peer's address carries a throwaway source port, so the old order left the original connection in place and the manual one was never established. If you added a good inbound peer and it stayed inbound, this was why.
 
 
 developer: Ben
