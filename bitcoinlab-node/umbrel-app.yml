@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "1.16.2"
+version: "1.16.3"
 tagline: Measure your peers, keep the ones that deliver
 description: >-
   Your peers decide how fast you hear about a new block, and Bitcoin Core picks them at random. Bitcoin Lab watches which of them actually delivers each block first - over Core's ZMQ interface, timestamped before anything else happens - and ranks every peer you have by how often it wins. The rank comes from the last few days rather than from a whole lifetime, so a peer whose routing has changed cannot coast on an old record. After a day of blocks the ranking tells you which of your connections are worth anything, and which are along for the ride.
@@ -11,17 +11,17 @@ description: >-
   Then you act on it. Keep a good peer and Core holds on to it instead of letting it rotate away; drop one that never delivers and Core hands you a fresh random peer to rank in its place. Inbound peers are ranked too, and can be promoted when they turn out to be reachable. An optional toggle runs the whole loop for you, off until you switch it on - and your proven peers are put back after a restart, which Core itself will not do.
 
 
-  Stratum Race is the other half: it times how quickly each mining pool turns a new block into fresh work, your own local pool included, with eight public solo pools racing as the baseline. Every second a miner spends on an already-solved block is a stale share, and that is the window curated peers close. Whether that is worth chasing is a fair question: half a second off a ten-minute job is 0.08% of your miner's time. Bitcoin Lab is for people who enjoy chasing it anyway.
+  Stratum Race is the other half: it times how quickly each mining pool turns a new block into fresh work, your own local pool included, with eight public solo pools racing as the baseline. It is off until you switch it on, so installing this does not start talking to anybody's pool on its own. Every second a miner spends on an already-solved block is a stale share, and that is the window curated peers close. Whether that is worth chasing is a fair question: half a second off a ten-minute job is 0.08% of your miner's time. Bitcoin Lab is for people who enjoy chasing it anyway.
 
 
 releaseNotes: >-
-  The button beside a peer no longer protects it from the rotation. Add & Keep was meant for one thing - an address you type in yourself - but it ended up on the button next to every peer in every table, and that button set the star too. It did the most damage where it was least visible: the ten ordinary outbound peers are the pool the rotation promotes from, so clicking it on one of them took that peer out of the pool for good. Eight of those and the loop has nothing left to work with.
+  Stratum Race can be switched off completely. Somebody who wants the peer half of this app and not the pool half had no way of saying so: disabling all eight pools by hand came close, but it was eight clicks, the card still sat there as if it were measuring, and the next pool anyone added started connecting again. There is a switch on the card now, the same as the rotation's. Off means no TCP connection to any pool, public or your own, and nothing measured - a pool added while it is off is not connected either. Everything measured so far is kept; the pool history still only goes if you delete it under Storage.
 
 
-  The distinction the star exists for still holds. A hand-typed address may name a peer this node has never seen, so there is no record to judge it on and the first candidate with any history would displace it before you saw it work. A peer picked out of the ranking is the opposite case: it is in that list because the app measured it. So the button in the tables reads "Add as Manual" again and adds without the star, and only the Add a Peer box still stars what it adds. Freeing a slot when all eight are full is unchanged for both.
+  A fresh install now starts with it off, so nothing here reaches out to anyone but your own node until you ask it to. An install that has been running is switched on as it was - the update does not take away something that has been measuring since the day you installed it.
 
 
-  A Tor or I2P row is quieter. Where the button goes, those peers printed "Tor only" - a word about the peer standing where an action or a reason belongs, and since 1.16.1 the address cell already names them, so the row said Tor twice. That slot is simply empty now, the same as for the two other kinds of peer this app can do nothing with, and the reason moved into the address cell's tooltip.
+  Under the hood, the app's two largest source files were split up along what they actually do, without a single line of logic changing, and the image stopped shipping 23 MB it can never load: prebuilt binaries for Windows, macOS and musl that a Debian Linux container has no use for.
 
 
 developer: Ben
