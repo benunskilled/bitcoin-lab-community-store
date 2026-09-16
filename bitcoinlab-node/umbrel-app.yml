@@ -2,27 +2,29 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "1.16.3"
+version: "1.17.1"
 tagline: Measure your peers, keep the ones that deliver
 description: >-
   Your peers decide how fast you hear about a new block, and Bitcoin Core picks them at random. Bitcoin Lab watches which of them actually delivers each block first - over Core's ZMQ interface, timestamped before anything else happens - and ranks every peer you have by how often it wins. The rank comes from the last few days rather than from a whole lifetime, so a peer whose routing has changed cannot coast on an old record. After a day of blocks the ranking tells you which of your connections are worth anything, and which are along for the ride.
 
 
-  Then you act on it. Keep a good peer and Core holds on to it instead of letting it rotate away; drop one that never delivers and Core hands you a fresh random peer to rank in its place. Inbound peers are ranked too, and can be promoted when they turn out to be reachable. An optional toggle runs the whole loop for you, off until you switch it on - and your proven peers are put back after a restart, which Core itself will not do.
+  Then you act on it. Keep a good peer and Core holds on to it instead of letting it rotate away; drop one that never delivers and Core hands you a fresh random peer to rank in its place. Inbound peers are ranked too, and the loop leaves them alone - you can keep one yourself if its record earns it. An optional toggle runs the whole loop for you, off until you switch it on - and your proven peers are put back after a restart, which Core itself will not do.
 
 
   Stratum Race is the other half: it times how quickly each mining pool turns a new block into fresh work, your own local pool included, with eight public solo pools racing as the baseline. It is off until you switch it on, so installing this does not start talking to anybody's pool on its own. Every second a miner spends on an already-solved block is a stale share, and that is the window curated peers close. Whether that is worth chasing is a fair question: half a second off a ten-minute job is 0.08% of your miner's time. Bitcoin Lab is for people who enjoy chasing it anyway.
 
 
 releaseNotes: >-
-  Stratum Race can be switched off completely. Somebody who wants the peer half of this app and not the pool half had no way of saying so: disabling all eight pools by hand came close, but it was eight clicks, the card still sat there as if it were measuring, and the next pool anyone added started connecting again. There is a switch on the card now, the same as the rotation's. Off means no TCP connection to any pool, public or your own, and nothing measured - a pool added while it is off is not connected either. Everything measured so far is kept; the pool history still only goes if you delete it under Storage.
+  The rotation no longer keeps inbound peers, and that is a correction rather than a feature removed. Promoting one meant dialling out to the port it listens on and dropping the session it had opened - so the connection whose record earned the slot was gone, replaced by a different one starting at zero. On the node this was found on, that replacement then delivered nothing at all, after the peer had been one of the best on the node for as long as it was left alone. You can still keep an inbound peer yourself, and the button still finds its listening port; the difference is that a person doing it has looked at the number first.
 
 
-  A fresh install now starts with it off, so nothing here reaches out to anyone but your own node until you ask it to. An install that has been running is switched on as it was - the update does not take away something that has been measuring since the day you installed it.
+  Three things that used to fail in silence now say so. If Bitcoin Core's clock and this app's disagree by more than a couple of seconds, no peer is ever credited with a block and First % sits at 0 forever - that is now read straight off Core and reported before the damage, rather than guessed at afterwards. If no block arrives for six hours, that is reported too: a ZMQ subscription pointed at nothing looks exactly like a quiet network, so blocks arriving is the only evidence there is. And if nobody is credited for three blocks running, the dashboard says so instead of leaving a table that fills up with zeroes.
 
 
-  Under the hood, the app's two largest source files were split up along what they actually do, without a single line of logic changing, and the image stopped shipping 23 MB it can never load: prebuilt binaries for Windows, macOS and musl that a Debian Linux container has no use for.
+  A pool that says something malformed is now cut off rather than believed, and a configuration with a typo in it stops the app with a message naming the variable instead of starting it with a number that is not a number. A restart no longer records a miss against every pool that had not answered yet, which was a small but permanent bias in the pool statistics.
 
+
+  Nothing new to learn and nothing to switch on. Under the hood the ranking rule was measured against 2,206 recorded blocks instead of argued for - it came out ahead, and stays as it was - and there is now a test that runs two real Bitcoin Core nodes and checks that the peer which delivered a block is the peer this app credits.
 
 developer: Ben
 website: https://github.com/benunskilled/bitcoin-lab-community-store
