@@ -1,0 +1,33 @@
+# One service, one static binary (ghcr.io/benunskilled/peer-map, built from
+# github.com/benunskilled/peer-map). No volume: the app keeps no state.
+#
+# The image reference is pinned by tag AND digest - the digest of the
+# multi-arch index, as listed for the tagged version under the repository's
+# GitHub Packages. See RELEASING.md.
+#
+# port: in umbrel-app.yml (8791) is the host port; APP_PORT below is the port
+# inside the container, which the binary listens on by default.
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: bitcoinlab-peermap_web_1
+      APP_PORT: 8789
+
+  web:
+    image: ghcr.io/benunskilled/peer-map:0.1.0@sha256:cb813443e90644d53da1b906184933c6391f7df5896312d9b781431f04b9ced8
+    user: "1000:1000"
+    restart: unless-stopped
+    environment:
+      APP_BITCOIN_NODE_IP: $APP_BITCOIN_NODE_IP
+      APP_BITCOIN_RPC_PORT: $APP_BITCOIN_RPC_PORT
+      APP_BITCOIN_RPC_USER: $APP_BITCOIN_RPC_USER
+      APP_BITCOIN_RPC_PASS: $APP_BITCOIN_RPC_PASS
+      PEERMAP_PORT: "8789"
+    healthcheck:
+      # The image has no shell; the binary checks its own /api/health.
+      test: ["CMD", "/peermap", "healthcheck"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s

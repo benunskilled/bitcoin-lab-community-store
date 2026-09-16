@@ -23,6 +23,18 @@ application itself, and everything about how it works, lives in
 The dashboard is then at `<your-umbrel>:8788`, and a summary widget is available
 for the Umbrel home screen.
 
+## Peer Map
+
+The same store also installs **Peer Map**: your node's live peers on a world
+map, with manual, inbound and outbound connections kept apart. It asks Bitcoin
+Core for its peer list only while the dashboard is open, at most every ten
+seconds. Source: [**benunskilled/peer-map**](https://github.com/benunskilled/peer-map).
+
+![Peer Map dashboard](./bitcoinlab-peermap/1.png)
+
+Install it from the same store; it also depends on the **Bitcoin Node** app.
+The dashboard is then at `<your-umbrel>:8791`.
+
 ## Releasing
 
 See [RELEASING.md](./RELEASING.md).
