@@ -26,7 +26,8 @@ for the Umbrel home screen.
 ## Peer Map
 
 The same store also installs **Peer Map**: your node's live peers on a world
-map, with manual, inbound and outbound connections kept apart. It asks Bitcoin
+map, with manual, inbound and outbound connections kept apart, split into
+regions when you zoom in. It asks Bitcoin
 Core for its peer list only while the dashboard is open, at most every ten
 seconds. Source: [**benunskilled/peer-map**](https://github.com/benunskilled/peer-map).
 
