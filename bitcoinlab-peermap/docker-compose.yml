@@ -15,7 +15,7 @@ services:
       APP_PORT: 8789
 
   web:
-    image: ghcr.io/benunskilled/peer-map:0.3.0@sha256:18438fb8b155c7251b284231a6814b23db82fcf8978aa30498b3de9ac591b7cb
+    image: ghcr.io/benunskilled/peer-map:0.4.0@sha256:198ee91483c4112e6c2639e6667622154aac13537441e16b268bb26318497cf9
     user: "1000:1000"
     restart: unless-stopped
     environment:
