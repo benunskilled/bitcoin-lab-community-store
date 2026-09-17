@@ -8,13 +8,18 @@ description: >-
   Your node talks to dozens of other nodes around the world, and Bitcoin Core lists them as a wall of addresses. Peer Map puts them on a world map instead: one marker per country, split into the three kinds of connection that matter - the manual peers you chose yourself, the outbound peers Core picked for you, and the inbound peers that found you. Zoom in and the markers split into regions, so Australia becomes New South Wales, Victoria and Queensland.
 
 
-  Switch each kind on and off, click a country or region to see exactly which peers are there, and read the details in a table per kind: location, what kind of software the peer runs, client version, network, P2P transport, ping and how long the connection has lasted. Peers that have no place on a map are counted rather than dropped - Tor, I2P and CJDNS have no location, and on umbrelOS inbound IPv6 arrives through Docker and shows up as a private address.
+  Switch each kind on and off, click a country or region to see exactly which peers are there, and read the details in a table per kind: location, the network operator the address belongs to, what kind of software the peer runs, network, P2P transport, ping and how long the connection has lasted. Three peers in three countries can still be three rented machines at one company, and the operator is where that shows. Peers that have no place on a map are counted rather than dropped - Tor, I2P and CJDNS have no location, and on umbrelOS inbound IPv6 arrives through Docker and shows up as a private address.
+
+
+  Bitcoin Lab, in the same store, takes the step after this one: it measures which of these peers actually delivers each new block first, and lets you keep the ones that do.
 
 
   It is built to cost nothing while you are not looking. There is no background job: Bitcoin Core is asked for its peer list only while the dashboard is open, at most every ten seconds, and a dashboard nobody has touched for half an hour pauses itself. The app is a single small binary with the map and the location database built in, so nothing is downloaded and no peer address ever leaves your node.
 
 
-  IP geolocation by DB-IP (https://db-ip.com), licensed CC BY 4.0. Map data from Natural Earth.
+  IP geolocation and network data by DB-IP (https://db-ip.com), licensed CC BY 4.0. Map data from Natural Earth.
+
+
 releaseNotes: >-
   Every peer now says what kind of software it is - Core, Knots, a wallet, a light client, an indexer, a crawler, a research scanner, a mining pool, a client of another chain - with the mix summarised under each heading.
 
