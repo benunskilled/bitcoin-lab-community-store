@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "1.17.1"
+version: "1.18.0"
 tagline: Measure your peers, keep the ones that deliver
 description: >-
   Your peers decide how fast you hear about a new block, and Bitcoin Core picks them at random. Bitcoin Lab watches which of them actually delivers each block first - over Core's ZMQ interface, timestamped before anything else happens - and ranks every peer you have by how often it wins. The rank comes from the last few days rather than from a whole lifetime, so a peer whose routing has changed cannot coast on an old record. After a day of blocks the ranking tells you which of your connections are worth anything, and which are along for the ride.
@@ -15,16 +15,13 @@ description: >-
 
 
 releaseNotes: >-
-  The rotation no longer keeps inbound peers, and that is a correction rather than a feature removed. Promoting one meant dialling out to the port it listens on and dropping the session it had opened - so the connection whose record earned the slot was gone, replaced by a different one starting at zero. On the node this was found on, that replacement then delivered nothing at all, after the peer had been one of the best on the node for as long as it was left alone. You can still keep an inbound peer yourself, and the button still finds its listening port; the difference is that a person doing it has looked at the number first.
+  The dashboard has moved to port 8790. Port 8788 belongs to another app in the official store, Enclosed, and two apps cannot share one - installing both meant one of them silently failing to start. Nothing else changes: the same address, a different number after the colon, and Umbrel's own tile takes you there either way.
 
 
-  Three things that used to fail in silence now say so. If Bitcoin Core's clock and this app's disagree by more than a couple of seconds, no peer is ever credited with a block and First % sits at 0 forever - that is now read straight off Core and reported before the damage, rather than guessed at afterwards. If no block arrives for six hours, that is reported too: a ZMQ subscription pointed at nothing looks exactly like a quiet network, so blocks arriving is the only evidence there is. And if nobody is credited for three blocks running, the dashboard says so instead of leaving a table that fills up with zeroes.
+  A peer that cannot deliver a block now says so in colour. Phone wallets, light clients, address indexers, network crawlers, research scanners, clients of other chains - they connect, they count, and they can never win a block, because their software does not pass blocks on at all. Measured over 2,270 peers on one node: 688 of them ran software like that, 790 observations between them, and not one block delivered first. Their status is red instead of green and the reason is in the tooltip; nothing else changes, they are still measured, still ranked, still shown. Block-relay-only peers stay green on purpose - they refuse transactions and pass blocks on, which is the opposite thing.
 
 
-  A pool that says something malformed is now cut off rather than believed, and a configuration with a typo in it stops the app with a message naming the variable instead of starting it with a number that is not a number. A restart no longer records a miss against every pool that had not answered yet, which was a small but permanent bias in the pool statistics.
-
-
-  Nothing new to learn and nothing to switch on. Under the hood the ranking rule was measured against 2,206 recorded blocks instead of argued for - it came out ahead, and stays as it was - and there is now a test that runs two real Bitcoin Core nodes and checks that the peer which delivered a block is the peer this app credits.
+  Underneath, three more facts are written down for every connection: whether a peer advertises any services at all, whether it asked for transactions, and whether Bitcoin Core has ever learned which chain it is on. Nothing reads them yet. They are there because a name is worth very little - on the node this app is built against, four connections called themselves Bitcoin Core with a zero in place of the o - and because deciding what to do about a peer like that deserves data rather than an argument.
 
 developer: Ben
 website: https://github.com/benunskilled/bitcoin-lab-community-store
@@ -34,7 +31,7 @@ repo: https://github.com/benunskilled/bitcoin-lab
 support: https://github.com/benunskilled/bitcoin-lab/issues
 
 icon: https://raw.githubusercontent.com/benunskilled/bitcoin-lab-community-store/main/bitcoinlab-node/icon.svg
-port: 8788
+port: 8790
 gallery:
   - https://raw.githubusercontent.com/benunskilled/bitcoin-lab-community-store/main/bitcoinlab-node/1.png
   - https://raw.githubusercontent.com/benunskilled/bitcoin-lab-community-store/main/bitcoinlab-node/2.png
