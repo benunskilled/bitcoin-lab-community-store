@@ -2,13 +2,13 @@ manifestVersion: 1
 id: bitcoinlab-peermap
 category: bitcoin
 name: Peer Map
-version: "0.2.0"
+version: "0.3.0"
 tagline: See where your node's peers are
 description: >-
   Your node talks to dozens of other nodes around the world, and Bitcoin Core lists them as a wall of addresses. Peer Map puts them on a world map instead: one marker per country, split into the three kinds of connection that matter - the manual peers you chose yourself, the outbound peers Core picked for you, and the inbound peers that found you. Zoom in and the markers split into regions, so Australia becomes New South Wales, Victoria and Queensland.
 
 
-  Switch each kind on and off, click a country or region to see exactly which peers are there, and read the details in a table per kind: location, client version, network, P2P transport, ping and how long the connection has lasted. Peers that have no place on a map are counted rather than dropped - Tor, I2P and CJDNS have no location, and on umbrelOS inbound IPv6 arrives through Docker and shows up as a private address.
+  Switch each kind on and off, click a country or region to see exactly which peers are there, and read the details in a table per kind: location, what kind of software the peer runs, client version, network, P2P transport, ping and how long the connection has lasted. Peers that have no place on a map are counted rather than dropped - Tor, I2P and CJDNS have no location, and on umbrelOS inbound IPv6 arrives through Docker and shows up as a private address.
 
 
   It is built to cost nothing while you are not looking. There is no background job: Bitcoin Core is asked for its peer list only while the dashboard is open, at most every ten seconds, and a dashboard nobody has touched for half an hour pauses itself. The app is a single small binary with the map and the location database built in, so nothing is downloaded and no peer address ever leaves your node.
@@ -16,7 +16,14 @@ description: >-
 
   IP geolocation by DB-IP (https://db-ip.com), licensed CC BY 4.0. Map data from Natural Earth.
 releaseNotes: >-
-  Zoom in and the map now splits countries into their regions - states, provinces, Bundesländer - so a peer in Melbourne shows up in Victoria rather than as part of a single dot for the whole of Australia. Regions come from IP geolocation and are less certain than countries, since a server is placed where its provider registers it. The dashboard now looks like Bitcoin Lab and stays dark instead of turning white with a light system setting, the "Not on the map" panel folds away to give the map the full width, and a dashboard left open with no mouse or keyboard input for 30 minutes stops asking Bitcoin Core until you press Resume. Australia's marker, which sat on its north coast, is now in the middle of the country. The region data makes the app larger, 41.5 MB instead of 11.8 MB. Idle memory is about the same; with the dashboard open it measured 21 MB instead of 14 MB, most of it data the system can release again.
+  Every peer now says what kind of software it is - Core, Knots, a wallet, a light client, an indexer, a crawler, a research scanner, a mining pool, a client of another chain - with the mix summarised under each heading.
+
+
+  How much that is worth is a fair question, because the name comes from the peer itself and it can put anything there. On the node this app was built for, four connections called themselves Bitcoin Core with a zero in place of the o. So three things Bitcoin Core observed sit next to the name, and none of them can be typed into a string: whether the peer offers any services at all, whether it asked for transactions, and whether Core has ever learned which chain it is on. A peer claiming to be Bitcoin Core while offering nothing and having no known chain is worth a second look.
+
+
+  Nothing is downloaded for this and the app is no larger - the name was already in every row, it just was not read. The demo data now shows the mix of a real node instead of six versions of Core.
+
 developer: Ben
 website: https://github.com/benunskilled/bitcoin-lab-community-store
 dependencies:
