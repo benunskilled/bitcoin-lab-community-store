@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "1.18.0"
+version: "1.19.0"
 tagline: Measure your peers, keep the ones that deliver
 description: >-
   Your peers decide how fast you hear about a new block, and Bitcoin Core picks them at random. Bitcoin Lab watches which of them actually delivers each block first - over Core's ZMQ interface, timestamped before anything else happens - and ranks every peer you have by how often it wins. The rank comes from the last few days rather than from a whole lifetime, so a peer whose routing has changed cannot coast on an old record. After a day of blocks the ranking tells you which of your connections are worth anything, and which are along for the ride.
@@ -18,13 +18,17 @@ description: >-
 
 
 releaseNotes: >-
-  The dashboard has moved to port 8790. Port 8788 belongs to another app in the official store, Enclosed, and two apps cannot share one - installing both meant one of them silently failing to start. Nothing else changes: the same address, a different number after the colon, and Umbrel's own tile takes you there either way.
+  Peer Map, from the same store, is the other half of this pair, and the two apps now know about each other. If Peer Map is installed on the same node, the header carries a link to it and every peer address in the ranking becomes a jump to that peer on the map — the same peer, the other question. Whether it is installed is a question this app's own process answers, not your browser; the answer is kept for five minutes, and a node without Peer Map sees nothing at all: no link, no error, nothing in the log.
 
 
-  A peer that cannot deliver a block now says so in colour. Phone wallets, light clients, address indexers, network crawlers, research scanners, clients of other chains - they connect, they count, and they can never win a block, because their software does not pass blocks on at all. Measured over 2,270 peers on one node: 688 of them ran software like that, 790 observations between them, and not one block delivered first. Their status is red instead of green and the reason is in the tooltip; nothing else changes, they are still measured, still ranked, still shown. Block-relay-only peers stay green on purpose - they refuse transactions and pass blocks on, which is the opposite thing.
+  Colour means one thing now, in both windows. Manual is blue, inbound a yellow that leans green, outbound a sea green — the same three here and in Peer Map, so a peer looks the same wherever you meet it. The set was measured rather than picked by eye: its worst pair separates at ΔE 12.6 for readers with protanopia, against 9.4 for the set it replaces, and every colour clears 3:1 contrast against the panel.
 
 
-  Underneath, three more facts are written down for every connection: whether a peer advertises any services at all, whether it asked for transactions, and whether Bitcoin Core has ever learned which chain it is on. Nothing reads them yet. They are there because a name is worth very little - on the node this app is built against, four connections called themselves Bitcoin Core with a zero in place of the o - and because deciding what to do about a peer like that deserves data rather than an argument.
+  Nothing in the app is red any more. The red "cannot relay" pill from 1.18.0 failed the same measurement — ΔE 14.8 against the orange manual pill in normal vision, below the floor of 15, and 2.8 against the old inbound colour for readers with deuteranopia. Two meanings on one colour is one too many, so it is a strikethrough instead, which survives being printed in grey. What it marks is unchanged: on one node, 688 of 2,270 peers ran software that passes no blocks on at all — 790 observations between them, not one block delivered first.
+
+
+  The README is a front door of 460 words now instead of 3,291. Everything that stood on that page is in `docs/` beside it, whole; nothing was deleted.
+
 
 developer: Ben
 website: https://github.com/benunskilled/bitcoin-lab-community-store
