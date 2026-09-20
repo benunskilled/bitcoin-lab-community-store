@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "1.20.0"
+version: "1.21.0"
 tagline: Measure your peers, keep the ones that deliver
 description: >-
   Your peers decide how fast you hear about a new block, and Bitcoin Core picks them at random. Bitcoin Lab watches which of them actually delivers each block first - over Core's ZMQ interface, timestamped before anything else happens - and ranks every peer you have by how often it wins. The rank comes from the last few days rather than from a whole lifetime, so a peer whose routing has changed cannot coast on an old record. After a day of blocks the ranking tells you which of your connections are worth anything, and which are along for the ride. Each block also names the pool that found it, read out of the block itself rather than asked of any service.
@@ -18,16 +18,16 @@ description: >-
 
 
 releaseNotes: >-
-  Every block now says who found it. The **pool that mined the newest block** stands under its height, read off the block itself: the coinbase carries the address the reward is paid to and a short text the miner writes, and both are matched against a list that ships with the app. Nothing is asked of any service. On ten consecutive blocks on one real node, ten of ten were attributed - four by payout address, six only by tag, which is why both are used.
+  Two peers can be credited with the same block, and the dashboard now says how often that happens on your node. **First** comes from Core's `last_block`, a timestamp in whole seconds: two connections that hand the same block over inside one second cannot be told apart, so both keep the credit. The status line carries the count beside the network and the database size - "2 ties in 2,206 blocks".
 
 
-  A miner nobody has listed is not an empty field. What he wrote into his own coinbase is shown instead, in quotes, because it is his claim and not a name this app put on him.
+  How often it happens is a property of your node rather than of this app. It depends on how tightly the first copies of a block arrive, which is a question of where the node sits and who it is connected to. On the node this app is built against it is close to never - twice in 2,206 blocks over sixteen days, with no block left uncredited - but there is no reason to think that number travels, which is why yours is counted rather than assumed.
 
 
-  The cost is deliberately small and deliberately late: the lookup runs after the block race has been recorded, never before. Measured on the same node, 15.4 ms and 0.8 ms of RPC once every ten minutes - nowhere near the timing that matters.
+  A lifetime count rather than the 500-block window the ranking uses: at this rate a recent window would read zero almost every day, and a number that never says anything else is not worth its space. A fresh install shows nothing at all until it has recorded a block.
 
 
-  **Peer Map**, in the same store, reads the whole story of a block from here now: which pool mined it, which of your peers delivered it first, and where the Stratum race put your own pool. Joining a mining job to a block needed care, because pools send the previous block hash in whichever byte order they like. Of 200 races checked against this node's own history, 200 found their block.
+  It is affordable because of a new partial index over the credited rows only - one per block instead of one per peer per block. The count takes 0.26 ms instead of 104 ms on a node with a fortnight of history, for 28 KB and a one-off 18 ms the next time the app starts.
 
 
 developer: Ben
