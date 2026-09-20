@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "1.19.0"
+version: "1.20.0"
 tagline: Measure your peers, keep the ones that deliver
 description: >-
   Your peers decide how fast you hear about a new block, and Bitcoin Core picks them at random. Bitcoin Lab watches which of them actually delivers each block first - over Core's ZMQ interface, timestamped before anything else happens - and ranks every peer you have by how often it wins. The rank comes from the last few days rather than from a whole lifetime, so a peer whose routing has changed cannot coast on an old record. After a day of blocks the ranking tells you which of your connections are worth anything, and which are along for the ride.
@@ -18,16 +18,16 @@ description: >-
 
 
 releaseNotes: >-
-  Peer Map, from the same store, is the other half of this pair, and the two apps now know about each other. If Peer Map is installed on the same node, the header carries a link to it and every peer address in the ranking becomes a jump to that peer on the map — the same peer, the other question. Whether it is installed is a question this app's own process answers, not your browser; the answer is kept for five minutes, and a node without Peer Map sees nothing at all: no link, no error, nothing in the log.
+  Every block now says who found it. The **pool that mined the newest block** stands under its height, read off the block itself: the coinbase carries the address the reward is paid to and a short text the miner writes, and both are matched against a list that ships with the app. Nothing is asked of any service. On ten consecutive blocks on one real node, ten of ten were attributed - four by payout address, six only by tag, which is why both are used.
 
 
-  Colour means one thing now, in both windows. Manual is blue, inbound a yellow that leans green, outbound a sea green — the same three here and in Peer Map, so a peer looks the same wherever you meet it. The set was measured rather than picked by eye: its worst pair separates at ΔE 12.6 for readers with protanopia, against 9.4 for the set it replaces, and every colour clears 3:1 contrast against the panel.
+  A miner nobody has listed is not an empty field. What he wrote into his own coinbase is shown instead, in quotes, because it is his claim and not a name this app put on him.
 
 
-  Nothing in the app is red any more. The red "cannot relay" pill from 1.18.0 failed the same measurement — ΔE 14.8 against the orange manual pill in normal vision, below the floor of 15, and 2.8 against the old inbound colour for readers with deuteranopia. Two meanings on one colour is one too many, so it is a strikethrough instead, which survives being printed in grey. What it marks is unchanged: on one node, 688 of 2,270 peers ran software that passes no blocks on at all — 790 observations between them, not one block delivered first.
+  The cost is deliberately small and deliberately late: the lookup runs after the block race has been recorded, never before. Measured on the same node, 15.4 ms and 0.8 ms of RPC once every ten minutes - nowhere near the timing that matters.
 
 
-  The README is a front door of 460 words now instead of 3,291. Everything that stood on that page is in `docs/` beside it, whole; nothing was deleted.
+  **Peer Map**, in the same store, reads the whole story of a block from here now: which pool mined it, which of your peers delivered it first, and where the Stratum race put your own pool. Joining a mining job to a block needed care, because pools send the previous block hash in whichever byte order they like. Of 200 races checked against this node's own history, 200 found their block.
 
 
 developer: Ben

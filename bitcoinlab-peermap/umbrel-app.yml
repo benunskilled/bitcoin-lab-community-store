@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-peermap
 category: bitcoin
 name: Peer Map
-version: "0.4.0"
+version: "0.5.0"
 tagline: See where your node's peers are
 description: >-
   Your node talks to dozens of other nodes around the world, and Bitcoin Core lists them as a wall of addresses. Peer Map puts them on a world map instead: one marker per country, split into the three kinds of connection that matter - the manual peers you chose yourself, the outbound peers Core picked for you, and the inbound peers that found you. Zoom in and the markers split into regions, so Australia becomes New South Wales, Victoria and Queensland.
@@ -21,16 +21,19 @@ description: >-
 
 
 releaseNotes: >-
-  The map answers where a peer is. The new **Operator** column answers whose machine it is: the network that announces the address, with the AS number in the cell's title, right next to the location. Sorting by it is the whole point — three peers in three countries at the same company stop looking like diversity the moment they line up under one name. On one real node, three of eight manual peers sat in three different /16 networks and at one provider; only the AS number showed it.
+  With **Bitcoin Lab** installed on the same node, a card above the map follows the newest block: which pool mined it, which of your peers delivered it first, and - with Stratum Race running - how quickly each pool turned it into fresh work. Open the card and every delivering peer stands there with its location and hosting provider, and the race order with your own pool marked.
 
 
-  The **Kind** column answers the question somebody actually has: "Node (Core)" and "Node (Knots)" instead of the bare program name, and everything that cannot pass a block on — wallets, light clients, indexers, crawlers, clients of other chains — is struck through. The client string moved into that cell's title, which is what lets all three tables fit on a screen again without scrolling sideways.
+  The peer that brought the block in **is starred on the map** for two minutes, and in its row in the table, so you can see where your blocks arrive from before the next one lands. The pool's name sits next to the star in the header.
 
 
-  If **Bitcoin Lab** is installed on the same node, the header links to it and every address becomes a jump to that peer there — which of them actually delivers each new block first. Both apps share one palette now: manual blue, inbound yellow, outbound sea green, in both windows.
+  Missing data stays visible rather than hidden: a miner nobody can name shows the text out of his own coinbase, a peer that has since disconnected keeps its row and says so, and a block with no race recorded says why. Several peers credited for one block are all shown, because the block did not arrive once.
 
 
-  Both embedded tables were rebuilt from their project's corrected source, after its maintainer warned that the npm copies carry errors. Locations now come from a database built in August and September rather than June, networks from one built the day before this release: 81,763 networks, 479,138 IPv4 and 128,248 IPv6 ranges. A lookup takes about 30 ns and allocates nothing, and as before nothing is fetched from the internet and no peer address leaves your node.
+  **The counts in each software line are buttons now.** "125 Node (Core) - 14 Other": click one and the tables and the map show only those peers. Finding the five pool nodes among two hundred connections stopped being a search.
+
+
+  Nothing new is polled for any of this. The block rides along with the peer list that is fetched every ten seconds anyway, and without Bitcoin Lab the card is simply not there.
 
 
 developer: Ben
