@@ -13,6 +13,8 @@ If you're also into solo mining at home, Bitcoin Lab's optional Stratum Race let
 
 Use either app on its own or both together. Each requires Umbrel's official **Bitcoin Node** app.
 
+With both installed, Peer Map follows each new block across your node: which pool mined it, which of your peers delivered it first, and where they sit.
+
 ## Peer Map: understand your connections
 
 Put your live peers on a world map, zoom into regions and see their hosting providers, software and services. Manual, outbound and inbound connections have their own tables, making it easy to see how each group is distributed.
