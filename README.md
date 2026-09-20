@@ -1,54 +1,63 @@
 # Bitcoin Peer Lab
 
-Two Umbrel apps: one to see your peers, one to optimise them for fast block
-delivery — if you want to.
+**See who your Bitcoin node connects to. Find the peers that bring blocks first.**
 
-Your peers are not your choice: Core dials out at random, and whoever else finds
-you dials in. Nothing tells you which of them actually delivers a block first.
-Bitcoin Lab does, and lets you keep the best ones as manual peers.
+Two apps for Umbrel, built for enthusiasts who enjoy running their own node and getting more out of it. Explore your connections, discover which peers deliver first and build a set worth keeping.
 
-- **[Peer Map](https://github.com/benunskilled/peer-map)** — your live peers on
-  a world map, split into the manual peers you chose, the outbound peers Core
-  picked, and the inbound peers that found you. Each one says what it is — a
-  node, a wallet, a crawler — and the ones that cannot pass blocks on are
-  crossed out.
+| App | What it helps you do |
+|---|---|
+| [Peer Map](https://github.com/benunskilled/peer-map) | See your peers' locations, hosting providers, software and services |
+| [Bitcoin Lab](https://github.com/benunskilled/bitcoin-lab) | Find out which peers deliver blocks first and keep the strongest connections. |
 
-- **[Bitcoin Lab](https://github.com/benunskilled/bitcoin-lab)** — which of
-  your peers actually delivers each new block first, timed over Core's ZMQ
-  interface. It ranks them by how often they win, and you act on that: drop an
-  outbound peer that never delivers and Core dials a fresh random one in its
-  place straight away. The ones that keep winning move into your eight manual
-  slots, which Core never fills by itself.
+If you're also into solo mining at home, Bitcoin Lab's optional Stratum Race lets you compare your own pool with public solo pools.
 
-Use them together or on their own. Neither sends a peer address anywhere.
+Use either app on its own or both together. Each requires Umbrel's official **Bitcoin Node** app.
+
+## Peer Map: understand your connections
+
+Put your live peers on a world map, zoom into regions and see their hosting providers, software and services. Manual, outbound and inbound connections have their own tables, making it easy to see how each group is distributed.
+
+Discover details a connection count cannot show: peers across several countries sharing one provider, the mix of nodes, wallets and crawlers, and connections over Tor and I2P listed beside the map.
+
+All map and lookup data is bundled locally. No peer address is sent to an external lookup service, and the dashboard pauses updates when you're no longer viewing it.
+
+![Peer Map dashboard](./bitcoinlab-peermap/1.png)
+
+## Bitcoin Lab: find the connections worth keeping
+
+See which peers deliver new blocks first and use their track record to choose who stays. Manage your selection yourself, or enable rotation to keep proven peers and find stronger candidates among Core's outbound connections automatically. Inbound connections are left alone, and peers you protect stay protected.
+
+If you run your own solo-mining pool, optional Stratum Race shows how its new mining jobs arrive compared with public pools, so you can follow its performance as you improve your setup.
+
+Peer rotation and Stratum Race are both off on a fresh install. Enable either when you want to explore it. Bitcoin Lab also includes a summary widget for Umbrel's home screen.
+
+![Bitcoin Lab dashboard](./bitcoinlab-node/5.png)
 
 ## Install
 
-1. In umbrelOS: **Settings → App Store → ⋮ → Community App Stores**
-2. Add this store:
-   ```
+1. In umbrelOS, open **Settings → App Store → ⋮ → Community App Stores**.
+2. Add this store URL:
+
+   ```text
    https://github.com/benunskilled/bitcoin-lab-community-store
    ```
-3. Install what you want from it. Both apps depend on the official **Bitcoin
-   Node** app, which Umbrel offers to install first if you do not have it.
 
-| | Dashboard | Source |
-|---|---|---|
-| Bitcoin Lab | `<your-umbrel>:8790` | [benunskilled/bitcoin-lab](https://github.com/benunskilled/bitcoin-lab) |
-| Peer Map | `<your-umbrel>:8791` | [benunskilled/peer-map](https://github.com/benunskilled/peer-map) |
+3. Install **Peer Map**, **Bitcoin Lab**, or both. Umbrel will offer to install Bitcoin Node first if needed.
 
-Bitcoin Lab also has a summary widget for the Umbrel home screen.
+Open the apps from Umbrel, or use their dashboard addresses:
 
-![Bitcoin Lab](./bitcoinlab-node/1.png)
+| App | Dashboard |
+|---|---|
+| Bitcoin Lab | `<your-umbrel>:8790` |
+| Peer Map | `<your-umbrel>:8791` |
 
-![Peer Map](./bitcoinlab-peermap/1.png)
+Let Bitcoin Lab collect observations as blocks arrive, then see which peers are earning their place. There is no need to enable rotation to explore the results. Add Peer Map if you want to learn more about those connections and see how they are distributed across regions and providers.
 
-## What this repository is
+## Source and documentation
 
-Packaging only: an `umbrel-app.yml` and a `docker-compose.yml` per app, each
-pinned to a multi-arch image by tag **and** digest. The applications themselves
-live in their own repositories, linked above.
+This repository contains the Umbrel packaging. Application code and detailed documentation live in the individual repositories:
 
-## Releasing
+- [Bitcoin Lab](https://github.com/benunskilled/bitcoin-lab)
+- [Peer Map](https://github.com/benunskilled/peer-map)
 
-See [RELEASING.md](./RELEASING.md).
+For packaging and publishing instructions, see [RELEASING.md](RELEASING.md).
