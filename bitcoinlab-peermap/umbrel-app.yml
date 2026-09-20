@@ -48,7 +48,6 @@ port: 8791
 gallery:
   - https://raw.githubusercontent.com/benunskilled/bitcoin-lab-community-store/main/bitcoinlab-peermap/1.png
   - https://raw.githubusercontent.com/benunskilled/bitcoin-lab-community-store/main/bitcoinlab-peermap/2.png
-  - https://raw.githubusercontent.com/benunskilled/bitcoin-lab-community-store/main/bitcoinlab-peermap/3.png
 path: ""
 
 defaultUsername: ""
