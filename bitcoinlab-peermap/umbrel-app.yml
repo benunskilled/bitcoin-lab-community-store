@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-peermap
 category: bitcoin
 name: Peer Map
-version: "0.5.0"
+version: "0.6.0"
 tagline: See where your node's peers are
 description: >-
   Your node talks to dozens of other nodes around the world, and Bitcoin Core lists them as a wall of addresses. Peer Map puts them on a world map instead: one marker per country, split into the three kinds of connection that matter - the manual peers you chose yourself, the outbound peers Core picked for you, and the inbound peers that found you. Zoom in and the markers split into regions, so Australia becomes New South Wales, Victoria and Queensland.
@@ -21,19 +21,13 @@ description: >-
 
 
 releaseNotes: >-
-  With **Bitcoin Lab** installed on the same node, a card above the map follows the newest block: which pool mined it, which of your peers delivered it first, and - with Stratum Race running - how quickly each pool turned it into fresh work. Open the card and every delivering peer stands there with its location and hosting provider, and the race order with your own pool marked.
+  The block card now draws the **route of the newest block**, to scale. It starts at the first new job any pool sent here - the zero, because when a block was found cannot be measured - and runs through the peer that delivered it, with its location and hosting provider, to your node and on to your own pool's job. The long stretch is the long stretch: you see at a glance where the time goes.
 
 
-  The peer that brought the block in **is starred on the map** for two minutes, and in its row in the table, so you can see where your blocks arrive from before the next one lands. The pool's name sits next to the star in the header.
+  Everything on it is measured by one clock on one machine, except the hop from the peer into your node, which is estimated from that peer's lowest ping. Core sometimes has a block before any pool has sent a job; the route shows that too, left of the zero.
 
 
-  Missing data stays visible rather than hidden: a miner nobody can name shows the text out of his own coinbase, a peer that has since disconnected keeps its row and says so, and a block with no race recorded says why. Several peers credited for one block are all shown, because the block did not arrive once.
-
-
-  **The counts in each software line are buttons now.** "125 Node (Core) - 14 Other": click one and the tables and the map show only those peers. Finding the five pool nodes among two hundred connections stopped being a search.
-
-
-  Nothing new is polled for any of this. The block rides along with the peer list that is fetched every ten seconds anyway, and without Bitcoin Lab the card is simply not there.
+  With Stratum Race running, the summary and the route stay open and only the full pool list folds away. On a phone the route becomes a list. Nothing new is asked of Bitcoin Lab - it already sends the two timestamps this needs.
 
 
 developer: Ben
