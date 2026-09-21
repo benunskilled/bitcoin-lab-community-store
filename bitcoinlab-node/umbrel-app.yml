@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "1.21.0"
+version: "1.22.0"
 tagline: Measure your peers, keep the ones that deliver
 description: >-
   Your peers decide how fast you hear about a new block, and Bitcoin Core picks them at random. Bitcoin Lab watches which of them actually delivers each block first - over Core's ZMQ interface, timestamped before anything else happens - and ranks every peer you have by how often it wins. The rank comes from the last few days rather than from a whole lifetime, so a peer whose routing has changed cannot coast on an old record. After a day of blocks the ranking tells you which of your connections are worth anything, and which are along for the ride. Each block also names the pool that found it, read out of the block itself rather than asked of any service.
@@ -18,16 +18,16 @@ description: >-
 
 
 releaseNotes: >-
-  Two peers can be credited with the same block, and the dashboard now says how often that happens on your node. **First** comes from Core's `last_block`, a timestamp in whole seconds: two connections that hand the same block over inside one second cannot be told apart, so both keep the credit. The status line carries the count beside the network and the database size - "2 ties in 2,206 blocks".
+  The Peer Map route of a block now splits the stretch from Core to your pool in two: **how long Core takes to build the next block template**, and how long your pool takes to turn it into a job. For that, Bitcoin Lab asks Core for a template itself the moment a block arrives - the same request every pool on the node makes then - and times it. Measured on one node: 75 to 91 ms right after a block.
 
 
-  How often it happens is a property of your node rather than of this app. It depends on how tightly the first copies of a block arrive, which is a question of where the node sits and who it is connected to. On the node this app is built against it is close to never - twice in 2,206 blocks over sixteen days, with no block left uncredited - but there is no reason to think that number travels, which is why yours is counted rather than assumed.
+  It costs one template per block; a pool on the same node already asks about thirty times as often. Core builds one template at a time and keeps it for a few seconds, so this can make your pool faster, never slower.
 
 
-  A lifetime count rather than the 500-block window the ranking uses: at this rate a recent window would read zero almost every day, and a number that never says anything else is not worth its space. A fresh install shows nothing at all until it has recorded a block.
+  The delivering peer's ping is now stored with each block, from the moment it arrived. And for every stop of the route Bitcoin Lab works out the median over the last hundred blocks, so a change you make shows up as a shorter stretch.
 
 
-  It is affordable because of a new partial index over the credited rows only - one per block instead of one per peer per block. The count takes 0.26 ms instead of 104 ms on a node with a fortnight of history, for 28 KB and a one-off 18 ms the next time the app starts.
+  All of this is measured at every block, whether Peer Map is open or not.
 
 
 developer: Ben
