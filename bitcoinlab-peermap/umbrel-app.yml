@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-peermap
 category: bitcoin
 name: Peer Map
-version: "0.6.0"
+version: "0.7.0"
 tagline: See where your node's peers are
 description: >-
   Your node talks to dozens of other nodes around the world, and Bitcoin Core lists them as a wall of addresses. Peer Map puts them on a world map instead: one marker per country, split into the three kinds of connection that matter - the manual peers you chose yourself, the outbound peers Core picked for you, and the inbound peers that found you. Zoom in and the markers split into regions, so Australia becomes New South Wales, Victoria and Queensland.
@@ -21,13 +21,13 @@ description: >-
 
 
 releaseNotes: >-
-  The block card now draws the **route of the newest block**, to scale. It starts at the first new job any pool sent here - the zero, because when a block was found cannot be measured - and runs through the peer that delivered it, with its location and hosting provider, to your node and on to your own pool's job. The long stretch is the long stretch: you see at a glance where the time goes.
+  The route of a block now has **four stretches**, each with its own lever: the block reaching your peer, the hop into your node, Core building the next template, and your pool turning it into a job. Where the time goes is where you can make it shorter.
 
 
-  Everything on it is measured by one clock on one machine, except the hop from the peer into your node, which is estimated from that peer's lowest ping. Core sometimes has a block before any pool has sent a job; the route shows that too, left of the zero.
+  Beside this block's route there is the **typical block**: every stop at its median over the last hundred blocks. One block scatters; the median shows whether a change made anything shorter. Switch between the two above the route - the choice is remembered.
 
 
-  With Stratum Race running, the summary and the route stay open and only the full pool list folds away. On a phone the route becomes a list. Nothing new is asked of Bitcoin Lab - it already sends the two timestamps this needs.
+  The template stop needs Bitcoin Lab 1.22.0. With an older Bitcoin Lab the card is as it was.
 
 
 developer: Ben
