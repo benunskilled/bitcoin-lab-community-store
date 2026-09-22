@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "1.22.0"
+version: "1.23.0"
 tagline: Measure your peers, keep the ones that deliver
 description: >-
   Your peers decide how fast you hear about a new block, and Bitcoin Core picks them at random. Bitcoin Lab watches which of them actually delivers each block first - over Core's ZMQ interface, timestamped before anything else happens - and ranks every peer you have by how often it wins. The rank comes from the last few days rather than from a whole lifetime, so a peer whose routing has changed cannot coast on an old record. After a day of blocks the ranking tells you which of your connections are worth anything, and which are along for the ride. Each block also names the pool that found it, read out of the block itself rather than asked of any service.
@@ -18,16 +18,7 @@ description: >-
 
 
 releaseNotes: >-
-  The Peer Map route of a block now splits the stretch from Core to your pool in two: **how long Core takes to build the next block template**, and how long your pool takes to turn it into a job. For that, Bitcoin Lab asks Core for a template itself the moment a block arrives - the same request every pool on the node makes then - and times it. Measured on one node: 75 to 91 ms right after a block.
-
-
-  It costs one template per block; a pool on the same node already asks about thirty times as often. Core builds one template at a time and keeps it for a few seconds, so this can make your pool faster, never slower.
-
-
-  The delivering peer's ping is now stored with each block, from the moment it arrived. And for every stop of the route Bitcoin Lab works out the median over the last hundred blocks, so a change you make shows up as a shorter stretch.
-
-
-  All of this is measured at every block, whether Peer Map is open or not.
+  Bitcoin Lab now tells **Peer Map** which of your connections have ever delivered a block first, so the map can mark them. It is the record the ranking is already built on, sent along with the newest block: no extra request, worked out once per block.
 
 
 developer: Ben
