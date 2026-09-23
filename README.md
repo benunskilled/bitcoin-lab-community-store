@@ -37,7 +37,7 @@ Peer rotation and Stratum Race are both off on a fresh install. Enable either wh
 
 ## Install
 
-1. In umbrelOS, open **Settings → App Store → ⋮ → Community App Stores**.
+1. In umbrelOS, open **App Store → ⋮ → Community App Stores**.
 2. Add this store URL:
 
    ```text
