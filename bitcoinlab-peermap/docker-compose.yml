@@ -7,6 +7,28 @@
 #
 # port: in umbrel-app.yml (8791) is the host port; APP_PORT below is the port
 # inside the container, which the binary listens on by default.
+#
+# Sandboxing. This app is the easy case: the image is FROM scratch and holds
+# one static binary, run as uid 1000, with the map and the location databases
+# compiled into it.
+#
+#   read_only: true - the app keeps no state and has no volume. There is no
+#     database, no cache directory and no log file; the only writes it makes
+#     are bytes onto an open HTTP socket. There is also no /tmp in a scratch
+#     image, so nothing can have been using one, and no tmpfs is needed here.
+#   cap_drop: [ALL] - it listens on 8789, above 1024, and makes outbound HTTP
+#     calls to Bitcoin Core on the Docker network. Neither needs a capability.
+#   security_opt: no-new-privileges - there is nothing in the image to
+#     escalate into: no shell, no setuid binary, no package manager.
+#
+# The healthcheck runs the same binary with a `healthcheck` argument, inside
+# the same container, so it is covered by all three flags and needs nothing
+# further. Left at 30s: this is one process, not four, and unlike the Lab it
+# has no heartbeat threshold in front of it - a failed check here means the
+# HTTP server did not answer just now.
+#
+# app_proxy is left alone deliberately: Umbrel owns that service and supplies
+# its image.
 
 services:
   app_proxy:
@@ -18,6 +40,12 @@ services:
     image: ghcr.io/benunskilled/peer-map:0.8.0@sha256:be0414bc38825b4ea78bc748428b1e7743e9d39a47e119b65ccb86d077c00e08
     user: "1000:1000"
     restart: unless-stopped
+    # See "Sandboxing" at the top of this file.
+    read_only: true
+    security_opt:
+      - "no-new-privileges:true"
+    cap_drop:
+      - ALL
     environment:
       APP_BITCOIN_NODE_IP: $APP_BITCOIN_NODE_IP
       APP_BITCOIN_RPC_PORT: $APP_BITCOIN_RPC_PORT
