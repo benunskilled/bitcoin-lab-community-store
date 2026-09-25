@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-peermap
 category: bitcoin
 name: Peer Map
-version: "0.8.0"
+version: "0.9.0"
 tagline: See where your node's peers are
 description: >-
   Your node talks to dozens of other nodes around the world, and Bitcoin Core lists them as a wall of addresses. Peer Map puts them on a world map instead: one marker per country, split into the three kinds of connection that matter - the manual peers you chose yourself, the outbound peers Core picked for you, and the inbound peers that found you. Zoom in and the markers split into regions, so Australia becomes New South Wales, Victoria and Queensland.
@@ -21,13 +21,10 @@ description: >-
 
 
 releaseNotes: >-
-  **Green rows** in the peer tables are the connections Bitcoin Lab has seen deliver a block first at least once. On one real node that is about one in twelve connected peers - every manual peer and a handful of inbound ones. The peer that brought the newest block is **orange** for as long as its star is up, two minutes, and then turns green.
+  **See why a job took longer.** Next to the time your pool needed to build its job, the route now shows how many transactions the block template carried. The bigger the template, the longer the job takes. This needs Bitcoin Lab 1.24.0. With an older version the route looks as before.
 
 
-  The route of a block reads better when your peer had the block before any pool sent a job. The first job is the zero the times are counted from, not a stop the block passes, so it no longer cuts the ping into two unlabelled pieces.
-
-
-  Green and orange rows need Bitcoin Lab 1.23.0.
+  A node that names a pool in its user agent, such as "(PyBLOCK-POOL)", now shows as a pool node. A lost connection to Core reads as a short sentence instead of a raw error with your node's address, and closing a browser tab no longer leaves the map showing an error for a few seconds.
 
 
 developer: Ben
