@@ -69,6 +69,21 @@ widgets:
         - title: "Manual"
           text: "8/8"
           subtext: "manual peers online"
+  - id: "traffic"
+    type: "three-stats"
+    refresh: "3600s"
+    endpoint: "dashboard:8788/api/widget/traffic"
+    link: ""
+    example:
+      type: "three-stats"
+      link: ""
+      items:
+        - text: "8.4 GB"
+          subtext: "sent today"
+        - text: "1.9 GB"
+          subtext: "received today"
+        - text: "312 GB"
+          subtext: "last 30 days"
 
 submitter: Ben
 submission: ""
