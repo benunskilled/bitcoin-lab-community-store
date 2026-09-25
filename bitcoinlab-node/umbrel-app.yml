@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "1.23.0"
+version: "1.24.0"
 tagline: Measure your peers, keep the ones that deliver
 description: >-
   Your peers decide how fast you hear about a new block, and Bitcoin Core picks them at random. Bitcoin Lab watches which of them actually delivers each block first - over Core's ZMQ interface, timestamped before anything else happens - and ranks every peer you have by how often it wins. The rank comes from the last few days rather than from a whole lifetime, so a peer whose routing has changed cannot coast on an old record. After a day of blocks the ranking tells you which of your connections are worth anything, and which are along for the ride. Each block also names the pool that found it, read out of the block itself rather than asked of any service.
@@ -18,7 +18,13 @@ description: >-
 
 
 releaseNotes: >-
-  Bitcoin Lab now tells **Peer Map** which of your connections have ever delivered a block first, so the map can mark them. It is the record the ranking is already built on, sent along with the newest block: no extra request, worked out once per block.
+  **Faster, and it writes less.** The peer ranking no longer walks your whole history to read its 500-block window: on a node with two million recorded observations that took 3.7 s, and now takes 32 ms. The dashboard only writes a peer's session when something actually changed, which saves roughly 100 MB of database log a day.
+
+
+  **Fixes.** IPv6 peers are no longer counted twice, and every step of the outbound funnel now counts the same peers. Stratum Race no longer charges a pool with a miss for the moment it takes us to connect. The dashboard sends the same security headers as Peer Map and turns malformed actions away instead of passing them on to Core. Both apps now run in a tighter container.
+
+
+  Bitcoin Lab also counts the transactions in each block template, so **Peer Map** can show why your pool took longer on one block than the next.
 
 
 developer: Ben
