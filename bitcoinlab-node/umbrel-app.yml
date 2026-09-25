@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "1.25.0"
+version: "1.25.1"
 tagline: Measure your peers, keep the ones that deliver
 description: >-
   Your peers decide how fast you hear about a new block, and Bitcoin Core picks them at random. Bitcoin Lab watches which of them actually delivers each block first - over Core's ZMQ interface, timestamped before anything else happens - and ranks every peer you have by how often it wins. The rank comes from the last few days rather than from a whole lifetime, so a peer whose routing has changed cannot coast on an old record. After a day of blocks the ranking tells you which of your connections are worth anything, and which are along for the ride. Each block also names the pool that found it, read out of the block itself rather than asked of any service.
@@ -18,7 +18,7 @@ description: >-
 
 
 releaseNotes: >-
-  **Traffic.** See what your node sent and received per day, and which peers used the most. Plus a second widget for today's traffic.
+  **Traffic.** Only the node's daily totals now; the table per peer is gone, and so is its data.
 
 
 developer: Ben
