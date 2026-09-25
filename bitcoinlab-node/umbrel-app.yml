@@ -18,10 +18,7 @@ description: >-
 
 
 releaseNotes: >-
-  **See what your node costs in traffic.** A new Traffic card shows what your node sent and received today, over 7 and over 30 days, with a chart of the last 30 days. Below it are the hosts that cost the most this week, next to how often they delivered a block first, so you can see whether a peer earns its bandwidth. With Peer Map installed, each host opens there in a new tab, like every other address.
-
-
-  A second home-screen widget shows today's traffic. The first numbers appear within an hour of the update.
+  **Traffic.** See what your node sent and received per day, and which peers used the most. Plus a second widget for today's traffic.
 
 
 developer: Ben
