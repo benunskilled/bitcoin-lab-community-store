@@ -35,7 +35,7 @@ Peer rotation and Stratum Race are both off on a fresh install. Enable either wh
 
 ![Bitcoin Lab dashboard](./bitcoinlab-node/5.png)
 
-**No open port? Both apps still work.** If port 8333 is not reachable from the internet, your node only has the connections it opens itself - about ten, plus any manual peers - and inbound peers can reach it only over Tor, if at all. Peer Map then has less to discover. Bitcoin Lab measures, ranks and rotates your outbound peers as usual.
+**No open port? Both apps still work.** If port 8333 is not reachable from the internet, your node only has the connections it opens itself - about ten, plus any manual peers - and inbound peers can reach it only over Tor or I2P, if at all. Peer Map then has less to discover. Bitcoin Lab measures, ranks and rotates your outbound peers as usual.
 
 ## Install
 
