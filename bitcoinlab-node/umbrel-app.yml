@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "1.25.4"
+version: "1.25.5"
 tagline: Measure your peers, keep the ones that deliver
 description: >-
   Your peers decide how fast you hear about a new block, and Bitcoin Core picks them at random. Bitcoin Lab watches which of them actually delivers each block first - over Core's ZMQ interface, timestamped before anything else happens - and ranks every peer you have by how often it wins. The rank comes from the last few days rather than from a whole lifetime, so a peer whose routing has changed cannot coast on an old record. After a day of blocks the ranking tells you which of your connections are worth anything, and which are along for the ride. Each block also names the pool that found it, read out of the block itself rather than asked of any service.
@@ -18,7 +18,7 @@ description: >-
 
 
 releaseNotes: >-
-  **Core's anchors stay put.** Rotation no longer disconnects or promotes block-relay-only peers, the two connections Bitcoin Core keeps as anchors against eclipse attacks. They are still measured and ranked, and you can still add one by hand. A new section in the docs answers whether choosing peers makes an eclipse attack easier. Peers that offer no services are now struck through, as in Peer Map.
+  **Swaps connect the new peer right away.** When rotation replaced a manual peer, the displaced one stayed connected and kept one of Core's eight manual slots, so the new peer could not connect until the old one dropped by itself. The displaced peer is now disconnected; it keeps its record and can win a slot back like any other peer.
 
 
 developer: Ben
