@@ -156,21 +156,31 @@ triggered again. That cost an evening once.
 ## Screenshots
 
 Bitcoin Lab's gallery in `bitcoinlab-node/umbrel-app.yml` is **five** files,
-`1.png` … `5.png`:
+`1.png` … `5.png`, each one card of the dashboard, full width:
 
-- **1.png** — the page from the top through the Live Peer Ranking
-- **2.png** — the Peer Rotation card, including the rotation log
-- **3.png** — the Stratum Race card
-- **4.png** — the Storage card
-- **5.png** — also used as the Bitcoin Lab header image in this repository's
-  `README.md`
+- **1.png** — Outbound Peers
+- **2.png** — Manual Peers
+- **3.png** — Peer Rotation, including the parked list and the rotation log
+- **4.png** — Stratum Race
+- **5.png** — the header and the Live Peer Ranking; also the Bitcoin Lab header
+  image in this repository's `README.md`
 
 `bitcoinlab-node/overview.png` is a sixth file and not part of the gallery: it is
-the header image of the *application* repository's `README.md`, which is where
-its `?v=` stamp gets bumped.
+the header image of the *application* repository's `README.md`, the whole page.
 
-Peer Map's gallery is two files, `bitcoinlab-peermap/1.png` and `2.png`, and
-`1.png` is also the Peer Map header image in this repository's `README.md`.
+**All of them are cut from one full-page capture**, so every picture shows the same
+moment, the same block and the same peers. Do not replace one picture on its own;
+take a new capture and cut them all. The same goes for Peer Map's pictures below.
+
+Peer Map's gallery is two files, `bitcoinlab-peermap/1.png` (header, newest block,
+map) and `2.png` (the Manual table and the start of Inbound); `1.png` is also the
+Peer Map header image in this repository's `README.md`, and
+`bitcoinlab-peermap/overview.png` (the top of the page, 2940 × 4398) heads the
+Peer Map README. All three come from one capture.
+
+The pictures of 1 October 2026 were captured from the real dashboards with
+`Skripte/screenshot.mjs`-style Playwright (1470 CSS px wide at 2×, dark mode,
+addresses replaced and blurred before the capture) and cut with `sips`.
 
 Captures come from the app repo's `scripts/screenshot.js`, which takes **one**
 full-page screenshot of the dashboard at a 1280 CSS px viewport and writes it to
