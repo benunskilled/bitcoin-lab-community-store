@@ -1,41 +1,41 @@
 # Bitcoin Peer Lab
 
-**See who your Bitcoin node connects to. Find the peers that bring blocks first.**
+**Ever wondered which of your peers actually brings you new blocks first?**
 
-Two apps for Umbrel, built for enthusiasts who enjoy running their own node and getting more out of it. Explore your connections, discover which peers deliver first and build a set worth keeping.
+Two apps for Umbrel that show you. Bitcoin Lab notes for every new block which peer delivered it first and ranks your peers by it. Peer Map shows where those peers are, who runs them and what they are: real nodes, pool nodes, wallets, crawlers or scanners.
 
 | App | What it helps you do |
 |---|---|
+| [Bitcoin Lab](https://github.com/benunskilled/bitcoin-lab) | See which peers deliver new blocks first, measured on your own node |
 | [Peer Map](https://github.com/benunskilled/peer-map) | See your peers' locations, hosting providers, software and services |
-| [Bitcoin Lab](https://github.com/benunskilled/bitcoin-lab) | Find out which peers deliver blocks first and keep the strongest connections. |
 
-If you're also into solo mining at home, Bitcoin Lab's optional Stratum Race lets you compare your own pool with public solo pools.
+If you're also into solo mining at home, Bitcoin Lab's optional Stratum Race lets you compare your own pool with public solo pools. Peer Map then takes each new block apart step by step: when your peer had it, when Core accepted it, when the block template was ready and when your pool sent the new job, so you can see where your setup loses time.
 
 Use either app on its own or both together. Each requires Umbrel's official **Bitcoin Node** app.
 
-With both installed, Peer Map follows each new block across your node: which pool mined it, which of your peers delivered it first, and where they sit.
+## Bitcoin Lab: see who delivers first
+
+Every time a new block arrives, Bitcoin Lab notes which peer brought it first. Over time this becomes a ranking of your peers, built from your node's own measurements.
+
+If you want to act on it, you can keep proven peers as manual peers yourself, or enable rotation to do it automatically among Core's outbound connections. Inbound connections are left alone, and peers you protect stay protected.
+
+Running your own solo pool? Stratum Race lets you track how its job times change as you improve your setup.
+
+Peer rotation and Stratum Race are both off on a fresh install. Let Bitcoin Lab just measure for a day or so first: you'll see who delivers blocks to your node as it is, so you can better judge improvements later. Bitcoin Lab also includes a summary widget for Umbrel's home screen.
+
+![Bitcoin Lab dashboard](./bitcoinlab-node/5.png)
 
 ## Peer Map: understand your connections
 
-Put your live peers on a world map, zoom into regions and see their hosting providers, software and services. Manual, outbound and inbound connections have their own tables, making it easy to see how each group is distributed.
+Put your live peers on a world map and see what they are – nodes, pool nodes, wallets or crawlers –, their hosting providers, software and services. Manual, outbound and inbound connections have their own tables, making it easy to see how each group is distributed.
 
-Discover details a connection count cannot show: peers across several countries sharing one provider, the mix of nodes, wallets and crawlers, and connections over Tor and I2P listed beside the map.
+See at a glance whether your peers really are spread out – across countries and across providers.
 
 All map and lookup data is bundled locally. No peer address is sent to an external lookup service, and the dashboard pauses updates when you're no longer viewing it.
 
 ![Peer Map dashboard](./bitcoinlab-peermap/1.png)
 
-## Bitcoin Lab: find the connections worth keeping
-
-See which peers deliver new blocks first and use their track record to choose who stays. Manage your selection yourself, or enable rotation to keep proven peers and find stronger candidates among Core's outbound connections automatically. Inbound connections are left alone, and peers you protect stay protected.
-
-If you run your own solo-mining pool, optional Stratum Race shows how its new mining jobs arrive compared with public pools, so you can follow its performance as you improve your setup.
-
-Peer rotation and Stratum Race are both off on a fresh install. Enable either when you want to explore it. Bitcoin Lab also includes a summary widget for Umbrel's home screen.
-
-![Bitcoin Lab dashboard](./bitcoinlab-node/5.png)
-
-**No open port? Both apps still work.** If port 8333 is not reachable from the internet, your node only has the connections it opens itself - about ten, plus any manual peers - and inbound peers can reach it only over Tor or I2P, if at all. Peer Map then has less to discover. Bitcoin Lab measures, ranks and rotates your outbound peers as usual.
+**No open port? Both apps still work.** Without port 8333 open to the internet, your node only has the roughly ten connections it opens itself, plus whatever reaches it over Tor or I2P. Peer Map then has fewer peers to show. Bitcoin Lab works as usual – and matters even more here: its eight manual slots nearly double your node's connections, filled with the peers that delivered best.
 
 ## Install
 
@@ -46,7 +46,7 @@ Peer rotation and Stratum Race are both off on a fresh install. Enable either wh
    https://github.com/benunskilled/bitcoin-lab-community-store
    ```
 
-3. Install **Peer Map**, **Bitcoin Lab**, or both. Umbrel will offer to install Bitcoin Node first if needed.
+3. Install **Bitcoin Lab**, **Peer Map**, or both. Umbrel will offer to install Bitcoin Node first if needed.
 
 Open the apps from Umbrel, or use their dashboard addresses:
 
@@ -54,8 +54,6 @@ Open the apps from Umbrel, or use their dashboard addresses:
 |---|---|
 | Bitcoin Lab | `<your-umbrel>:8790` |
 | Peer Map | `<your-umbrel>:8791` |
-
-Let Bitcoin Lab collect observations as blocks arrive, then see which peers are earning their place. There is no need to enable rotation to explore the results. Add Peer Map if you want to learn more about those connections and see how they are distributed across regions and providers.
 
 ## Source and documentation
 
