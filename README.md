@@ -15,7 +15,7 @@ Use either app on its own or both together. Each requires Umbrel's official **Bi
 
 ## Bitcoin Lab: see who delivers first
 
-Every time a new block arrives, Bitcoin Lab notes which peer brought it first. Over time this becomes a ranking of your peers, built from your node's own measurements.
+Over days the first deliveries add up to a ranking of your peers, built from your node's own measurements.
 
 If you want to act on it, you can keep proven peers as manual peers yourself, or enable rotation to do it automatically among Core's outbound connections. Inbound connections are left alone, and peers you protect stay protected.
 
@@ -27,9 +27,7 @@ Peer rotation and Stratum Race are both off on a fresh install. Let Bitcoin Lab 
 
 ## Peer Map: understand your connections
 
-Put your live peers on a world map and see what they are – nodes, pool nodes, wallets or crawlers –, their hosting providers, software and services. Manual, outbound and inbound connections have their own tables, making it easy to see how each group is distributed.
-
-See at a glance whether your peers really are spread out – across countries and across providers.
+Put your live peers on a world map and see their hosting providers, software and services. Manual, outbound and inbound connections have their own tables, and at a glance you see whether your peers really are spread out – across countries and across providers.
 
 All map and lookup data is bundled locally. No peer address is sent to an external lookup service, and the dashboard pauses updates when you're no longer viewing it.
 
