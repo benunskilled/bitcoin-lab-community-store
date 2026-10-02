@@ -2,23 +2,26 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "1.25.6"
-tagline: Measure your peers, keep the ones that deliver
+version: "1.25.7"
+tagline: See which peers bring you new blocks first
 description: >-
-  Your peers decide how fast you hear about a new block, and Bitcoin Core picks them at random. Bitcoin Lab watches which of them actually delivers each block first - over Core's ZMQ interface, timestamped before anything else happens - and ranks every peer you have by how often it wins. The rank comes from the last few days rather than from a whole lifetime, so a peer whose routing has changed cannot coast on an old record. After a day of blocks the ranking tells you which of your connections are worth anything, and which are along for the ride. Each block also names the pool that found it, read out of the block itself rather than asked of any service.
+  Ever wondered which of your peers actually brings you new blocks first? Your peers decide how soon your node hears about a new block, and Bitcoin Core picks them at random. Bitcoin Lab notes for every block which peer delivered it first and ranks your peers by it.
 
 
-  Then you act on it. Keep a good peer and Core holds on to it instead of letting it rotate away; drop one that never delivers and Core hands you a fresh random peer to rank in its place. Inbound peers are ranked too, and the loop leaves them alone - you can keep one yourself if its record earns it. An optional toggle runs the whole loop for you, off until you switch it on - and your proven peers are put back after a restart, which Core itself will not do.
+  Then you act on it. Keep a good peer and Core holds on to it instead of letting it rotate away; drop one that never delivers and Core hands you a fresh random peer to rank in its place. An optional rotation runs this loop for you among Core's outbound connections; it is off by default. Your proven peers are put back after a restart, which Core itself will not do. Inbound peers are ranked too, and always left alone.
 
 
-  Not every connection is even in the running. A phone wallet, a network crawler, an address indexer - software like that passes no blocks on at all, so it can never deliver one, and a zero next to its name means nothing. Those peers are marked rather than quietly counted among your competitors. Peer Map, in the same store, shows the same peers on a world map and says what kind of software each one is running.
+  Not every connection is even in the running. A phone wallet, a network crawler, an address indexer - software like that passes no blocks on at all, so it can never deliver one. Those peers are struck through in the list, with the reason shown on hover, rather than quietly counted among your competitors. Peer Map, in the same store, shows the same peers on a world map: where they are, who runs them and what they are.
 
 
   Stratum Race is the other half: it times how quickly each mining pool turns a new block into fresh work, your own local pool included, with eight public solo pools racing as the baseline. It is off until you switch it on, so installing this does not start talking to anybody's pool on its own. Every second a miner spends on an already-solved block is a stale share, and that is the window curated peers close. Whether that is worth chasing is a fair question: half a second off a ten-minute job is 0.08% of your miner's time. Bitcoin Lab is for people who enjoy chasing it anyway.
 
 
 releaseNotes: >-
-  **Quiet outbound peers are replaced again.** Rotation now judges an outbound peer on the last 500 blocks, the same window the dashboard shows. A former manual peer that once delivered first used to be spared for good, even after a week without delivering anything, and kept one of Core's outbound slots from finding new candidates.
+  **Catching up no longer skews the ranking.** Blocks your node fetches after being offline arrive several a second from many peers; they used to be scored like new blocks and credited whoever served the backlog. They are now left out, and only blocks that reach the tip are counted.
+
+
+  **Opening a peer from Peer Map lands on it.** Inbound peers outside the top ten of the live ranking had no row to mark, so the link opened Bitcoin Lab as if nothing had been asked. The list now opens for that peer, and the page moves to it right away.
 
 
 developer: Ben
