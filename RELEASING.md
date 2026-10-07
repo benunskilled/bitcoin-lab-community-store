@@ -18,9 +18,7 @@ refresh.
 
 ## What the workflows do on a tag
 
-Both application repositories now work the same way, and it is worth knowing
-before you push a tag, because it changed after Peer Map v0.8.0 published with a
-red test run beside it:
+Both application repositories work the same way:
 
 - **Build and publish multi-arch image** (`release.yml`) triggers on `v*.*.*`.
 - Its first job calls the whole **Tests** workflow (`ci.yml`) and the publish job
@@ -34,15 +32,19 @@ red test run beside it:
 - `ci.yml` no longer triggers on tags by itself. On a tag it runs once, inside
   the release.
 
-So: a red check now means nothing was published. Before, it meant a coin flip.
+A red check means nothing was published.
 
 ## Bitcoin Lab
 
 In `bitcoin-lab`:
 
 1. Make the code changes. Update `README.md` if behaviour or wording changed,
-   and bump the `?v=` stamp on its screenshot URL if the picture changed.
-2. `npm test` — all green.
+   and bump the `?v=` stamp on its screenshot URL if the picture changed. If you
+   tested against a newer Bitcoin Core, update the "Tested with Bitcoin Core"
+   line in the README.
+2. `npm test` — all green. **Then check that the Tests run on `main` is green**
+   (`gh run list -R benunskilled/bitcoin-lab --limit 1`), not only `npm test` on
+   your machine – the first-start test once failed only on GitHub's Linux runners.
 3. Bump `package.json` (and `package-lock.json`), commit.
 4. **Check `git log -1` before tagging.** A failed commit still leaves `git tag`
    working, and the tag then lands on the previous version's code — which the
@@ -80,7 +82,8 @@ to bump.
 In `peer-map`:
 
 1. Make the code changes. `gofmt -w .`, then `go vet ./...` and `go test ./...`
-   — the release gate runs all three and `gofmt` is part of it.
+   — the release gate runs all three and `gofmt` is part of it. Then check that
+   the Tests run on `main` is green (`gh run list -R benunskilled/peer-map --limit 1`).
 2. **Check `git log -1` before tagging**, for the same reason as above.
 3. `git tag vX.Y.Z`, then push the branch and the tag.
 4. Wait for **Build and publish multi-arch image**. It gates on the full Tests
@@ -179,10 +182,11 @@ Peer Map header image in this repository's `README.md`, and
 Peer Map README. All three come from one capture.
 
 The pictures of 1 October 2026 were captured from the real dashboards with
-`Skripte/screenshot.mjs`-style Playwright (1470 CSS px wide at 2×, dark mode,
-addresses replaced and blurred before the capture) and cut with `sips`.
+Playwright (1470 CSS px wide at 2×, dark mode, addresses replaced and blurred
+before the capture) and cut with `sips`.
 
-Captures come from the app repo's `scripts/screenshot.js`, which takes **one**
+For pictures without a real node, captures come from the app repo's demo data and
+`scripts/screenshot.js`, which takes **one**
 full-page screenshot of the dashboard at a 1280 CSS px viewport and writes it to
 `$SCREENSHOT_OUT` (default `/tmp/bitcoin-lab-screenshot-full.png`). The numbered
 gallery files are cut from that capture by hand — no script in either repository
@@ -213,5 +217,5 @@ a demo stack running no workers and false of the app, and it has shipped in a
 store screenshot once already.
 
 **Changing dashboard text means changing a screenshot.** The rotation card's
-explanatory paragraphs are in 2.png; the storage panel's are in 4.png. A text
-edit without a new picture puts a UI in the store that no longer exists.
+explanatory paragraphs are in 3.png. A text edit without a new picture puts a UI
+in the store that no longer exists.
