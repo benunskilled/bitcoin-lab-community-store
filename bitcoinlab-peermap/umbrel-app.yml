@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-peermap
 category: bitcoin
 name: Peer Map
-version: "0.9.4"
+version: "0.9.5"
 tagline: See where your peers are, who runs them and what they are
 description: >-
   Ever wondered who all these connections are? Your node talks to dozens, often hundreds, of other nodes, and Bitcoin Core lists them as a wall of addresses. Peer Map tells you what they are: real nodes running Core, Knots or btcd, mining pools, phone wallets, light clients, address indexers, network crawlers, university scanners – and fakes that only pretend to be Core. Next to what each peer claims, it shows what Core actually observed: whether it offers services, relays transactions and follows a chain Core knows.
@@ -21,7 +21,7 @@ description: >-
 
 
 releaseNotes: >-
-  Peer Map 0.9.4 is a maintenance release. It is built with Go 1.27, with the build image pinned, and when Bitcoin Lab's block information is too large to read it now says so in its log instead of quietly dropping the block card. Bitcoin Lab 1.25.8 keeps that reply small, so update both.
+  Peer Map now names LinkingLion. Peers from the address ranges that 0xB10C tracks as LinkingLion – an entity that connects to many nodes and may link transactions to their IP addresses – are still listed as Fake, and their description now says who they probably are. Connections without a user agent from these ranges are recognised too.
 developer: Ben
 website: https://github.com/benunskilled/bitcoin-lab-community-store
 dependencies:
