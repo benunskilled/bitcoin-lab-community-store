@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "1.25.7"
+version: "1.25.8"
 tagline: See which peers bring you new blocks first
 description: >-
   Ever wondered which of your peers actually brings you new blocks first? Your peers decide how soon your node hears about a new block, and Bitcoin Core picks them at random. Bitcoin Lab notes for every block which peer delivered it first and ranks your peers by it.
@@ -18,12 +18,7 @@ description: >-
 
 
 releaseNotes: >-
-  **Catching up no longer skews the ranking.** Blocks your node fetches after being offline arrive several a second from many peers; they used to be scored like new blocks and credited whoever served the backlog. They are now left out, and only blocks that reach the tip are counted.
-
-
-  **Opening a peer from Peer Map lands on it.** Inbound peers outside the top ten of the live ranking had no row to mark, so the link opened Bitcoin Lab as if nothing had been asked. The list now opens for that peer, and the page moves to it right away.
-
-
+  Bitcoin Lab 1.25.8 closes a gap and makes rotation more careful with your choices. The dashboard now only accepts changes from its own page, so another website you have open can no longer reset your data or disconnect peers through your Umbrel login. Manual peers you set in Core yourself, for example in Umbrel's Bitcoin Node settings, are now protected, a reset keeps manual peers that are offline, and after Core restarts your manual peers are back within seconds. Typing in a peer never pushes out a protected one, and the same node written two ways now counts once. Without Stratum Race switched on, Bitcoin Lab no longer asks Core for a block template on every block.
 developer: Ben
 website: https://github.com/benunskilled/bitcoin-lab-community-store
 dependencies:
