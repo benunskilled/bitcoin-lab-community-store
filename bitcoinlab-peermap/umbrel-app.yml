@@ -2,10 +2,10 @@ manifestVersion: 1
 id: bitcoinlab-peermap
 category: bitcoin
 name: Peer Map
-version: "0.9.5"
+version: "0.9.6"
 tagline: See where your peers are, who runs them and what they are
 description: >-
-  Ever wondered who all these connections are? Your node talks to dozens, often hundreds, of other nodes, and Bitcoin Core lists them as a wall of addresses. Peer Map tells you what they are: real nodes running Core, Knots or btcd, mining pools, phone wallets, light clients, address indexers, network crawlers, university scanners – and fakes that only pretend to be Core. Next to what each peer claims, it shows what Core actually observed: whether it offers services, relays transactions and follows a chain Core knows.
+  Ever wondered who all these connections are? Your node talks to dozens, often hundreds, of other nodes, and Bitcoin Core lists them as a wall of addresses. Peer Map tells you what they are: real nodes running Core, Knots or btcd, mining pools, phone wallets, light clients, address indexers, network crawlers, university scanners – and disguised peers that only pretend to be Core. Next to what each peer claims, it shows what Core actually observed: whether it offers services, relays transactions and follows a chain Core knows.
 
 
   It also shows where they are and who runs them: every peer on a world map, split into the manual peers you chose, the outbound peers Core picked for you and the inbound peers that found you, with the network operator behind each address. Three peers in three different countries can still be three rented machines at one company – the operator is where that shows. Peers with no place on a map are counted rather than dropped: Tor, I2P and CJDNS, and inbound IPv6 that umbrelOS hands over through Docker.
@@ -21,7 +21,7 @@ description: >-
 
 
 releaseNotes: >-
-  Peer Map now names LinkingLion. Peers from the address ranges that 0xB10C tracks as LinkingLion – an entity that connects to many nodes and may link transactions to their IP addresses – are still listed as Fake, and their description now says who they probably are. Connections without a user agent from these ranges are recognised too.
+  "Fake" is now called "Disguised", and it now also catches peers that call themselves Bitcoin Core but offer nothing – real Core always offers at least blocks. ckp2p is no longer listed as a pool node, a "(mempool…)" label no longer makes a node a pool or an indexer, and NBitcoin and Bitcore get a short description. On Umbrel, inbound IPv6 peers now show as "IPv6 (address hidden)" instead of "Private": umbrelOS hands them over through Docker, which hides their real address.
 developer: Ben
 website: https://github.com/benunskilled/bitcoin-lab-community-store
 dependencies:
