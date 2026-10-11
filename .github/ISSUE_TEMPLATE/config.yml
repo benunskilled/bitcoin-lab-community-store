@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: A problem with Bitcoin Lab
+    url: https://github.com/benunskilled/bitcoin-lab/issues/new/choose
+    about: Report it where the app's code lives.
+  - name: A problem with Peer Map
+    url: https://github.com/benunskilled/peer-map/issues/new/choose
+    about: Report it where the app's code lives.
