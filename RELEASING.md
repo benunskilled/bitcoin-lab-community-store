@@ -45,11 +45,12 @@ In `bitcoin-lab`:
 2. `npm test` — all green. **Then check that the Tests run on `main` is green**
    (`gh run list -R benunskilled/bitcoin-lab --limit 1`), not only `npm test` on
    your machine – the first-start test once failed only on GitHub's Linux runners.
-3. Bump `package.json` (and `package-lock.json`), commit.
-4. **Check `git log -1` before tagging.** A failed commit still leaves `git tag`
+3. Bump `package.json` (and `package-lock.json`) on a branch, open a PR and merge it once its checks are
+   green: `main` is protected (required checks, admins included), so nothing is pushed to it directly.
+4. Pull `main`. **Check `git log -1` before tagging.** A failed commit still leaves `git tag`
    working, and the tag then lands on the previous version's code — which the
    workflow will happily build and publish under the new number.
-5. `git tag vX.Y.Z`, then `git push origin master:main` and `git push origin vX.Y.Z`.
+5. `git tag vX.Y.Z` on that `main` commit, then `git push origin vX.Y.Z`.
 6. Wait for the **Build and publish multi-arch image** workflow. Its last step,
    *Print pinned reference for the app package*, prints the exact
    `ghcr.io/benunskilled/bitcoin-lab:X.Y.Z@sha256:<digest>` reference. Copy the
@@ -69,7 +70,8 @@ Here:
    relay-profiler and stratum-race all run the same image. Tag *and* digest: a
    moving tag would mean two nodes installing "the same version" get different
    code.
-9. Commit and push. Umbrel offers the update on the next store refresh.
+9. Commit on a branch and open a PR. The **Check apps** workflow verifies the reference (digest, multi-arch,
+   `version:` = tag); merge once it is green. Umbrel offers the update on the next store refresh.
 10. Back in `bitcoin-lab`, publish a GitHub Release for the tag with the same
     notes. The workflow does not do this. Releases start at v1.13.0; earlier
     tags have none, so refer to those by version rather than linking.
@@ -81,11 +83,12 @@ to bump.
 
 In `peer-map`:
 
-1. Make the code changes. `gofmt -w .`, then `go vet ./...` and `go test ./...`
+1. Make the code changes on a branch and merge them by PR (`main` is protected). `gofmt -w .`, then
+   `go vet ./...` and `go test ./...`
    — the release gate runs all three and `gofmt` is part of it. Then check that
    the Tests run on `main` is green (`gh run list -R benunskilled/peer-map --limit 1`).
 2. **Check `git log -1` before tagging**, for the same reason as above.
-3. `git tag vX.Y.Z`, then push the branch and the tag.
+3. `git tag vX.Y.Z` on the merged `main` commit, then push the tag.
 4. Wait for **Build and publish multi-arch image**. It gates on the full Tests
    workflow, then builds `linux/amd64,linux/arm64` with `VERSION=X.Y.Z`, pushes
    `:X.Y.Z` and `:latest`, and smoke-tests **both** architectures: each image
@@ -103,7 +106,7 @@ Here:
    `bitcoin` app.
 6. Paste the pinned reference into the single `image:` line in
    `bitcoinlab-peermap/docker-compose.yml`.
-7. Commit and push.
+7. Commit on a branch and open a PR; merge once **Check apps** is green.
 8. Back in `peer-map`, publish a GitHub Release for the tag if the change is
    worth one. The workflow does not do this either.
 
