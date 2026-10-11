@@ -21,7 +21,7 @@ A line that cannot be ticked stops the release.
 ## Release
 
 - [ ] Version bump merged by PR (Bitcoin Lab: `package.json` + `package-lock.json`); `git log -1` on `main` is that commit.
-- [ ] Tag pushed; **Build and publish** workflow green, smoke test included.
+- [ ] Tag pushed; **Build and publish multi-arch image** workflow green, smoke test included.
 - [ ] Provenance checks out: `gh attestation verify oci://ghcr.io/benunskilled/<image>:X.Y.Z --owner benunskilled`.
 - [ ] Store PR: image line(s) with the printed reference, `version:`, `releaseNotes:`; **Check apps** green; merged.
 - [ ] GitHub Release for the tag with the same notes.
