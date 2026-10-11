@@ -1,5 +1,7 @@
 # Releasing
 
+Every release goes through [RELEASE-CHECKLIST.md](RELEASE-CHECKLIST.md); this file explains the steps in detail.
+
 Three repositories move together. [`bitcoin-lab`](https://github.com/benunskilled/bitcoin-lab)
 and [`peer-map`](https://github.com/benunskilled/peer-map) hold the two
 applications and publish their images; this one tells Umbrel how to install
