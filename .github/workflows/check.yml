@@ -1,0 +1,25 @@
+name: Check apps
+
+# Every change to this store is checked before an Umbrel picks it up: a wrong
+# or private image reference does not fail loudly there - the update just
+# hangs in "updating". See .github/scripts/check-app.sh for what is checked.
+on:
+  push:
+    branches: ['**']
+  pull_request:
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        app: [bitcoinlab-node, bitcoinlab-peermap]
+    name: ${{ matrix.app }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - run: .github/scripts/check-app.sh ${{ matrix.app }}
