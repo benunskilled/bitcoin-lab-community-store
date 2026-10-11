@@ -1,0 +1,7 @@
+# Updates for the actions this store's checks use, on the 1st and 15th of each month.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule: { interval: cron, cronjob: "0 6 1,15 * *" }
+    groups: { actions: { patterns: ["*"] } }
