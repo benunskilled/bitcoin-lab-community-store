@@ -8,7 +8,7 @@ description: >-
   Ever wondered which of your peers actually brings you new blocks first? Your peers decide how soon your node hears about a new block, and Bitcoin Core picks them at random. Bitcoin Lab notes for every block which peer delivered it first and ranks your peers by it.
 
 
-  Then you act on it. Keep a good peer and Core holds on to it instead of letting it rotate away; drop one that never delivers and Core hands you a fresh random peer to rank in its place. An optional rotation runs this loop for you among Core's outbound connections; it is off by default. Your proven peers are put back after a restart, which Core itself will not do. Inbound peers are ranked too, and always left alone.
+  Then you act on it. Keep a good peer and Core holds on to it instead of letting it rotate away; drop one that never delivers and Core hands you a fresh random peer to rank in its place. An optional rotation runs this loop for you among Core's outbound connections; it is off by default. Your proven peers are put back after a restart, which Core itself will not do. Inbound peers are ranked too, but never promoted or replaced automatically.
 
 
   Not every connection is even in the running. A phone wallet, a network crawler, an address indexer - software like that passes no blocks on at all, so it can never deliver one. Those peers are struck through in the list, with the reason shown on hover, rather than quietly counted among your competitors. Peer Map, in the same store, shows the same peers on a world map: where they are, who runs them and what they are.
