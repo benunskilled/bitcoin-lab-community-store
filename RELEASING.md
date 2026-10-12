@@ -186,9 +186,10 @@ Peer Map header image in this repository's `README.md`, and
 `bitcoinlab-peermap/overview.png` (the top of the page, 2940 × 4398) heads the
 Peer Map README. All three come from one capture.
 
-The pictures of 1 October 2026 were captured from the real dashboards with
-Playwright (1470 CSS px wide at 2×, dark mode, addresses replaced and blurred
-before the capture) and cut with `sips`.
+The pictures of 12 October 2026 (block 971,097) were captured from the real
+dashboards with Playwright (1470 CSS px wide at 2×, dark mode; only the addresses
+themselves replaced and blurred before the capture, so location and operator stay
+readable) and cut with `ffmpeg`.
 
 For pictures without a real node, captures come from the app repo's demo data and
 `scripts/screenshot.js`, which takes **one**
