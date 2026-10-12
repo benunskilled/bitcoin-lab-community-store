@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "1.25.8"
+version: "1.26.0"
 tagline: See which peers bring you new blocks first
 description: >-
   Ever wondered which of your peers actually brings you new blocks first? Your peers decide how soon your node hears about a new block, and Bitcoin Core picks them at random. Bitcoin Lab notes for every block which peer delivered it first and ranks your peers by it.
@@ -18,7 +18,7 @@ description: >-
 
 
 releaseNotes: >-
-  Bitcoin Lab 1.25.8 closes a gap and makes rotation more careful with your choices. The dashboard now only accepts changes from its own page, so another website you have open can no longer reset your data or disconnect peers through your Umbrel login. Manual peers you set in Core yourself, for example in Umbrel's Bitcoin Node settings, are now protected, a reset keeps manual peers that are offline, and after Core restarts your manual peers are back within seconds. Typing in a peer never pushes out a protected one, and the same node written two ways now counts once. Without Stratum Race switched on, Bitcoin Lab no longer asks Core for a block template on every block.
+  Bitcoin Lab now notices pool apps installed on your Umbrel. With Stratum Race on, if it finds GoBrrr, Bassin, Public Pool, DATUM or Pogolo and they are not in Stratum Race yet, it offers to add them, once in each browser. The quick-fill buttons stay for later, now including DATUM and Pogolo. Finding them is only a name lookup: nothing connects to a pool until you add it.
 developer: Ben
 website: https://github.com/benunskilled/bitcoin-lab-community-store
 dependencies:

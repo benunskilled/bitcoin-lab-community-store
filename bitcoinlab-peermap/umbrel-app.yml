@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-peermap
 category: bitcoin
 name: Peer Map
-version: "0.9.6"
+version: "1.0.0"
 tagline: See where your peers are, who runs them and what they are
 description: >-
   Ever wondered who all these connections are? Your node talks to dozens, often hundreds, of other nodes, and Bitcoin Core lists them as a wall of addresses. Peer Map tells you what they are: real nodes running Core, Knots or btcd, mining pools, phone wallets, light clients, address indexers, network crawlers, university scanners – and disguised peers that only pretend to be Core. Next to what each peer claims, it shows what Core actually observed: whether it offers services, relays transactions and follows a chain Core knows.
@@ -21,7 +21,7 @@ description: >-
 
 
 releaseNotes: >-
-  "Fake" is now called "Disguised", and it now also catches peers that call themselves Bitcoin Core but offer nothing – real Core always offers at least blocks. ckp2p is no longer listed as a pool node, a "(mempool…)" label no longer makes a node a pool or an indexer, and NBitcoin and Bitcore get a short description. On Umbrel, inbound IPv6 peers now show as "IPv6 (address hidden)" instead of "Private": umbrelOS hands them over through Docker, which hides their real address.
+  The header now counts LinkingLion connections on their own, with a link explaining who they are. Peer Map now recognises LinkingLion by the ranges in the bnoc banlist, including two single addresses it missed: on my node one of them alone had opened 5,822 connections under 82 fake wallet names. Peers whose user agent contains /mempool count as indexers again. Locations and network names now come from October's DB-IP data.
 developer: Ben
 website: https://github.com/benunskilled/bitcoin-lab-community-store
 dependencies:
