@@ -17,7 +17,7 @@ Use either app on its own or both together. Each requires Umbrel's official **Bi
 
 Over days the first deliveries add up to a ranking of your peers, built from your node's own measurements.
 
-If you want to act on it, you can keep proven peers as manual peers yourself, or enable rotation to do it automatically among Core's outbound connections. Inbound connections are left alone, and peers you protect stay protected.
+If you want to act on it, you can keep proven peers as manual peers yourself, or enable rotation to do it automatically among Core's outbound connections. Inbound connections are never promoted or replaced automatically, and peers you protect stay protected.
 
 Running your own solo pool? Stratum Race lets you track how its job times change as you improve your setup.
 
