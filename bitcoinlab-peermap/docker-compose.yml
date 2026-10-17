@@ -39,7 +39,7 @@ services:
   web:
     image: ghcr.io/benunskilled/peer-map:2.0.0@sha256:8b77247764211913715156da05d6b81e9fd0a34bf698842929beafaf4db9046a
     user: "1000:1000"
-    restart: unless-stopped
+    restart: on-failure
     # See "Sandboxing" at the top of this file.
     read_only: true
     security_opt:
