@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "1.26.0"
+version: "2.0.0"
 tagline: See which peers bring you new blocks first
 description: >-
   Ever wondered which of your peers actually brings you new blocks first? Your peers decide how soon your node hears about a new block, and Bitcoin Core picks them at random. Bitcoin Lab notes for every block which peer delivered it first and ranks your peers by it.
@@ -11,14 +11,14 @@ description: >-
   Then you act on it. Keep a good peer and Core holds on to it instead of letting it rotate away; drop one that never delivers and Core hands you a fresh random peer to rank in its place. An optional rotation runs this loop for you among Core's outbound connections; it is off by default. Your proven peers are put back after a restart, which Core itself will not do. Inbound peers are ranked too, but never promoted or replaced automatically.
 
 
-  Not every connection is even in the running. A phone wallet, a network crawler, an address indexer - software like that passes no blocks on at all, so it can never deliver one. Those peers are struck through in the list, with the reason shown on hover, rather than quietly counted among your competitors. Peer Map, in the same store, shows the same peers on a world map: where they are, who runs them and what they are.
+  Not every connection is even in the running. A phone wallet, a network crawler, an address indexer - software like that passes no blocks on at all, so it can never deliver one. Those peers are marked "never first" in the list, with the reason shown on hover, rather than quietly counted among your competitors. Peer Map, in the same store, shows the same peers on a world map: where they are, who runs them and what they are.
 
 
   Stratum Race is the other half: it times how quickly each mining pool turns a new block into fresh work, your own local pool included – Bitcoin Lab finds the pool apps on your Umbrel and offers to add them – with eight public solo pools racing as the baseline. It is off until you switch it on, so installing this does not start talking to anybody's pool on its own. Every second a miner spends on an already-solved block is a stale share, and that is the window curated peers close. Whether that is worth chasing is a fair question: half a second off a ten-minute job is 0.08% of your miner's time. Bitcoin Lab is for people who enjoy chasing it anyway.
 
 
 releaseNotes: >-
-  Bitcoin Lab now notices pool apps installed on your Umbrel. With Stratum Race on, if it finds GoBrrr, Bassin, Public Pool, DATUM or Pogolo and they are not in Stratum Race yet, it offers to add them, once in each browser. The quick-fill buttons stay for later, now including DATUM and Pogolo. Finding them is only a name lookup: nothing connects to a pool until you add it.
+  Bitcoin Lab 2.0.0 has a new design: four tiles in the header, calmer tables that turn into cards on narrow screens instead of scrolling sideways, and "never first" instead of a strike-through. The ranking marks with ⚡ the peers Core has chosen right now to send it new blocks without asking (BIP152 high-bandwidth). Peers that have delivered a block first show their address in green. Removed or disconnected peers leave the tables at once, and the rotation log shows the recent record that decided a swap. Links between Bitcoin Lab and Peer Map reuse one window per app; on phones they open in the same tab and land on the peer.
 developer: Ben
 website: https://github.com/benunskilled/bitcoin-lab-community-store
 dependencies:
