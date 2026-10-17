@@ -2,9 +2,9 @@
 # four share the same SQLite file under ${APP_DATA_DIR}/data (better-sqlite3
 # in WAL mode is safe for multiple local processes).
 #
-# restart: unless-stopped rather than on-failure - these are long-running
-# services, and on-failure does not bring one back that exited cleanly, nor
-# reliably after a Docker daemon restart.
+# restart: on-failure - a service exits non-zero on any fault (see
+# src/lib/process-guard.js), so the policy brings it back; it exits 0 only
+# when Umbrel stops it on purpose.
 #
 # Every service has a healthcheck. The three worker processes have no HTTP
 # port, so each writes a heartbeat into the shared database every 30s and its
@@ -66,7 +66,7 @@ services:
     image: ghcr.io/benunskilled/bitcoin-lab:2.0.0@sha256:0fa926ab397aebecbf920fe0b18bd1350774dcd134689f92492edca989ddd690
     user: "1000:1000"
     init: true
-    restart: unless-stopped
+    restart: on-failure
     # Hardening - see "Sandboxing" at the top of this file for what each line
     # assumes about this app. The data mount below stays writable.
     read_only: true
@@ -108,7 +108,7 @@ services:
     image: ghcr.io/benunskilled/bitcoin-lab:2.0.0@sha256:0fa926ab397aebecbf920fe0b18bd1350774dcd134689f92492edca989ddd690
     user: "1000:1000"
     init: true
-    restart: unless-stopped
+    restart: on-failure
     # Hardening - see "Sandboxing" at the top of this file for what each line
     # assumes about this app. The data mount below stays writable.
     read_only: true
@@ -144,7 +144,7 @@ services:
     image: ghcr.io/benunskilled/bitcoin-lab:2.0.0@sha256:0fa926ab397aebecbf920fe0b18bd1350774dcd134689f92492edca989ddd690
     user: "1000:1000"
     init: true
-    restart: unless-stopped
+    restart: on-failure
     # Hardening - see "Sandboxing" at the top of this file for what each line
     # assumes about this app. The data mount below stays writable.
     read_only: true
@@ -180,7 +180,7 @@ services:
     image: ghcr.io/benunskilled/bitcoin-lab:2.0.0@sha256:0fa926ab397aebecbf920fe0b18bd1350774dcd134689f92492edca989ddd690
     user: "1000:1000"
     init: true
-    restart: unless-stopped
+    restart: on-failure
     # Hardening - see "Sandboxing" at the top of this file for what each line
     # assumes about this app. The data mount below stays writable.
     read_only: true
