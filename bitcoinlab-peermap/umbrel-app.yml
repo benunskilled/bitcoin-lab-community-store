@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-peermap
 category: bitcoin
 name: Peer Map
-version: "1.0.0"
+version: "2.0.0"
 tagline: See where your peers are, who runs them and what they are
 description: >-
   Ever wondered who all these connections are? Your node talks to dozens, often hundreds, of other nodes, and Bitcoin Core lists them as a wall of addresses. Peer Map tells you what they are: real nodes running Core, Knots or btcd, mining pools, phone wallets, light clients, address indexers, network crawlers, university scanners – and disguised peers that only pretend to be Core, LinkingLion among them: an entity that connects to many nodes and may link transactions to their IP addresses. Next to what each peer claims, it shows what Core actually observed: whether it offers services, relays transactions and follows a chain Core knows.
@@ -21,7 +21,7 @@ description: >-
 
 
 releaseNotes: >-
-  The header now counts LinkingLion connections on their own, with a link explaining who they are. Peer Map now recognises LinkingLion by the ranges in the bnoc banlist, including two single addresses it missed: on my node one of them alone had opened 5,822 connections under 82 fake wallet names. Peers whose user agent contains /mempool count as indexers again. Locations and network names now come from October's DB-IP data.
+  Peer Map 2.0.0 has a new design: a dot map with lit markers, arcs to your node and a pulse when a block arrives, and tables that turn into cards on narrow screens. LinkingLion peers get their own red pill, whatever software they claim. On Umbrel, Tor and I2P peers are shown as hidden with 🧅 and 🌐, and peers from your own Umbrel, such as its indexers, are named after their app with 🏠. Peers that have delivered a block first show their address in green, and the groups are ordered inbound, outbound, manual everywhere. Links between Peer Map and Bitcoin Lab reuse one window per app; on phones they open in the same tab.
 developer: Ben
 website: https://github.com/benunskilled/bitcoin-lab-community-store
 dependencies:
