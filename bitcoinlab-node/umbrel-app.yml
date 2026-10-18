@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "2.0.1"
+version: "2.0.2"
 tagline: See which peers bring you new blocks first
 description: >-
   Ever wondered which of your peers actually brings you new blocks first? Your peers decide how soon your node hears about a new block, and Bitcoin Core picks them at random. Bitcoin Lab notes for every block which peer delivered it first and ranks your peers by it.
@@ -18,7 +18,7 @@ description: >-
 
 
 releaseNotes: >-
-  Bitcoin Lab 2.0.1 shows a single number under First %: the rate over the last 500 blocks, which the ranking sorts by. The lifetime rate is still there on hover, and in the rotation log.
+  Fixes a block wave that could stop after many tabs had been opened. Tables now fit narrower windows and phones. Only Storage folds; parked peers are shorter.
 developer: Ben
 website: https://github.com/benunskilled/bitcoin-lab-community-store
 dependencies:
