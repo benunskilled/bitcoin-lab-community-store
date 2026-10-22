@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "2.0.3"
+version: "2.0.4"
 tagline: See which peers bring you new blocks first
 description: >-
   Ever wondered which of your peers actually brings you new blocks first? Your peers decide how soon your node hears about a new block, and Bitcoin Core picks them at random. Bitcoin Lab notes for every block which peer delivered it first and ranks your peers by it.
@@ -18,7 +18,7 @@ description: >-
 
 
 releaseNotes: >-
-  Fixes the phone and tablet view: First % is no longer cut off, the rotation log fits in three short lines and the type pill stays on narrower tables. A block that two peers seem to have delivered at almost the same time, often right after a restart, now credits neither peer; the status line counts these as "unclear" instead of "ties". Shorter texts for the rotation, Add a Peer and Traffic.
+  📡 marks the peers that take new blocks from your node first: they picked it as one of their high-bandwidth peers. The heading counts them. A swap in the rotation log is labelled Promoted. Built on Node 22.23.4 with its October security fixes.
 developer: Ben
 website: https://github.com/benunskilled/bitcoin-lab-community-store
 dependencies:
