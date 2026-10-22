@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-peermap
 category: bitcoin
 name: Peer Map
-version: "2.0.2"
+version: "2.0.3"
 tagline: See where your peers are, who runs them and what they are
 description: >-
   Ever wondered who all these connections are? Your node talks to dozens, often hundreds, of other nodes, and Bitcoin Core lists them as a wall of addresses. Peer Map tells you what they are: real nodes running Core, Knots or btcd, mining pools, phone wallets, light clients, address indexers, network crawlers, university scanners – and disguised peers that only pretend to be Core, LinkingLion among them: an entity that connects to many nodes and may link transactions to their IP addresses. Next to what each peer claims, it shows what Core actually observed: whether it offers services, relays transactions and follows a chain Core knows.
@@ -21,7 +21,7 @@ description: >-
 
 
 releaseNotes: >-
-  ckp2p is a pool node again: it is ckpool's block relay. ckcoind is listed as a pool node and dnsseed-rust as a crawler. Disguised now also catches peers whose protocol version doesn't match the Core release they name, which finds LinkingLion outside its known address ranges too, and Core peers since 0.16 that lack the pruned-node service.
+  Disguised now also looks at behaviour: a peer naming Bitcoin Core or Knots that asks for addresses again and again, or pings more often than every 5 seconds, is flagged. A Bitcoin Wallet peer speaking a newer protocol than the app ever did now says "not a wallet". Long provider names on phones end with "…".
 developer: Ben
 website: https://github.com/benunskilled/bitcoin-lab-community-store
 dependencies:
