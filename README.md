@@ -1,39 +1,35 @@
 # Bitcoin Peer Lab
 
-**Ever wondered which of your peers actually brings you new blocks first?**
+Two Umbrel apps for a closer look at your node's peers.
 
-Two apps for Umbrel that show you. Bitcoin Lab notes for every new block which peer delivered it first and ranks your peers by it. Peer Map shows where those peers are, who runs them and what they are: real nodes, pool nodes, wallets, crawlers or scanners.
-
-| App | What it helps you do |
+| App | What it does |
 |---|---|
-| [Bitcoin Lab](https://github.com/benunskilled/bitcoin-lab) | See which peers deliver new blocks first, measured on your own node |
-| [Peer Map](https://github.com/benunskilled/peer-map) | See your peers' locations, hosting providers, software and services |
-
-If you're also into solo mining at home, Bitcoin Lab's optional Stratum Race lets you compare your own pool with public solo pools. Peer Map then takes each new block apart step by step: when your peer had it, when Core accepted it, when the block template was ready and when your pool sent the new job, so you can see where your setup loses time.
+| [Bitcoin Lab](https://github.com/benunskilled/bitcoin-lab) | Ranks your peers by who brings new blocks first, and keeps the best as manual peers if you want |
+| [Peer Map](https://github.com/benunskilled/peer-map) | Checks what each peer claims against what it really does, and puts them all on a world map |
 
 Use either app on its own or both together. Each requires Umbrel's official **Bitcoin Node** app.
 
-## Bitcoin Lab: see who delivers first
+## Bitcoin Lab: who brings blocks first
 
-Over days the first deliveries add up to a ranking of your peers, built from your node's own measurements.
+Every new block reaches your node through one of your peers. Some peers are first again and again, others never. Bitcoin Lab notes for every block who was first and ranks your peers by it. Keep the fast ones as manual peers, drop the ones that never deliver and get fresh ones to rank, or let rotation do it for you.
 
-If you want to act on it, you can keep proven peers as manual peers yourself, or enable rotation to do it automatically among Core's outbound connections. Inbound connections are never promoted or replaced automatically, and peers you protect stay protected.
-
-Running your own solo pool? Stratum Race lets you track how its job times change as you improve your setup.
-
-Peer rotation and Stratum Race are both off on a fresh install. Let Bitcoin Lab just measure for a day or so first: you'll see who delivers blocks to your node as it is, so you can better judge improvements later. Bitcoin Lab also includes a summary widget for Umbrel's home screen.
+Mining solo? Stratum Race times how fast your own pool turns a new block into fresh work, side by side with public pools. Rotation and Stratum Race are both off by default.
 
 ![Bitcoin Lab dashboard](./bitcoinlab-node/5.png)
 
-## Peer Map: understand your connections
+## Peer Map: who your node is talking to
 
-Put your live peers on a world map and see their hosting providers, software and services. Manual, outbound and inbound connections have their own tables, and at a glance you see whether your peers really are spread out – across countries and across providers.
-
-All map and lookup data is bundled locally. No peer address is sent to an external lookup service, and the dashboard pauses updates when you're no longer viewing it.
+Your node talks to strangers all day. Each one says what software it runs, but is it telling the truth? Peer Map takes a closer look: what the peer offers, whether it wants your transactions, how often it pings or asks for addresses, which chain it is on. A normal node, a wallet, a crawler, or a spy in disguise? Find out.
 
 ![Peer Map dashboard](./bitcoinlab-peermap/1.png)
 
-**No open port? Both apps still work.** Without port 8333 open to the internet, your node only has the roughly ten connections it opens itself, plus whatever reaches it over Tor or I2P. Peer Map then has fewer peers to show. Bitcoin Lab works as usual – and matters even more here: its eight manual slots nearly double your node's connections, filled with the peers that delivered best.
+## Better together
+
+With both installed, Peer Map follows every new block across your node: which pool mined it, which of your peers brought it first and, if Stratum Race watches your own pool, how long each step to your mining job took. Change your setup and you see whether it gets faster.
+
+## No open port?
+
+Both apps still work. Without an open port your node only has the connections it opens itself, plus whatever reaches it over Tor or I2P. Peer Map has fewer strangers to show, but can still catch a surprise in your outbound slots. Bitcoin Lab helps you most here: once you fill its eight manual slots, your node holds on to the peers that delivered best.
 
 ## Install
 
