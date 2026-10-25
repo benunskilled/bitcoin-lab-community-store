@@ -181,10 +181,11 @@ moment, the same block and the same peers. Do not replace one picture on its own
 take a new capture and cut them all. The same goes for Peer Map's pictures below.
 
 Peer Map's gallery is two files, `bitcoinlab-peermap/1.png` (header, newest block,
-map) and `2.png` (the start of the Inbound table, the first group since 2.0.0); `1.png` is also the
-Peer Map header image in this repository's `README.md`, and
+map) and `2.png` (the start of the Inbound table, the first group since 2.0.0);
+`bitcoinlab-peermap/readme.png` (the map and the start of the Inbound table, so the kinds show) is the
+Peer Map picture in this repository's `README.md`, and
 `bitcoinlab-peermap/overview.png` (the top of the page, 2940 × 4400) heads the
-Peer Map README. All three come from one capture.
+Peer Map README. All four come from one capture.
 
 The pictures of 25 October 2026 (Bitcoin Lab 2.0.5 and Peer Map 2.0.4, both at block 973,087) were captured from the real
 dashboards with Playwright (1470 CSS px wide at 2×, dark mode; only the addresses
