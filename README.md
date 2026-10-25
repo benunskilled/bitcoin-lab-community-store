@@ -21,7 +21,7 @@ Mining solo? Stratum Race times how fast your own pool turns a new block into fr
 
 Your node talks to strangers all day. Each one says what software it runs, but is it telling the truth? Peer Map takes a closer look: what the peer offers, whether it wants your transactions, how often it pings or asks for addresses, which chain it is on. A normal node, a wallet, a crawler, or a spy in disguise? Find out.
 
-![Peer Map dashboard](./bitcoinlab-peermap/1.png)
+![Peer Map: the map and the start of the Inbound table](./bitcoinlab-peermap/readme.png)
 
 ## Better together
 
