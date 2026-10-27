@@ -10,7 +10,7 @@ A line that cannot be ticked stops the release.
       against real Bitcoin Core.
 - [ ] Independent review: a second reviewer read the whole diff since the last release (`git diff vLAST..main`)
       looking for bugs, wrong claims and risky changes. Every finding is fixed or answered.
-- [ ] Release notes written; every statement in them checked against the code or measured data; approved by Ben.
+- [ ] Release notes written; every statement in them checked against the code or measured data; approved by the maintainer.
 - [ ] `CHANGELOG.md` has the same notes under the new version.
 - [ ] Tested on a real Umbrel, both ways:
   - [ ] **Fresh install** of the new version: opens through Umbrel, main function works, restart keeps the data.
