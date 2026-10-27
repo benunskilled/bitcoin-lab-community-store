@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "2.0.5"
+version: "2.0.6"
 tagline: See which peers bring you new blocks first
 description: >-
   Every new block reaches your node through one of your peers. Some peers are first again and again, others never. Bitcoin Lab notes for every block who was first and ranks your peers by it. Keep the fast ones as manual peers, drop the ones that never deliver and get fresh ones to rank, or let rotation do it for you.
@@ -15,7 +15,7 @@ description: >-
 
 
 releaseNotes: >-
-  Peers on another chain, nodes that set Knots' BIP110 or BLAKE2b bit, now read "never first". Bitcoin Lab knows the same new clients as Peer Map, Lightning wallets among them. On phones every peer is a tidy card with its buttons always in the same place, and the padlock can be found and tapped. The rotation log now shows every peer you add by hand. Inbound peers that never delivered a block first are forgotten after 30 days away. A Core restart no longer stops the recording, and Stratum Race no longer keeps redialling a pool that drops it.
+  Blocks from pools that run ckpool, such as Braiins Solo, AtlasPool or Satoshi Radio, now show their own name instead of CKPool. A reload puts you back where you were.
 developer: benunskilled
 website: https://github.com/benunskilled/bitcoin-lab-community-store
 dependencies:
