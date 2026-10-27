@@ -19,7 +19,7 @@ description: >-
 
 releaseNotes: >-
   Peers on another chain are flagged: nodes that set Knots' BIP110 or BLAKE2b bit can never bring you a block. Peers coming through a Tor exit are marked, since their place is the exit's. Peer Map now recognises Wasabi and Ginger behind their borrowed Core names, Libre Relay, Lightning wallets and many more clients. Hover over "no tx" to see why a peer wants no transactions. The three tables line up, and on phones the label sits next to the place.
-developer: Ben
+developer: benunskilled
 website: https://github.com/benunskilled/bitcoin-lab-community-store
 dependencies:
   - bitcoin
@@ -36,5 +36,5 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 
-submitter: Ben
+submitter: benunskilled
 submission: ""

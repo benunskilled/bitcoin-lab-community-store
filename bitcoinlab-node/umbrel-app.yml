@@ -16,7 +16,7 @@ description: >-
 
 releaseNotes: >-
   Peers on another chain, nodes that set Knots' BIP110 or BLAKE2b bit, now read "never first". Bitcoin Lab knows the same new clients as Peer Map, Lightning wallets among them. On phones every peer is a tidy card with its buttons always in the same place, and the padlock can be found and tapped. The rotation log now shows every peer you add by hand. Inbound peers that never delivered a block first are forgotten after 30 days away. A Core restart no longer stops the recording, and Stratum Race no longer keeps redialling a pool that drops it.
-developer: Ben
+developer: benunskilled
 website: https://github.com/benunskilled/bitcoin-lab-community-store
 dependencies:
   - bitcoin
@@ -74,5 +74,5 @@ widgets:
         - text: "312 GB"
           subtext: "last 30 days"
 
-submitter: Ben
+submitter: benunskilled
 submission: ""
