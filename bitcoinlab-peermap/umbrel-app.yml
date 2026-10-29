@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-peermap
 category: bitcoin
 name: Peer Map
-version: "2.1.0"
+version: "2.2.0"
 tagline: See who your node is really talking to
 description: >-
   Your node talks to strangers all day. Each one says what software it runs, but is it telling the truth? Peer Map takes a closer look: what the peer offers, whether it wants your transactions, how often it pings or asks for addresses, which chain it is on. A normal node, a wallet, a crawler, or a spy in disguise? Find out.
@@ -18,7 +18,7 @@ description: >-
 
 
 releaseNotes: >-
-  Tap or click a peer to see everything known about it: what it is, why each flag is there, its connection and traffic. Pool nodes name their pool where the address proves it, and you can pick a single pool under Pool node. Lightning wallets show which lnd they run. Syncing peers are marked and can be filtered, and with a group picked the list says in a line or two why each peer is in it. A reload keeps your place, and the map no longer jumps while loading.
+  A grey line under each label says what sets a peer apart: why it is disguised, what an unknown program does, pruned, another chain, a pool or syncing. Cards fold to their title, the page holds your place while tables refresh, and every kind has a filter level for versions and names. Bitcoin Purity is flagged as another chain, and more clients are recognised.
 developer: benunskilled
 website: https://github.com/benunskilled/bitcoin-lab-community-store
 dependencies:
