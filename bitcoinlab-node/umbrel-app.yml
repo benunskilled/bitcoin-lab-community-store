@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "2.1.0"
+version: "2.1.1"
 tagline: See which peers bring you new blocks first
 description: >-
   Every new block reaches your node through one of your peers. Some peers are first again and again, others never. Bitcoin Lab notes for every block who was first and ranks your peers by it. Keep the fast ones as manual peers, drop the ones that never deliver and get fresh ones to rank, or let rotation do it for you.
@@ -15,7 +15,7 @@ description: >-
 
 
 releaseNotes: >-
-  Cards fold to their title, and the page holds your place while the ranking re-sorts. A jump bar takes you to any card, and phone cards all have the same height. "Never first" now stands in the First % column, and Total Time is gone. Bitcoin Purity, a hard fork of Knots, reads as another chain, and more new clients are recognised. Built on a rebuilt Node 22.23.4 image with security updates.
+  The status line drops the database size, which stays under Storage. EMPORION and SYMMARTYS are recognised as light clients.
 developer: benunskilled
 website: https://github.com/benunskilled/bitcoin-lab-community-store
 dependencies:
