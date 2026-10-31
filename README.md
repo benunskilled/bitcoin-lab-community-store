@@ -25,7 +25,7 @@ Your node talks to strangers all day. Each one says what software it runs, but i
 
 ## Better together
 
-With both installed, Peer Map follows every new block across your node: which pool mined it, which of your peers brought it first and, if Stratum Race watches your own pool, how long each step to your mining job took. Change your setup and you see whether it gets faster.
+With both installed, Peer Map follows every new block across your node: which pool mined it, which of your peers brought it first and, if Stratum Race watches your own pool, roughly how long it took to reach your mining job. Change your setup and you see whether it gets faster.
 
 ## No open port?
 

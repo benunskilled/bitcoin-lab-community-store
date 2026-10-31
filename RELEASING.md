@@ -187,7 +187,7 @@ Peer Map picture in this repository's `README.md`, and
 `bitcoinlab-peermap/overview.png` (the top of the page, 2940 × 4400) heads the
 Peer Map README. All four come from one capture.
 
-The pictures of 25 October 2026 (Bitcoin Lab 2.0.5 and Peer Map 2.0.4, both at block 973,087) were captured from the real
+The pictures of 31 October 2026 (Bitcoin Lab 2.1.1 and Peer Map 2.3.0, both at block 974,001) were captured from the real
 dashboards with Playwright (1470 CSS px wide at 2×, dark mode; only the addresses
 themselves replaced and blurred before the capture, so location and operator stay
 readable) and cut with `ffmpeg`.
