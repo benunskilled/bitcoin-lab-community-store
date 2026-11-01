@@ -5,7 +5,7 @@ Two Umbrel apps for a closer look at your node's peers.
 | App | What it does |
 |---|---|
 | [Bitcoin Lab](https://github.com/benunskilled/bitcoin-lab) | Ranks your peers by who brings new blocks first, and keeps the best as manual peers if you want |
-| [Peer Map](https://github.com/benunskilled/peer-map) | Checks what each peer claims against what it really does, and puts them all on a world map |
+| [Peer Map](https://github.com/benunskilled/peer-map) | Checks what each peer claims against what it really does, and puts them all on a world map. Read-only: it never changes your node |
 
 Use either app on its own or both together. Each requires Umbrel's official **Bitcoin Node** app.
 
@@ -53,7 +53,7 @@ Open the apps from Umbrel, or use their dashboard addresses:
 
 This repository contains the Umbrel packaging. Application code and detailed documentation live in the individual repositories:
 
-- [Bitcoin Lab](https://github.com/benunskilled/bitcoin-lab)
-- [Peer Map](https://github.com/benunskilled/peer-map)
+- [Bitcoin Lab](https://github.com/benunskilled/bitcoin-lab) · [Issues](https://github.com/benunskilled/bitcoin-lab/issues) · [Security](https://github.com/benunskilled/bitcoin-lab/blob/main/SECURITY.md)
+- [Peer Map](https://github.com/benunskilled/peer-map) · [Issues](https://github.com/benunskilled/peer-map/issues) · [Security](https://github.com/benunskilled/peer-map/blob/main/SECURITY.md)
 
 For packaging and publishing instructions, see [RELEASING.md](RELEASING.md).
