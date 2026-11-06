@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "2.2.0"
+version: "2.3.0"
 tagline: See which peers bring you new blocks first
 description: >-
   Every new block reaches your node through one of your peers. Some peers are first again and again, others never. Bitcoin Lab notes for every block who was first and ranks your peers by it. Keep the fast ones as manual peers, drop the ones that never deliver and get fresh ones to rank, or let rotation do it for you.
@@ -15,7 +15,7 @@ description: >-
 
 
 releaseNotes: >-
-  Stratum Race shows the latest block and the average instead of median and P90, and says that a pool app works without a miner. The ranking marks disguised peers and pool nodes and offers no manual slot to a peer that can never deliver. On phones a legend explains the marks, and a tap on an open explanation folds it shut. One widget now shows traffic and your peers in and out. Storage shows the database size while folded, and pages load faster. Built on an updated Node 22 image with security fixes.
+  A peer you disconnect by hand now gets a line in the rotation log. Only the newest block's peers are tinted orange, the block wave runs evenly across the page, and the tab and home-screen icon is now the store icon. A request line that is no URL no longer stops the dashboard, Stratum Race takes at most 20 pools, and the pool login no longer carries the app's name.
 developer: benunskilled
 website: https://github.com/benunskilled/bitcoin-lab
 dependencies:
