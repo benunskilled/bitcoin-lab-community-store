@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-peermap
 category: bitcoin
 name: Peer Map
-version: "2.5.2"
+version: "2.6.0"
 tagline: See who your node is really talking to
 description: >-
   Your node talks to strangers all day. Each one says what software it runs, but is it telling the truth? Peer Map takes a closer look: what the peer offers, whether it wants your transactions, how often it pings or asks for addresses, which chain it is on. A normal node, a wallet, a crawler, or a spy in disguise? Find out.
@@ -18,7 +18,7 @@ description: >-
 
 
 releaseNotes: >-
-  The block wave runs evenly across the page, as in Bitcoin Lab. A peer with a name Peer Map doesn't know is described by what it did before it is guessed to be a full node, so one that only takes transactions no longer reads as a node.
+  The block card shows how your node rebuilt the block: from its mempool, after asking for missing transactions, with how much of the block that was, or downloaded whole. Switch to 24 hours or 7 days for the averages; this needs Bitcoin Lab 2.4.0. Pool nodes say whose block relay they are, a disguised peer only reads as a crawler when it asks for many addresses, and more clients are recognised.
 developer: benunskilled
 website: https://github.com/benunskilled/peer-map
 dependencies:
