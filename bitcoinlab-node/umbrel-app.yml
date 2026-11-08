@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-node
 category: bitcoin
 name: Bitcoin Lab
-version: "2.4.0"
+version: "2.5.0"
 tagline: See which peers bring you new blocks first
 description: >-
   Every new block reaches your node through one of your peers. Some peers are first again and again, others never. Bitcoin Lab notes for every block who was first and ranks your peers by it. Keep the fast ones as manual peers, drop the ones that never deliver and get fresh ones to rank, or let rotation do it for you.
@@ -15,7 +15,7 @@ description: >-
 
 
 releaseNotes: >-
-  Bitcoin Lab now records how your node put each block together: straight from its mempool, after asking a peer for missing transactions (and how much was missing), or downloaded whole, also as a share over the last day and week. Peer Map shows it on its block card. Changes to your node are only taken through Umbrel's own login, so another app on the same Umbrel can no longer change anything. The page no longer jumps while you read.
+  Blocks name their pool in full, and a block with no known pool and no name of its own reads "Unknown". F2Pool's new fish tag is recognised. Stratum Race only counts a block your node knows, and its range is a switch: 10 blocks, 100 blocks or all time. Compact-block shares cover the last 100 blocks, and a block that can't be told apart reads as unclear. The rotation log keeps 1,000 entries and says more clearly why a peer was dropped.
 developer: benunskilled
 website: https://github.com/benunskilled/bitcoin-lab
 dependencies:
