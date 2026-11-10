@@ -5,13 +5,13 @@ name: Bitcoin Lab
 version: "2.5.0"
 tagline: See which peers bring you new blocks first
 description: >-
-  Every new block reaches your node through one of your peers. Some peers are first again and again, others never. Bitcoin Lab notes for every block who was first and ranks your peers by it. Keep the fast ones as manual peers, drop the ones that never deliver and get fresh ones to rank, or let rotation do it for you.
+  Every new block reaches your node through one of your peers. Bitcoin Lab notes for every block who was first and ranks your peers by it.
 
 
-  Rotation only works on the outbound peers Core picks for you. Inbound peers are ranked too, but rotation never keeps them or drops them for a low score. Many of them don't accept connections at all, and the port you see is only the one they called from, so there is no address to dial back.
+  Core has eight manual slots it never fills on its own, so on a default node they sit empty. Slot Fill uses them. It takes peers from Core's own address book and puts them where your node has the fewest connections: other regions and other providers, as far as your node's networks allow. It goes for spread, not speed.
 
 
-  Mining solo? Stratum Race times how fast your own pool turns a new block into fresh work, side by side with public pools. Rotation and Stratum Race are both off by default, and Bitcoin Lab never touches bitcoin.conf, wallets or keys.
+  Stratum Race times how fast your own pool turns a new block into fresh work, side by side with public solo pools. No miner needed, just a pool app on your Umbrel. Slot Fill and Stratum Race are both off by default, and Bitcoin Lab never touches bitcoin.conf, wallets or keys.
 
 
 releaseNotes: >-

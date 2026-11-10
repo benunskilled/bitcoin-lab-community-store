@@ -4,16 +4,18 @@ Two Umbrel apps for a closer look at your node's peers.
 
 | App | What it does |
 |---|---|
-| [Bitcoin Lab](https://github.com/benunskilled/bitcoin-lab) | Ranks your peers by who brings new blocks first, and keeps the best as manual peers if you want |
+| [Bitcoin Lab](https://github.com/benunskilled/bitcoin-lab) | Ranks your peers by who brings new blocks first, and fills your manual slots where your node has the fewest connections |
 | [Peer Map](https://github.com/benunskilled/peer-map) | Checks what each peer claims against what it really does, and puts them all on a world map. Read-only: it never changes your node |
 
 Use either app on its own or both together. Each requires Umbrel's official **Bitcoin Node** app.
 
 ## Bitcoin Lab: who brings blocks first
 
-Every new block reaches your node through one of your peers. Some peers are first again and again, others never. Bitcoin Lab notes for every block who was first and ranks your peers by it. Keep the fast ones as manual peers, drop the ones that never deliver and get fresh ones to rank, or let rotation do it for you.
+Every new block reaches your node through one of your peers. Bitcoin Lab notes for every block who was first and ranks your peers by it.
 
-Mining solo? Stratum Race times how fast your own pool turns a new block into fresh work, side by side with public pools. Rotation and Stratum Race are both off by default.
+Core has eight manual slots it never fills on its own, so on a default node they sit empty. Slot Fill uses them. It takes peers from Core's own address book and puts them where your node has the fewest connections: other regions and other providers, as far as your node's networks allow. It goes for spread, not speed.
+
+Stratum Race times how fast your own pool turns a new block into fresh work, side by side with public solo pools. No miner needed, just a pool app on your Umbrel. Slot Fill and Stratum Race are both off by default.
 
 ![Bitcoin Lab dashboard](./bitcoinlab-node/5.png)
 
@@ -29,7 +31,7 @@ With both installed, Peer Map follows every new block across your node: which po
 
 ## No open port?
 
-Both apps still work. Without an open port your node only has the connections it opens itself, plus whatever reaches it over Tor or I2P. Peer Map has fewer strangers to show, but can still catch a surprise in your outbound slots. Bitcoin Lab helps you most here: once you fill its eight manual slots, your node holds on to the peers that delivered best.
+Both apps still work. Without an open port your node only has the connections it opens itself, plus whatever reaches it over Tor or I2P. Peer Map has fewer strangers to show, but can still catch a surprise in your outbound slots. Bitcoin Lab helps here too: Slot Fill adds up to eight manual peers where your node has the fewest connections.
 
 ## Install
 
