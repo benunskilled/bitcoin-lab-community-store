@@ -13,7 +13,7 @@ Use either app on its own or both together. Each requires Umbrel's official **Bi
 
 Every new block reaches your node through one of your peers. Bitcoin Lab notes for every block who was first and ranks your peers by it.
 
-Core has eight manual slots it never fills on its own, so on a default node they sit empty. Slot Fill uses them. It takes peers from Core's own address book and puts them where your node has the fewest connections: other regions and other providers, as far as your node's networks allow. It goes for spread, not speed.
+Core has eight manual slots it never fills on its own, so on a default node they sit empty. Slot Fill uses them. It takes peers from Core's own address book and puts them where your node has the fewest connections: other regions and other providers, as far as your node's networks allow. It goes for spread, not speed. It only fills free slots: peers already there stay until they go offline.
 
 Stratum Race times how fast your own pool turns a new block into fresh work, side by side with public solo pools. No miner needed, just a pool app on your Umbrel. Slot Fill and Stratum Race are both off by default.
 
