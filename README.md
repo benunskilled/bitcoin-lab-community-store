@@ -6,7 +6,7 @@ Your node talks to strangers all day. Each one says what software it runs, but i
 
 **[Try the live demo →](https://peermap.xyz/)**
 
-![Peer Lab: the map of one node's peers](./bitcoinlab-peerlab/readme.png)
+<img src="./bitcoinlab-peerlab/block-wave.gif" width="900" alt="A new block arrives: an orange wave rolls across the page, the block height goes up by one and the peer that brought it lights up on the map">
 
 ## Bitcoin Lab and Peer Map
 
