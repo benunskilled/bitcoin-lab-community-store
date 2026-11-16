@@ -1,6 +1,6 @@
 # Release checklist
 
-For Bitcoin Lab and Peer Map. At most one release per app and week, on Mondays; sooner only if the app is broken,
+For Peer Lab, Bitcoin Lab and Peer Map. At most one release per app and week, on Mondays; sooner only if the app is broken,
 data is at risk or there is a security issue. Copy this list into the store PR of the release and tick every line.
 A line that cannot be ticked stops the release.
 

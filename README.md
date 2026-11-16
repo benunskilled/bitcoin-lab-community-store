@@ -2,7 +2,7 @@
 
 One Umbrel app for a closer look at your node's peers: **[Peer Lab](https://github.com/benunskilled/peer-lab)**. It requires Umbrel's official **Bitcoin Node** app.
 
-Your node talks to strangers all day. Each one says what software it runs, but is it telling the truth? Peer Lab takes a closer look: what a peer offers, whether it wants your transactions, which chain it is on. The map shows where they are and who hosts them. For every new block it notes which peer brought it first. Slot Fill puts Core's eight empty manual slots to use for spread, and Stratum Race times how fast your own pool turns a new block into fresh work.
+Your node talks to strangers all day. Each one says what software it runs, but is it telling the truth? Peer Lab takes a closer look: what a peer offers, whether it wants your transactions, which chain it is on. A normal node, a wallet, a crawler, or a spy in disguise? The map shows where they are and who hosts them. For every new block it notes which peer brought it first. Slot Fill puts Core's eight empty manual slots to use for spread, and Stratum Race times how fast your own pool turns a new block into fresh work.
 
 **[Try the live demo →](https://peermap.xyz/)**
 

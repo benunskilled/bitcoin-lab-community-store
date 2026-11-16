@@ -2,14 +2,14 @@
 
 Every release goes through [RELEASE-CHECKLIST.md](RELEASE-CHECKLIST.md); this file explains the steps in detail.
 
-Three repositories move together. [`bitcoin-lab`](https://github.com/benunskilled/bitcoin-lab)
-and [`peer-map`](https://github.com/benunskilled/peer-map) hold the two
-applications and publish their images; this one tells Umbrel how to install
-them. Half the store is Peer Map, so it has a procedure here too — it is the
-same shape as Bitcoin Lab's, with one image reference instead of four.
+[`peer-lab`](https://github.com/benunskilled/peer-lab) holds Peer Lab and publishes
+its image; this repository tells Umbrel how to install it. Peer Lab replaces
+Bitcoin Lab ([`bitcoin-lab`](https://github.com/benunskilled/bitcoin-lab)) and
+Peer Map ([`peer-map`](https://github.com/benunskilled/peer-map)), which stay in
+the store for now; their procedures are kept below.
 
 **The `version:` in each `umbrel-app.yml` always equals the version the
-application was built with.** For Bitcoin Lab that is the version in its
+application was built with.** For Peer Lab and Bitcoin Lab that is the version in its
 `package.json`; for Peer Map there is no manifest file — the version is the git
 tag, baked into the binary at build time with `-X main.Version=` and reported by
 `peermap version`, which the release workflow checks against the tag before it
@@ -35,6 +35,33 @@ Both application repositories work the same way:
   the release.
 
 A red check means nothing was published.
+
+## Peer Lab
+
+Like Bitcoin Lab: one image, `package.json` holds the version. In `peer-lab`:
+
+1. Merge the changes by PR (`main` is protected); Tests on `main` green,
+   including the test against real Bitcoin Core.
+2. Bump `app/package.json` and `app/package-lock.json` and add the notes to
+   `CHANGELOG.md`, in one PR. The release workflow stops if the tag and those
+   versions differ.
+3. Pull `main`, **check `git log -1`**, then `git tag vX.Y.Z` and push the tag.
+4. Wait for **Build and publish multi-arch image**. It smoke-tests the pushed
+   image and prints `ghcr.io/benunskilled/peer-lab:X.Y.Z@sha256:<digest>`.
+   Verify the digest (below) and the provenance:
+   `gh attestation verify oci://<that reference> --owner benunskilled`.
+
+Here:
+
+5. Set `version:` and `releaseNotes:` in `bitcoinlab-peerlab/umbrel-app.yml`.
+6. Paste the reference into **all five** `image:` lines in
+   `bitcoinlab-peerlab/docker-compose.yml` (dashboard, peer-profiler,
+   relay-profiler, stratum-race, peers).
+7. PR, **Check apps** green, merge.
+8. Back in `peer-lab`, publish a GitHub Release for the tag with the same notes.
+
+Test builds come from `bitcoin-lab-test-store` (workflow *Publish Peer Lab test
+build*, app `bltest-peerlab`, port 8796); Peer Lab itself is on port 8797.
 
 ## Bitcoin Lab
 
