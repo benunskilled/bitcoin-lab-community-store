@@ -1,0 +1,51 @@
+# Stops personal data from reaching this public repository: a home-network
+# address, a mail address, a local path, or a commit not made with a GitHub
+# noreply address (GitHub's own noreply@github.com counts as one). More patterns come from the PRIVACY_PATTERNS secret (one
+# extended regex per line) so they stay private. Only file and line are
+# printed, never the match.
+name: Privacy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  privacy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - name: Files
+        env:
+          PRIVACY_PATTERNS: ${{ secrets.PRIVACY_PATTERNS }}
+        run: |
+          {
+            echo '192[.]168[.]178[.]'
+            echo '@gmail[.]com'
+            echo '/Users/[A-Za-z]'
+            printf '%s\n' "$PRIVACY_PATTERNS" | sed '/^[[:space:]]*$/d'
+          } > "$RUNNER_TEMP/patterns"
+          hits=$(git grep -I -n -i -E -f "$RUNNER_TEMP/patterns" HEAD -- . | cut -d: -f2,3 || true)
+          if [ -n "$hits" ]; then
+            echo "Personal data found at:"
+            echo "$hits"
+            exit 1
+          fi
+          [ -n "$PRIVACY_PATTERNS" ] || echo "PRIVACY_PATTERNS not available: checked the public patterns only."
+      - name: Commit authors
+        if: github.event_name == 'pull_request'
+        env:
+          BASE: ${{ github.event.pull_request.base.sha }}
+          HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          bad=$(git log --format='%h %ae%n%h %ce' "$BASE..$HEAD" | grep -v -E ' ([^ ]*@users[.]noreply[.]github[.]com|noreply@github[.]com)$' | cut -d' ' -f1 | sort -u || true)
+          if [ -n "$bad" ]; then
+            echo "Commits without a GitHub noreply address:"
+            echo "$bad"
+            exit 1
+          fi
