@@ -10,7 +10,7 @@ Your node talks to strangers all day. Each one says what software it runs, but i
 
 ## Bitcoin Lab and Peer Map
 
-Peer Lab replaces both. They stay in this store for now but get no new features. Turn off Bitcoin Lab's Slot Fill, or uninstall both, before you install Peer Lab. It keeps the manual peers already set in Core that connect, but starts with its own data; nothing is imported.
+Peer Lab replaces both. They stay in this store for now but get no new features. Switch off Bitcoin Lab's Slot Fill, install Peer Lab, then uninstall both. It keeps the manual peers already set in Core that connect, but starts with its own data; nothing is imported.
 
 ## Install
 

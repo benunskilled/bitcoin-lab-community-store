@@ -16,7 +16,7 @@ description: >-
 
   IP geolocation and network data by DB-IP (https://db-ip.com), licensed CC BY 4.0. Map data from Natural Earth.
 releaseNotes: >-
-  First release. Peer Lab replaces Bitcoin Lab and Peer Map in one app. It starts with empty data: there is no import from the two old apps. If Bitcoin Lab's Slot Fill is on, turn it off before you turn on Peer Lab's, so only one app changes Core's peers. Peer Lab keeps the manual peers already set in Core that connect.
+  First release. Peer Lab replaces Bitcoin Lab and Peer Map in one app. It starts with empty data: there is no import from the two old apps. Switch off Bitcoin Lab's Slot Fill, install Peer Lab, then uninstall Bitcoin Lab and Peer Map, so only one app changes Core's peers. Peer Lab keeps the manual peers already set in Core that connect.
 developer: benunskilled
 website: https://github.com/benunskilled/peer-lab
 dependencies:
