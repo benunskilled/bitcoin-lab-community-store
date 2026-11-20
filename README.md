@@ -8,10 +8,6 @@ Your node talks to strangers all day. Each one says what software it runs, but i
 
 <img src="./bitcoinlab-peerlab/block-wave.gif" width="900" alt="A new block arrives: an orange wave rolls across the page, the block height goes up by one and the peer that brought it lights up on the map">
 
-## Bitcoin Lab and Peer Map
-
-Peer Lab replaces both. They stay in this store for now but get no new features. Switch off Bitcoin Lab's Slot Fill, install Peer Lab, then uninstall both. It keeps the manual peers already set in Core that connect, but starts with its own data; nothing is imported.
-
 ## Install
 
 1. In umbrelOS, open **App Store → ⋮ → Community App Stores**.
@@ -27,10 +23,11 @@ Open it from Umbrel, or at `<your-umbrel>:8797`.
 
 ## Source and documentation
 
-This repository contains the Umbrel packaging. Application code and detailed documentation live in the app's own repository:
-
-- [Peer Lab](https://github.com/benunskilled/peer-lab) · [Issues](https://github.com/benunskilled/peer-lab/issues) · [Security](https://github.com/benunskilled/peer-lab/blob/main/SECURITY.md)
-- [Bitcoin Lab](https://github.com/benunskilled/bitcoin-lab) · [Issues](https://github.com/benunskilled/bitcoin-lab/issues) · [Security](https://github.com/benunskilled/bitcoin-lab/blob/main/SECURITY.md)
-- [Peer Map](https://github.com/benunskilled/peer-map) · [Issues](https://github.com/benunskilled/peer-map/issues) · [Security](https://github.com/benunskilled/peer-map/blob/main/SECURITY.md)
+This repository contains the Umbrel packaging. Code and documentation live in
+[Peer Lab](https://github.com/benunskilled/peer-lab) · [Issues](https://github.com/benunskilled/peer-lab/issues) · [Security](https://github.com/benunskilled/peer-lab/blob/main/SECURITY.md)
 
 For packaging and publishing instructions, see [RELEASING.md](RELEASING.md).
+
+## Older apps
+
+[Bitcoin Lab](https://github.com/benunskilled/bitcoin-lab) and [Peer Map](https://github.com/benunskilled/peer-map) are still in this store but no longer updated; Peer Lab replaces both. To switch, turn off Bitcoin Lab's Slot Fill, install Peer Lab, then uninstall both.
