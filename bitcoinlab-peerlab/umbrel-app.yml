@@ -24,14 +24,14 @@ dependencies:
 repo: https://github.com/benunskilled/peer-lab
 support: https://github.com/benunskilled/peer-lab/issues
 
-icon: https://raw.githubusercontent.com/benunskilled/bitcoin-lab-community-store/main/bitcoinlab-peerlab/icon.png
+icon: https://raw.githubusercontent.com/benunskilled/peer-lab-store/main/bitcoinlab-peerlab/icon.png
 port: 8797
 gallery:
-  - https://raw.githubusercontent.com/benunskilled/bitcoin-lab-community-store/main/bitcoinlab-peerlab/1.png
-  - https://raw.githubusercontent.com/benunskilled/bitcoin-lab-community-store/main/bitcoinlab-peerlab/2.png
-  - https://raw.githubusercontent.com/benunskilled/bitcoin-lab-community-store/main/bitcoinlab-peerlab/3.png
-  - https://raw.githubusercontent.com/benunskilled/bitcoin-lab-community-store/main/bitcoinlab-peerlab/4.png
-  - https://raw.githubusercontent.com/benunskilled/bitcoin-lab-community-store/main/bitcoinlab-peerlab/5.png
+  - https://raw.githubusercontent.com/benunskilled/peer-lab-store/main/bitcoinlab-peerlab/1.png
+  - https://raw.githubusercontent.com/benunskilled/peer-lab-store/main/bitcoinlab-peerlab/2.png
+  - https://raw.githubusercontent.com/benunskilled/peer-lab-store/main/bitcoinlab-peerlab/3.png
+  - https://raw.githubusercontent.com/benunskilled/peer-lab-store/main/bitcoinlab-peerlab/4.png
+  - https://raw.githubusercontent.com/benunskilled/peer-lab-store/main/bitcoinlab-peerlab/5.png
 path: ""
 
 defaultUsername: ""

@@ -14,7 +14,7 @@ Your node talks to strangers all day. Each one says what software it runs, but i
 2. Add this store URL:
 
    ```text
-   https://github.com/benunskilled/bitcoin-lab-community-store
+   https://github.com/benunskilled/peer-lab-store
    ```
 
 3. Install **Peer Lab**. Umbrel will offer to install Bitcoin Node first if needed.
