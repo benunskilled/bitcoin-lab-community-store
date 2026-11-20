@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitcoinlab-peerlab
 category: bitcoin
 name: Peer Lab
-version: "1.0.0"
+version: "1.0.1"
 tagline: Who your node talks to, and who brings it blocks first
 description: >-
   Your node talks to strangers all day. Each one says what software it runs, but is it telling the truth? Peer Lab takes a closer look: what a peer offers, whether it wants your transactions, which chain it is on. A normal node, a wallet, a crawler, or a spy in disguise? The map shows where they are and who hosts them.
@@ -16,7 +16,7 @@ description: >-
 
   IP geolocation and network data by DB-IP (https://db-ip.com), licensed CC BY 4.0. Map data from Natural Earth.
 releaseNotes: >-
-  First release. Peer Lab replaces Bitcoin Lab and Peer Map in one app. It starts with empty data: there is no import from the two old apps. Switch off Bitcoin Lab's Slot Fill, install Peer Lab, then uninstall Bitcoin Lab and Peer Map, so only one app changes Core's peers. Peer Lab keeps the manual peers already set in Core that connect.
+  Stratum Race marks a pool app it finds on this Umbrel, ready to add with one tap. Slot Fill always shows the regions, lists peers being tested newest first, and logs a peer that makes room for one added by hand. Peers behind Tor, I2P or Docker say so instead of showing the proxy's address. Three more programs are recognised, and a peer that misspells Core's name is shown as Disguised. On tablets the kind pills line up and filters show the same detail as on a phone.
 developer: benunskilled
 website: https://github.com/benunskilled/peer-lab
 dependencies:
